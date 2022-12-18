@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RentalItemLoader {
+    private ArrayList<RentalItem> games = new ArrayList<>();
+    private ArrayList<RentalItem> movies = new ArrayList<>();
+
     //load all movies from the csv file.
     public ArrayList<RentalItem> loadMovies() {
-        ArrayList<RentalItem> movies = new ArrayList<>();
         File movieData = new File(("G:\\Git\\Project-RentAVideo\\data\\test.csv"));
         try (BufferedReader reader = new BufferedReader(new FileReader(movieData))) {
             String line;
@@ -31,7 +33,6 @@ public class RentalItemLoader {
 
     //load all games from the csv file.
     public ArrayList<RentalItem> loadGames() {
-        ArrayList<RentalItem> games = new ArrayList<>();
         File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
         try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
             String line;
@@ -53,4 +54,17 @@ public class RentalItemLoader {
         }
         return games;
     }
+
+    //get a list of all movies loaded into the arraylist
+    public ArrayList<RentalItem> getRentalMovies() {
+        System.out.println("Here's a list of all movies: ");
+        return movies;
+    }
+
+    //get a list of all games loaded into the arraylist
+    public ArrayList<RentalItem> getRentalGames() {
+        System.out.println("Here's a list of all games: ");
+        return games;
+    }
+
 }

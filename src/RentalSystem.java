@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class RentalSystem {
-    private ArrayList<RentalItem> movies;
-    private ArrayList<RentalItem> games;
     private ArrayList<Customer> customers;
     private ArrayList<RentalItem> itemCart;
 
@@ -16,15 +14,9 @@ public class RentalSystem {
     //TODO Hashmap with day overview, what has been rented / how much money did we make
 
     public RentalSystem() {
-        this.movies = new ArrayList<>();
         this.customers = new ArrayList<>();
-        this.games = new ArrayList<>();
         this.itemCart = new ArrayList<>();
         this.totalPrice = totalPrice;
-    }
-
-    public void addGame(Game x) {
-        games.add(x);
     }
 
     public ArrayList<RentalItem> addItemToCart(RentalItem item) throws IOException {
@@ -76,15 +68,6 @@ public class RentalSystem {
         System.out.println(s);
     }
 
-    public ArrayList<RentalItem> getRentalMovies() {
-        System.out.println("Here's a list of all movies: ");
-        return movies;
-    }
-
-    public ArrayList<RentalItem> getRentalGames() {
-        System.out.println("Here's a list of all games: ");
-        return games;
-    }
 
     public void addCustomer(Customer customer) {
         overview.setNewMembers(+1);
@@ -94,63 +77,6 @@ public class RentalSystem {
     public ArrayList<Customer> getCustomers() {
         System.out.println("Here's a list of all customers: ");
         return customers;
-    }
-
-    public boolean movieExists(String title) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\test.csv"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                // Check if the title of the movie in the file matches the given title
-                if (parts[4].equals(title)) {
-                    System.out.println(title + " already in the database");
-                    return true;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            // The file doesn't exist yet, so the movie definitely doesn't exist
-            return false;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
-
-    public void addMovieToMoviesCSV(Movie movie) {
-        String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
-        if (!movieExists(movie.getTitle())) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                String movieData = movie.getRentalPrice() + ","
-                        + movie.getRentalDuration() + ","
-                        + movie.isOutOfStock() + ","
-                        + movie.getStock() + ","
-                        + movie.getTitle() + ","
-                        + movie.getReleaseDate() + ","
-                        + movie.getGenre();
-                writer.write(movieData);
-                writer.newLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    public void addGameToGamesCSV(Game game) {
-        String filePath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String movieData = game.getRentalPrice() + ","
-                    + game.getRentalDuration() + ","
-                    + game.isOutOfStock() + ","
-                    + game.getStock() + ","
-                    + game.getTitle() + ","
-                    + game.getPublisher() + ","
-                    + game.getPlatform() + ","
-                    + game.getRating();
-            writer.write(movieData);
-            writer.newLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void viewOverview(Date date) {

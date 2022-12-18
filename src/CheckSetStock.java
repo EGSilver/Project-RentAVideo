@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class CheckSetStock {
+    DayOverview overview = new DayOverview(0,0,0,0);
+
+    //reads the amount in stock for a certain item in the CSV file
     public int getStockFromCSV(RentalItem item) throws IOException {
         int stock = 0;
         if (item instanceof Movie) {
@@ -57,8 +60,8 @@ public class CheckSetStock {
             }
         }
     }
-    DayOverview overview = new DayOverview(0,0,0,0);
 
+    //customer can return a rented item, updates the stock field in the CSV file
     public void returnItem(RentalItem item) throws IOException {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         ArrayList<String> arrayLines = new ArrayList<>();
