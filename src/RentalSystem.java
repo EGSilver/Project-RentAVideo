@@ -185,12 +185,8 @@ public class RentalSystem {
         for (int i = 0; i < arrayLines.size(); i++) {
             String line = arrayLines.get(i);
             String[] parts = line.split(",");
-<<<<<<< HEAD
             if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStock(item) > 0
                     || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStock(item) > 0) {
-=======
-            if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStock(item) > 0) {
->>>>>>> main
                 parts[3] = String.valueOf(getStock(item)-1);
                 arrayLines.set(i, String.join(",", parts));
             }
@@ -203,7 +199,6 @@ public class RentalSystem {
         }
     }
 
-<<<<<<< HEAD
     public void returnItem(RentalItem item) throws IOException {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         ArrayList<String> arrayLines = new ArrayList<>();
@@ -230,8 +225,6 @@ public class RentalSystem {
         }
     }
 
-=======
->>>>>>> main
     public void addMovieToMoviesCSV(Movie movie) {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         if (!movieExists(movie.getTitle())) {
