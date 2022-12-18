@@ -119,7 +119,6 @@ public class RentalSystem {
                 String[] parts = line.split(",");
                 // Check if the title of the movie in the file matches the given title
                 if (parts[3].equals(title)) {
-                    System.out.println("HALLONEGERO");
                     return true;
                 }
             }
