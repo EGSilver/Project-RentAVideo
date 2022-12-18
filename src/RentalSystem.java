@@ -1,16 +1,16 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class RentalSystem {
     private ArrayList<RentalItem> movies;
     private ArrayList<RentalItem> games;
     private ArrayList<Customer> customers;
     private ArrayList<RentalItem> itemCart;
-    private HashMap<Date, OverviewDay> DayOverview = new HashMap<>();
+
     private double totalPrice;
     private final double TAX = 1.21;
+    DayOverview overview = new DayOverview(0,0,0,0);
 
     //TODO Hashmap with day overview, what has been rented / how much money did we make
 
@@ -22,57 +22,12 @@ public class RentalSystem {
         this.totalPrice = totalPrice;
     }
 
-    //load all movies from the csv file.
-    public void loadMovies() {
-        File movieData = new File(("G:\\Git\\Project-RentAVideo\\data\\test.csv"));
-        try (BufferedReader reader = new BufferedReader(new FileReader(movieData))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                double rentalPrice = Double.parseDouble(parts[0]);
-                int rentalDuration = Integer.parseInt(parts[1]);
-                boolean rentalStatus = Boolean.parseBoolean(parts[2]);
-                int stock = Integer.parseInt(parts[3]);
-                String title = parts[4];
-                String releaseDate = parts[5];
-                String genre = parts[6];
-                RentalItem r = new Movie(rentalPrice, rentalDuration, rentalStatus, stock, title, releaseDate, genre);
-                movies.add(r);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void addGame(Game x) {
         games.add(x);
     }
 
-    //load all games from the csv file.
-    public void loadGames() {
-        File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
-        try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                double rentalPrice = Double.parseDouble(parts[0]);
-                int rentalDuration = Integer.parseInt(parts[1]);
-                boolean rentalStatus = Boolean.parseBoolean(parts[2]);
-                int stock = Integer.parseInt(parts[3]);
-                String title = parts[4];
-                String platform = parts[5];
-                String publisher = parts[6];
-                double rating = Double.parseDouble(parts[7]);
-                RentalItem r = new Game(rentalPrice, rentalDuration, rentalStatus, stock, title, platform, publisher, rating);
-                games.add(r);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public ArrayList<RentalItem> addItemToCart(RentalItem item) throws IOException {
-        if (item.isOutOfStock() || getStock(item) < 0) {
+        if (getStockFromCSV(item) <= 0) {
             System.out.println("This item is out of stock");
         } else {
             itemCart.add(item);
@@ -100,13 +55,15 @@ public class RentalSystem {
             if (item instanceof Movie movie) {
                 s += movie.getTitle() + "\n";
                 setStockMinusOne(item);
-                if (getStock(item) <= 1) {
+                overview.setRentals(overview.getRentals()+1);
+                if (getStockFromCSV(item) <= 1) {
                     item.setOutOfStock(true);
                 }
             } else if (item instanceof Game game) {
                 setStockMinusOne(item);
+                overview.setRentals(overview.getRentals()+1);
                 s += game.getTitle() + "\n";
-                if (getStock(item) <= 1) {
+                if (getStockFromCSV(item) <= 1) {
                     item.setOutOfStock(true);
                 }
             }
@@ -129,6 +86,7 @@ public class RentalSystem {
     }
 
     public void addCustomer(Customer customer) {
+        overview.setNewMembers(+1);
         customers.add(customer);
     }
 
@@ -157,7 +115,7 @@ public class RentalSystem {
         return false;
     }
 
-    public int getStock(RentalItem item) throws IOException {
+    public int getStockFromCSV(RentalItem item) throws IOException {
         int stock = 0;
         if (item instanceof Movie) {
             File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\test.csv"));
@@ -199,9 +157,9 @@ public class RentalSystem {
         for (int i = 0; i < arrayLines.size(); i++) {
             String line = arrayLines.get(i);
             String[] parts = line.split(",");
-            if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStock(item) > 0
-                    || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStock(item) > 0) {
-                parts[3] = String.valueOf(getStock(item)-1);
+            if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStockFromCSV(item) > 0
+                    || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStockFromCSV(item) > 0) {
+                parts[3] = String.valueOf(getStockFromCSV(item)-1);
                 arrayLines.set(i, String.join(",", parts));
             }
         }
@@ -225,10 +183,11 @@ public class RentalSystem {
         for (int i = 0; i < arrayLines.size(); i++) {
             String line = arrayLines.get(i);
             String[] parts = line.split(",");
-            if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStock(item) > 0
-                    || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStock(item) > 0) {
-                parts[3] = String.valueOf(getStock(item)+1);
+            if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStockFromCSV(item) > 0
+                    || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStockFromCSV(item) > 0) {
+                parts[3] = String.valueOf(getStockFromCSV(item)+1);
                 arrayLines.set(i, String.join(",", parts));
+                overview.setReturns(overview.getReturns()+1);
             }
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
@@ -258,7 +217,6 @@ public class RentalSystem {
         }
     }
 
-
     public void addGameToGamesCSV(Game game) {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
@@ -275,6 +233,11 @@ public class RentalSystem {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void viewOverview(Date date) {
+        overview.createOverview(date);
+        overview.viewOverview(date);
     }
 
 }

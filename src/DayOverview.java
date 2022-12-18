@@ -1,17 +1,32 @@
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
-public class OverviewDay {
+public class DayOverview {
     private int returns;
     private int rentals;
     private int lateReturns;
     private int newMembers;
+    private HashMap<Date, DayOverview> dayOverviewMap = new HashMap<>();
 
-    public OverviewDay(int returns, int rentals, int lateReturns, int newMembers) {
+    public DayOverview(int returns, int rentals, int lateReturns, int newMembers) {
         this.returns = returns;
         this.rentals = rentals;
         this.lateReturns = lateReturns;
         this.newMembers = newMembers;
+    }
+
+    public void createOverview(Date today) {
+        dayOverviewMap.put(today, new DayOverview(returns,rentals,lateReturns,newMembers));
+    }
+
+    public void viewOverview(Date date) {
+        DayOverview overviewOfCertainDate = dayOverviewMap.get(date);
+        int rentals = overviewOfCertainDate.getRentals();
+        int returns = overviewOfCertainDate.getReturns();
+        int newMembers = overviewOfCertainDate.getNewMembers();
+        System.out.println(date
+               + "\nAmount of rentals: " + rentals
+               + "\nAmount of returns: " + returns
+               + "\nAmount of New Members: " + newMembers);
     }
 
     public int getReturns() {
