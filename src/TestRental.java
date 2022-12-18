@@ -19,12 +19,13 @@ public class TestRental {
     //System.out.println(m.getCustomers());
     m.addItemToCart(theMatrix);
     m.addItemToCart(theLionKing);
-    m.checkout();
+    //m.checkout();
     //m.addMovieToMoviesCSV(theLionKing);
     //System.out.println(m.getRentalMovies());
     //m.getStock(theLionKing);
     //m.setStockMinusOne(theLionKing);
-        //m.getStock(theMatrix);
-        System.out.println(m.getStock(theMatrix));
+    //m.getStock(theMatrix);
+    m.returnItem(theMatrix);
+    System.out.println(m.getStock(theMatrix));
     }
 }
