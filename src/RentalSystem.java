@@ -187,7 +187,6 @@ public class RentalSystem {
             String[] parts = line.split(",");
             if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStock(item) > 0
                     || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStock(item) > 0) {
-            if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStock(item) > 0) {
                 parts[3] = String.valueOf(getStock(item)-1);
                 arrayLines.set(i, String.join(",", parts));
             }
@@ -225,6 +224,7 @@ public class RentalSystem {
             }
         }
     }
+
     public void addMovieToMoviesCSV(Movie movie) {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         if (!movieExists(movie.getTitle())) {
