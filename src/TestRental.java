@@ -29,6 +29,7 @@ public class TestRental {
     //Add items to cart
     m.addItemToCart(theMatrix);
     m.addItemToCart(theLionKing);
+    System.out.println(m.viewCart());
     //m.checkout();
 
     //***//

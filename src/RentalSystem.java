@@ -1,11 +1,14 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class RentalSystem {
     private ArrayList<RentalItem> movies;
     private ArrayList<RentalItem> games;
     private ArrayList<Customer> customers;
     private ArrayList<RentalItem> itemCart;
+    private HashMap<Date, OverviewDay> DayOverview = new HashMap<>();
     private double totalPrice;
     private final double TAX = 1.21;
 
@@ -63,15 +66,13 @@ public class RentalSystem {
                 RentalItem r = new Game(rentalPrice, rentalDuration, rentalStatus, stock, title, platform, publisher, rating);
                 games.add(r);
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public ArrayList<RentalItem> addItemToCart(RentalItem item) {
-        if (item.isOutOfStock()) {
+    public ArrayList<RentalItem> addItemToCart(RentalItem item) throws IOException {
+        if (item.isOutOfStock() || getStock(item) < 0) {
             System.out.println("This item is out of stock");
         } else {
             itemCart.add(item);
@@ -80,8 +81,20 @@ public class RentalSystem {
         return itemCart;
     }
 
-    public void checkout() throws IOException {
+    public String viewCart() {
         String s = "";
+        for (RentalItem item : itemCart) {
+            if (item instanceof Movie) {
+                 s += ((Movie) item).getTitle() + "\n";
+            } else if (item instanceof Game) {
+                 s += ((Game) item).getTitle() + "\n";
+            }
+        }
+        return s;
+    }
+
+    public void checkout(Customer customer) throws IOException {
+        String s = customer.getName() + "\n";
         totalPrice = 0;
         for (RentalItem item : itemCart) {
             if (item instanceof Movie movie) {
