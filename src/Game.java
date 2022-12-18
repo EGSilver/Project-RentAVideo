@@ -4,8 +4,8 @@ public class Game extends RentalItem {
     private String publisher;
     private double rating;
 
-    public Game(double rentalPrice, int rentalDuration, boolean rentalStatus, String title, String platform, String publisher, double rating) {
-        super(rentalPrice, rentalDuration, rentalStatus);
+    public Game(double rentalPrice, int rentalDuration, boolean rentalStatus, int stock, String title, String platform, String publisher, double rating) {
+        super(rentalPrice, rentalDuration, rentalStatus, stock);
         this.title = title;
         this.platform = platform;
         this.publisher = publisher;
