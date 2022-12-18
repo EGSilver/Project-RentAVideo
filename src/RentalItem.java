@@ -1,12 +1,22 @@
 public class RentalItem {
     private double rentalPrice;
     private int rentalDuration;
-    private boolean rentalStatus;
+    private boolean outOfStock;
+    private int stock;
 
-    public RentalItem(double rentalPrice, int rentalDuration, boolean rentalStatus) {
+    public RentalItem(double rentalPrice, int rentalDuration, boolean outOfStock, int stock) {
         this.rentalPrice = rentalPrice;
         this.rentalDuration = rentalDuration;
-        this.rentalStatus = rentalStatus;
+        this.outOfStock = outOfStock;
+        this.stock = stock;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public double getRentalPrice() {
@@ -25,27 +35,29 @@ public class RentalItem {
         this.rentalDuration = rentalDuration;
     }
 
-    public boolean isRentalStatus() {
-        return rentalStatus;
+    public boolean isOutOfStock() {
+        return outOfStock;
     }
 
     public void setRentalStatus() {
-        this.rentalStatus = rentalStatus;
+        this.outOfStock = outOfStock;
     }
 
     public void getRentalStatus() {
-        this.rentalStatus = rentalStatus;
+        this.outOfStock = outOfStock;
     }
 
-    public void setRentalStatus(boolean rentalStatus) {
-        this.rentalStatus = rentalStatus;
+    public void setOutOfStock(boolean outOfStock) {
+        this.outOfStock = outOfStock;
     }
+
     @Override
     public String toString() {
         return "RentalItem{" +
                 "rentalPrice=" + rentalPrice +
                 ", rentalDuration=" + rentalDuration +
-                ", rentalStatus=" + rentalStatus +
+                ", rentalStatus=" + outOfStock +
+                ", stock=" + stock +
                 '}';
     }
 }
