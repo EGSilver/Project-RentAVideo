@@ -5,7 +5,8 @@ public class TestRental {
     public static void main(String[] args) throws IOException {
     Panel panel = new Panel();
     RentalSystem m = new RentalSystem();
-    MovieGameManager manager = new MovieGameManager();
+    RentalItemLoader itemLoader = new RentalItemLoader();
+    CheckSetStock checkSetStock = new CheckSetStock();
     java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
     DayOverview dayOverview = new DayOverview(0,0,0,0);
     Customer jef = new Customer("Jef","Kabouterstraat 8 2800 Mechelen","19/02/1985","0499/99/66/33",0);
@@ -18,8 +19,8 @@ public class TestRental {
 
     //***//
     //Load CSV file into Arrays
-        manager.loadMovies();
-        manager.loadGames();
+        itemLoader.loadMovies();
+        itemLoader.loadGames();
 
     //***//
     //Print out loaded Arrays
@@ -42,7 +43,7 @@ public class TestRental {
         //System.out.println(m.getRentalMovies());
         //m.getStock(theLionKing);
         //m.setStockMinusOne(theLionKing);
-        m.returnItem(theMatrix);
+        checkSetStock.returnItem(theMatrix);
         //System.out.println(m.getStockFromCSV(theMatrix) + "\n");
     //***//
         //System.out.println(date);
