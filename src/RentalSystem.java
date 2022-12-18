@@ -7,6 +7,9 @@ public class RentalSystem {
     private ArrayList<Customer> customers;
     private ArrayList<RentalItem> itemCart;
     private double totalPrice;
+    private final double TAX = 1.21;
+
+    //TODO Hashmap with day overview, what has been rented / how much money did we make
 
     public RentalSystem() {
         this.movies = new ArrayList<>();
@@ -81,15 +84,13 @@ public class RentalSystem {
         String s = "";
         totalPrice = 0;
         for (RentalItem item : itemCart) {
-            if (item instanceof Movie) {
-                Movie movie = (Movie) item;
+            if (item instanceof Movie movie) {
                 s += movie.getTitle() + "\n";
                 setStockMinusOne(item);
                 if (getStock(item) <= 1) {
                     item.setOutOfStock(true);
                 }
-            } else if (item instanceof Game) {
-                Game game = (Game) item;
+            } else if (item instanceof Game game) {
                 setStockMinusOne(item);
                 s += game.getTitle() + "\n";
                 if (getStock(item) <= 1) {
@@ -100,7 +101,7 @@ public class RentalSystem {
         for (RentalItem c : itemCart) {
             totalPrice += c.getRentalPrice();
         }
-        s += "\nTotal price to pay: " + totalPrice;
+        s += "\nTotal price to pay: " + (totalPrice * TAX);
         System.out.println(s);
     }
 
