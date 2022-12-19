@@ -6,8 +6,9 @@ public class TestRental {
     Panel panel = new Panel();
     RentalSystem m = new RentalSystem();
     RentalItemLoader itemLoader = new RentalItemLoader();
-    CheckSetStock checkSetStock = new CheckSetStock();
+    StockManager stockManager = new StockManager();
     ItemManager itemManager = new ItemManager();
+    CartManager cartManager = new CartManager();
     java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
     DayOverview dayOverview = new DayOverview(0,0,0,0);
     Customer jef = new Customer("Jef","Kabouterstraat 8 2800 Mechelen","19/02/1985","0499/99/66/33",0);
@@ -30,26 +31,27 @@ public class TestRental {
         //System.out.println();
     //***//
     //Add customer to Array
-        m.addCustomer(jef);
-        System.out.println(m.getCustomers());
+        m.addCustomer(jef, dayOverview);
+        //System.out.println(m.getCustomers());
         //Add items to cart
-        m.addItemToCart(theMatrix);
-        m.addItemToCart(theLionKing);
-        System.out.println(m.viewCart());
-        m.checkout(jef);
+        cartManager.addItemToCart(theMatrix);
+        cartManager.addItemToCart(theLionKing);
+        //System.out.println(cartManager.viewCart());
+        m.checkout(jef, cartManager, dayOverview);
+        //System.out.println(cartManager.getItemCart());
         //System.out.println();
     //***//
     //Adding movies/games to the CSV databases & Testing changes in stock value's
-        itemManager.addMovieToMoviesCSV(theLionKing);
-        System.out.println(checkSetStock.getStockFromCSV(theLionKing));
-        checkSetStock.setStockMinusOne(theLionKing);
-        checkSetStock.returnItem(theMatrix);
+        //itemManager.addMovieToMoviesCSV(theLionKing);
+        //System.out.println(stockManager.getStockFromCSV(theLionKing));
+        //stockManager.setStockMinusOne(theLionKing);
+        stockManager.returnItem(theMatrix, dayOverview);
         //System.out.println(checkSetStock.getStockFromCSV(theMatrix) + "\n");
     //***//
         //System.out.println(date);
-        System.out.println();
+        //System.out.println();
         dayOverview.createOverview(date);
-        m.viewOverview(date);
+        dayOverview.viewOverview(date);
 
     }
 }

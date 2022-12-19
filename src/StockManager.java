@@ -1,9 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class CheckSetStock {
-    DayOverview overview = new DayOverview(0,0,0,0);
-
+public class StockManager {
     //reads the amount in stock for a certain item in the CSV file
     public int getStockFromCSV(RentalItem item) throws IOException {
         int stock = 0;
@@ -62,7 +60,7 @@ public class CheckSetStock {
     }
 
     //customer can return a rented item, updates the stock field in the CSV file
-    public void returnItem(RentalItem item) throws IOException {
+    public void returnItem(RentalItem item, DayOverview overview) throws IOException {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         ArrayList<String> arrayLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
