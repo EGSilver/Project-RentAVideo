@@ -7,6 +7,8 @@ public class DayOverview {
     private int newMembers;
     private HashMap<Date, DayOverview> dayOverviewMap = new HashMap<>();
 
+    //TODO hashmap with overview of earning of the day.
+
     public DayOverview(int returns, int rentals, int lateReturns, int newMembers) {
         this.returns = returns;
         this.rentals = rentals;
@@ -22,10 +24,12 @@ public class DayOverview {
         DayOverview overviewOfCertainDate = dayOverviewMap.get(date);
         int rentals = overviewOfCertainDate.getRentals();
         int returns = overviewOfCertainDate.getReturns();
+        int lateReturns = overviewOfCertainDate.getLateReturns();
         int newMembers = overviewOfCertainDate.getNewMembers();
         System.out.println(date
                + "\nAmount of rentals: " + rentals
                + "\nAmount of returns: " + returns
+               + "\nAmount of late returns: " + lateReturns
                + "\nAmount of New Members: " + newMembers);
     }
 

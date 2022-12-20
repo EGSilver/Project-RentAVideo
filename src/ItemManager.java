@@ -10,7 +10,7 @@ public class ItemManager {
                 String[] parts = line.split(",");
                 // Check if the title of the movie in the file matches the given title
                 if (parts[4].equals(title)) {
-                    System.out.println(title + " already in the database");
+                    System.out.println(title + " exists in the database");
                     return true;
                 }
             }
@@ -22,6 +22,7 @@ public class ItemManager {
         }
         return false;
     }
+
     public void addMovieToMoviesCSV(Movie movie) {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         if (!movieExists(movie.getTitle())) {

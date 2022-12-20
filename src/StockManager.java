@@ -32,7 +32,7 @@ public class StockManager {
         }
         return stock;
     }
-
+    //function gets called when a customer checks out a movie
     public void setStockMinusOne(RentalItem item) throws IOException {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         ArrayList<String> arrayLines = new ArrayList<>();
@@ -76,6 +76,7 @@ public class StockManager {
                     || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStockFromCSV(item) > 0) {
                 parts[3] = String.valueOf(getStockFromCSV(item)+1);
                 arrayLines.set(i, String.join(",", parts));
+                System.out.println("Movie: " + parts[4] + " has been been returned");
                 overview.setReturns(overview.getReturns()+1);
             }
         }
