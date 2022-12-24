@@ -22,7 +22,9 @@ public class RentalItemLoader {
                 String title = parts[4];
                 String releaseDate = parts[5];
                 String genre = parts[6];
-                RentalItem r = new Movie(rentalPrice, rentalDuration, rentalStatus, stock, title, releaseDate, genre);
+                String type = parts[7];
+                String discription = parts[7];
+                RentalItem r = new Movie(title, rentalPrice, rentalDuration, rentalStatus, stock, type, releaseDate, genre, discription);
                 movies.add(r);
             }
         } catch (IOException e) {
@@ -46,7 +48,8 @@ public class RentalItemLoader {
                 String platform = parts[5];
                 String publisher = parts[6];
                 double rating = Double.parseDouble(parts[7]);
-                RentalItem r = new Game(rentalPrice, rentalDuration, rentalStatus, stock, title, platform, publisher, rating);
+                String type = parts[8];
+                RentalItem r = new Game(title, rentalPrice, rentalDuration, rentalStatus, stock, type, platform, publisher, rating);
                 games.add(r);
             }
         } catch (IOException e) {

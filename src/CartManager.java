@@ -18,11 +18,7 @@ public class CartManager {
     public String viewCart() {
         String s = "";
         for (RentalItem item : itemCart) {
-            if (item instanceof Movie) {
-                s += ((Movie) item).getTitle() + "\n";
-            } else if (item instanceof Game) {
-                s += ((Game) item).getTitle() + "\n";
-            }
+                s +=  item.getTitle() + "\n";
         }
         return s;
     }

@@ -4,8 +4,8 @@ import java.text.DecimalFormat;
 public class CheckOutManager {
     private double totalPrice;
     private final double TAX = 1.21;
+    private DecimalFormat decimalFormat = new DecimalFormat("#.00");
     public void checkout(Customer customer, CartManager cartManager, DayOverview overview, StockManager stockManager) throws IOException {
-        DecimalFormat decimalFormat = new DecimalFormat("#.00");
         System.out.println(cartManager.getItemCart());
         String s = customer.getName() + "\n";
         totalPrice = 0;

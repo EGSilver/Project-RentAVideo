@@ -1,27 +1,22 @@
 public class Movie extends RentalItem {
-    private String title;
     private String releaseDate;
     private String genre;
+    private String description;
 
-    public Movie(double rentalPrice, int rentalDuration, boolean rentalStatus, int stock, String title, String releaseDate, String genre) {
-        super(rentalPrice, rentalDuration, rentalStatus, stock);
-        this.title = title;
+    public Movie(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String releaseDate, String genre, String description) {
+        super(title, rentalPrice, rentalDuration, outOfStock, stock, type);
         this.releaseDate = releaseDate;
         this.genre = genre;
+        this.description = description;
     }
 
-    public void getDescription() {
-
+    public String getDescription() {
+       return description;
     }
 
-    public String getTitle() {
-        return title;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getReleaseDate() {
         return releaseDate;
     }
@@ -40,10 +35,12 @@ public class Movie extends RentalItem {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "title='" + title + '\'' +
+        return "Movie: {" +
+                "title='" + super.getTitle() + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
                 ", genre='" + genre + '\'' +
+                ", description='" + description + '\'' +
+                ", type='" + super.getType() + '\'' +
                 '}';
     }
 }

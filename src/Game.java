@@ -1,23 +1,13 @@
 public class Game extends RentalItem {
-    private String title;
     private String platform;
     private String publisher;
     private double rating;
 
-    public Game(double rentalPrice, int rentalDuration, boolean rentalStatus, int stock, String title, String platform, String publisher, double rating) {
-        super(rentalPrice, rentalDuration, rentalStatus, stock);
-        this.title = title;
+    public Game(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String platform, String publisher, double rating) {
+        super(title, rentalPrice, rentalDuration, outOfStock, stock, type);
         this.platform = platform;
         this.publisher = publisher;
         this.rating = rating;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getPlatform() {
@@ -27,7 +17,6 @@ public class Game extends RentalItem {
     public void setPlatform(String platform) {
         this.platform = platform;
     }
-
     public String getPublisher() {
         return publisher;
     }
@@ -35,7 +24,6 @@ public class Game extends RentalItem {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-
     public double getRating() {
         return rating;
     }
@@ -46,8 +34,8 @@ public class Game extends RentalItem {
 
     @Override
     public String toString() {
-        return "Game{" +
-                "title='" + title + '\'' +
+        return "Game: {" +
+                "title='" + super.getTitle() + '\'' +
                 ", platform='" + platform + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", rating=" + rating +
