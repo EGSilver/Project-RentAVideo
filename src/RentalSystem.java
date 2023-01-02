@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class RentalSystem {
     private ArrayList<Customer> customers;
-    private DatabaseManager loader;
+    private DatabaseManager databaseManager;
     private CartManager cartManager;
     private DayOverview dayOverview;
 
     public RentalSystem() {
         this.customers = new ArrayList<>();
-        this.loader = new DatabaseManager();
+        this.databaseManager = new DatabaseManager();
         this.cartManager = new CartManager();
         this.dayOverview = new DayOverview(0,0,0,0);
     }
@@ -26,27 +26,27 @@ public class RentalSystem {
     }
 
     public ArrayList<RentalItem> getRentalMovies() {
-        return loader.getRentalMovies();
+        return databaseManager.getRentalMovies();
     }
 
     public ArrayList<RentalItem> getRentalGames() {
-        return loader.getRentalGames();
+        return databaseManager.getRentalGames();
     }
 
     public boolean movieExists(String title) {
-        return loader.movieExists(title);
+        return databaseManager.movieExists(title);
     }
 
     public void addMovieToCSV(Movie movie) {
-        loader.addMovieToMoviesCSV(movie);
+        databaseManager.addMovieToMoviesCSV(movie);
     }
 
     public void addGameToCSV(Game game) {
-        loader.addGameToGamesCSV(game);
+        databaseManager.addGameToGamesCSV(game);
     }
 
-    public void returnItem(RentalItem item, DayOverview overview, StockManager stockManager) throws IOException {
-        stockManager.returnItem(item, overview);
+    public void returnItem(RentalItem item, DayOverview overview, DatabaseManager databaseManager) throws IOException {
+        databaseManager.returnItem(item, overview);
     }
 
     public void createOverview(Date date, DayOverview day) {
@@ -69,8 +69,8 @@ public class RentalSystem {
         return cart.getItemCart();
     }
 
-    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, StockManager stockManager) throws IOException {
-        cartManager.checkout(customer, cartManager, overview, stockManager);
+    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException {
+        cartManager.checkout(customer, cartManager, overview, databaseManager);
     }
 
     public void setLateReturns(int lateReturns, DayOverview day) {
@@ -78,7 +78,7 @@ public class RentalSystem {
     }
 
     public String getRatingFromCSV(RentalItem item) throws IOException {
-        return loader.getRatinFromCSV(item);
+        return databaseManager.getRatinFromCSV(item);
     }
 
 }

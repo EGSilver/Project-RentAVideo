@@ -4,8 +4,7 @@ import java.io.IOException;
 public class TestRental {
     public static void main(String[] args) throws IOException {
     Panel panel = new Panel();
-    DatabaseManager itemLoader = new DatabaseManager();
-    StockManager stockManager = new StockManager();
+    DatabaseManager databaseManager = new DatabaseManager();
     CartManager cartManager = new CartManager();
     java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
     DayOverview dayOverview = new DayOverview(0,0,0,0);
@@ -19,13 +18,13 @@ public class TestRental {
 
     //***//
     //Load CSV file into Arrays
-        itemLoader.loadMovies();
-        itemLoader.loadGames();
+        databaseManager.loadMovies();
+        databaseManager.loadGames();
 
     //***//
     //Print out loaded Arrays
-        //System.out.println(itemLoader.getRentalMovies());
-        //System.out.println(itemLoader.getRentalGames());
+        //System.out.println(databaseManager.getRentalMovies());
+        //System.out.println(databaseManager.getRentalGames());
         //System.out.println();
     //***//
     //Add customer to Array
@@ -58,7 +57,7 @@ public class TestRental {
         rentalSystem.addItemToCart(theMatrix, jef, cartManager);
         //rentalSystem.addItemToCart(theLionKing, cartManager);
         rentalSystem.addItemToCart(tombRaider, jef, cartManager);
-        rentalSystem.checkOut(jef, cartManager, dayOverview, stockManager);
+        rentalSystem.checkOut(jef, cartManager, dayOverview, databaseManager);
 
 
         //System.out.println(rentalSystem.getCart(cartManager));

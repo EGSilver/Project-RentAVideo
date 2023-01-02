@@ -4,18 +4,17 @@ import java.util.ArrayList;
 
 public class CartManager {
     private ArrayList<RentalItem> itemCart = new ArrayList<>();
-    StockManager stockManager = new StockManager();
-    DatabaseManager loader = new DatabaseManager();
+    DatabaseManager databaseManager = new DatabaseManager();
 
     private double totalPrice;
     private final double TAX = 1.21;
     private DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
     public ArrayList<RentalItem> addItemToCart(RentalItem item, Customer customer) throws IOException {
-        if (stockManager.getStockFromCSV(item) <= 0) {
+        if (databaseManager.getStockFromCSV(item) <= 0) {
             System.out.println("This item is out of stock");
-        } else if (loader.getRatinFromCSV(item).equals("A") && customer.checkUnderaged()) {
-            System.out.println(item.getTitle() + " has been rated " + loader.getRatinFromCSV(item) + ". You must be age 18 or higher to be able to rent this item.\n");
+        } else if (databaseManager.getRatinFromCSV(item).equals("A") && customer.checkUnderaged()) {
+            System.out.println(item.getTitle() + " has been rated " + databaseManager.getRatinFromCSV(item) + ". You must be age 18 or higher to be able to rent this item.\n");
         } else {
             itemCart.add(item);
         }
@@ -30,23 +29,23 @@ public class CartManager {
         return s;
     }
 
-    public void checkout(Customer customer, CartManager cartManager, DayOverview overview, StockManager stockManager) throws IOException {
+    public void checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException {
         System.out.println(cartManager.getItemCart());
         String s = customer.getName() + "\n";
         totalPrice = 0;
         for (RentalItem item : cartManager.getItemCart()) {
             if (item.getType().equals("Movie")) {
                 s += item.getTitle() + "\n";
-                stockManager.setMovieStockMinusOne(item);
+                databaseManager.setMovieStockMinusOne(item);
                 overview.setRentals(overview.getRentals() + 1);
-                if (stockManager.getStockFromCSV(item) <= 1) {
+                if (databaseManager.getStockFromCSV(item) <= 1) {
                     item.setOutOfStock(true);
                 }
             } else if (item.getType().equals("Game")) {
-                stockManager.setGameStockMinusOne(item);
+                databaseManager.setGameStockMinusOne(item);
                 overview.setRentals(overview.getRentals() + 1);
                 s += item.getTitle() + "\n";
-                if (stockManager.getStockFromCSV(item) <= 1) {
+                if (databaseManager.getStockFromCSV(item) <= 1) {
                     item.setOutOfStock(true);
                 }
             }
