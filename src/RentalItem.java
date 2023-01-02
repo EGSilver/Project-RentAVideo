@@ -5,14 +5,16 @@ public class RentalItem {
     private boolean outOfStock;
     private int stock;
     private String type;
+    private String esrbRating;
 
-    public RentalItem(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type) {
+    public RentalItem(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String esrbRating) {
         this.title = title;
         this.rentalPrice = rentalPrice;
         this.rentalDuration = rentalDuration;
         this.outOfStock = outOfStock;
         this.stock = stock;
         this.type = type;
+        this.esrbRating = esrbRating;
     }
 
     public String getType() {
@@ -50,6 +52,15 @@ public class RentalItem {
     public void setRentalDuration(int rentalDuration) {
         this.rentalDuration = rentalDuration;
     }
+
+    public String getEsrbRating() {
+        return esrbRating;
+    }
+
+    public void setEsrbRating(String esrbRating) {
+        this.esrbRating = esrbRating;
+    }
+
     public boolean isOutOfStock() {
         return outOfStock;
     }

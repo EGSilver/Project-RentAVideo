@@ -23,8 +23,9 @@ public class DatabaseLoader {
                 String releaseDate = parts[5];
                 String genre = parts[6];
                 String type = parts[7];
-                String discription = parts[7];
-                RentalItem r = new Movie(title, rentalPrice, rentalDuration, rentalStatus, stock, type, releaseDate, genre, discription);
+                String discription = parts[8];
+                String esrbRating = parts[9];
+                RentalItem r = new Movie(title, rentalPrice, rentalDuration, rentalStatus, stock, type, releaseDate, genre, discription, esrbRating);
                 movies.add(r);
             }
         } catch (IOException e) {
@@ -47,9 +48,10 @@ public class DatabaseLoader {
                 String title = parts[4];
                 String platform = parts[5];
                 String publisher = parts[6];
-                double rating = Double.parseDouble(parts[7]);
+                String rating = parts[7];
                 String type = parts[8];
-                RentalItem r = new Game(title, rentalPrice, rentalDuration, rentalStatus, stock, type, platform, publisher, rating);
+                double criticRating = Double.parseDouble(parts[9]);
+                RentalItem r = new Game(title, rentalPrice, rentalDuration, rentalStatus, stock, type, platform, publisher, rating, criticRating);
                 games.add(r);
             }
         } catch (IOException e) {
@@ -58,13 +60,39 @@ public class DatabaseLoader {
         return games;
     }
 
-    //get a list of all movies loaded into the arraylist
+    public String getRatingfromCSV(RentalItem item) throws IOException {
+        String esrbRating = "";
+        if (item.getType().equals("Movie")) {
+            File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\test.csv"));
+            try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    if (item.getTitle().equals(parts[4])) {
+                        esrbRating = (parts[9]);
+                    }
+                }
+            }
+        } else {
+            File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
+            try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    esrbRating = (parts[7]);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return esrbRating;
+    }
+
     public ArrayList<RentalItem> getRentalMovies() {
         System.out.println("Here's a list of all movies: ");
         return movies;
     }
 
-    //get a list of all games loaded into the arraylist
     public ArrayList<RentalItem> getRentalGames() {
         System.out.println("Here's a list of all games: ");
         return games;

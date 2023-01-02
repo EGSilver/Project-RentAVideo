@@ -10,11 +10,11 @@ public class TestRental {
     CartManager cartManager = new CartManager();
     java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
     DayOverview dayOverview = new DayOverview(0,0,0,0);
-    Customer jef = new Customer("Jef","Kabouterstraat 8 2800 Mechelen","19/02/1985","0499/99/66/33",0);
-    Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive",9.6);
-    RentalItem rentalItem = new RentalItem("",0,0,false, 0, "");
-    Movie theMatrix = new Movie("The Matrix",3.5,3, false,0, "Movie","1999","Action", "");
-    Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "");
+    Customer jef = new Customer("Jef","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
+    Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6);
+    RentalItem rentalItem = new RentalItem("",0,0,false, 0, "","");
+    Movie theMatrix = new Movie("The Matrix",3.5,3, false,0, "Movie","1999","Action", "","");
+    Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "");
     RentalSystem rentalSystem = new RentalSystem();
     //m.addGame(tombRaider);
 
@@ -56,10 +56,10 @@ public class TestRental {
         //rentalSystem.movieExists("The Matrix");
         //rentalSystem.setLateReturns(10, dayOverview);
         rentalSystem.addCustomer(jef, dayOverview);
-        //rentalSystem.addItemToCart(theMatrix, cartManager);
+        rentalSystem.addItemToCart(theMatrix, jef, cartManager);
         //rentalSystem.addItemToCart(theLionKing, cartManager);
-        rentalSystem.addItemToCart(tombRaider, cartManager);
-        rentalSystem.checkOut(jef,cartManager,dayOverview,stockManager);
+        rentalSystem.addItemToCart(tombRaider, jef, cartManager);
+        rentalSystem.checkOut(jef, cartManager, dayOverview, stockManager);
 
 
         //System.out.println(rentalSystem.getCart(cartManager));
@@ -69,6 +69,10 @@ public class TestRental {
 
         rentalSystem.createOverview(currentSystemDate, dayOverview);
         rentalSystem.viewOverview(currentSystemDate, dayOverview);
+
+        //System.out.println(rentalSystem.getRatingfromCSV(tombRaider));
+
+
 
     }
 }
