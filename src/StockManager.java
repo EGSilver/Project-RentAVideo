@@ -5,7 +5,7 @@ public class StockManager {
     //reads the amount in stock for a certain item in the CSV file
     public int getStockFromCSV(RentalItem item) throws IOException {
         int stock = 0;
-        if (item instanceof Movie) {
+        if (item.getType().equals("Movie")) {
             File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\test.csv"));
             try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
                 String line;
@@ -45,8 +45,8 @@ public class StockManager {
         for (int i = 0; i < arrayLines.size(); i++) {
             String line = arrayLines.get(i);
             String[] parts = line.split(",");
-            if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStockFromCSV(item) > 0
-                    || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStockFromCSV(item) > 0) {
+            if (item.getType().equals("Movie") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0
+                    || item.getType().equals("Game") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0) {
                 parts[3] = String.valueOf(getStockFromCSV(item)-1);
                 arrayLines.set(i, String.join(",", parts));
             }
@@ -72,8 +72,8 @@ public class StockManager {
         for (int i = 0; i < arrayLines.size(); i++) {
             String line = arrayLines.get(i);
             String[] parts = line.split(",");
-            if (item instanceof Movie && parts[4].equals(((Movie) item).getTitle()) && getStockFromCSV(item) > 0
-                    || item instanceof Game && parts[4].equals(((Game) item).getTitle()) && getStockFromCSV(item) > 0) {
+            if (item.getType().equals("Movie") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0
+                    || item.getType().equals("Game") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0) {
                 parts[3] = String.valueOf(getStockFromCSV(item)+1);
                 arrayLines.set(i, String.join(",", parts));
                 System.out.println("Movie: " + parts[4] + " has been been returned");

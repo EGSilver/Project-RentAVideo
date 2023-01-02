@@ -10,17 +10,17 @@ public class CheckOutManager {
         String s = customer.getName() + "\n";
         totalPrice = 0;
         for (RentalItem item : cartManager.getItemCart()) {
-            if (item instanceof Movie movie) {
-                s += movie.getTitle() + "\n";
+            if (item.getType().equals("Movie")) {
+                s += item.getTitle() + "\n";
                 stockManager.setStockMinusOne(item);
                 overview.setRentals(overview.getRentals()+1);
                 if (stockManager.getStockFromCSV(item) <= 1) {
                     item.setOutOfStock(true);
                 }
-            } else if (item instanceof Game game) {
+            } else if (item.getType().equals("Game")) {
                 stockManager.setStockMinusOne(item);
                 overview.setRentals(overview.getRentals()+1);
-                s += game.getTitle() + "\n";
+                s += item.getTitle() + "\n";
                 if (stockManager.getStockFromCSV(item) <= 1) {
                     item.setOutOfStock(true);
                 }
