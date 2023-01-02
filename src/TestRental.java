@@ -6,7 +6,6 @@ public class TestRental {
     Panel panel = new Panel();
     DatabaseManager itemLoader = new DatabaseManager();
     StockManager stockManager = new StockManager();
-    ItemManager itemManager = new ItemManager();
     CartManager cartManager = new CartManager();
     java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
     DayOverview dayOverview = new DayOverview(0,0,0,0);
