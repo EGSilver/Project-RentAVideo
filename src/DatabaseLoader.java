@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RentalItemLoader {
+public class DatabaseLoader {
     private ArrayList<RentalItem> games = new ArrayList<>();
     private ArrayList<RentalItem> movies = new ArrayList<>();
 

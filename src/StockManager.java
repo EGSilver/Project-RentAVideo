@@ -33,7 +33,7 @@ public class StockManager {
         return stock;
     }
     //function gets called when a customer checks out a movie
-    public void setStockMinusOne(RentalItem item) throws IOException {
+    public void setMovieStockMinusOne(RentalItem item) throws IOException {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         ArrayList<String> arrayLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -45,8 +45,32 @@ public class StockManager {
         for (int i = 0; i < arrayLines.size(); i++) {
             String line = arrayLines.get(i);
             String[] parts = line.split(",");
-            if (item.getType().equals("Movie") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0
-                    || item.getType().equals("Game") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0) {
+            if (item.getType().equals("Movie") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0) {
+                parts[3] = String.valueOf(getStockFromCSV(item)-1);
+                arrayLines.set(i, String.join(",", parts));
+            }
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
+            for (String line : arrayLines) {
+                writer.write(line);
+                writer.newLine();
+            }
+        }
+    }
+
+    public void setGameStockMinusOne(RentalItem item) throws IOException {
+        String  filePath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
+        ArrayList<String> arrayLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                arrayLines.add(line);
+            }
+        }
+        for (int i = 0; i < arrayLines.size(); i++) {
+            String line = arrayLines.get(i);
+            String[] parts = line.split(",");
+            if (item.getType().equals("Game") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0) {
                 parts[3] = String.valueOf(getStockFromCSV(item)-1);
                 arrayLines.set(i, String.join(",", parts));
             }

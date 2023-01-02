@@ -22,7 +22,7 @@ public class CartManager {
     public String viewCart() {
         String s = "";
         for (RentalItem item : itemCart) {
-                s +=  item.getTitle() + "\n";
+            s += item.getTitle() + "\n";
         }
         return s;
     }
@@ -34,14 +34,14 @@ public class CartManager {
         for (RentalItem item : cartManager.getItemCart()) {
             if (item.getType().equals("Movie")) {
                 s += item.getTitle() + "\n";
-                stockManager.setStockMinusOne(item);
-                overview.setRentals(overview.getRentals()+1);
+                stockManager.setMovieStockMinusOne(item);
+                overview.setRentals(overview.getRentals() + 1);
                 if (stockManager.getStockFromCSV(item) <= 1) {
                     item.setOutOfStock(true);
                 }
             } else if (item.getType().equals("Game")) {
-                stockManager.setStockMinusOne(item);
-                overview.setRentals(overview.getRentals()+1);
+                stockManager.setGameStockMinusOne(item);
+                overview.setRentals(overview.getRentals() + 1);
                 s += item.getTitle() + "\n";
                 if (stockManager.getStockFromCSV(item) <= 1) {
                     item.setOutOfStock(true);
@@ -50,10 +50,16 @@ public class CartManager {
         }
         for (RentalItem c : cartManager.getItemCart()) {
             totalPrice += c.getRentalPrice();
+            //todo rentalDays & lateReturns
         }
         String formattedTotalPrice = decimalFormat.format(totalPrice * TAX);
-        s += "\nTotal price to pay: €" + formattedTotalPrice;
-        System.out.println(s);
+        if (totalPrice == 0) {
+            s += ("Total price to pay: €" + "0");
+            System.out.println(s + "\n");
+        } else {
+            s += "Total price to pay: €" + formattedTotalPrice;
+            System.out.println(s + "\n");
+        }
     }
 
     public ArrayList<RentalItem> getItemCart() {

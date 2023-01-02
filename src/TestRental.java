@@ -4,7 +4,7 @@ import java.io.IOException;
 public class TestRental {
     public static void main(String[] args) throws IOException {
     Panel panel = new Panel();
-    RentalItemLoader itemLoader = new RentalItemLoader();
+    DatabaseLoader itemLoader = new DatabaseLoader();
     StockManager stockManager = new StockManager();
     ItemManager itemManager = new ItemManager();
     CartManager cartManager = new CartManager();
@@ -58,13 +58,14 @@ public class TestRental {
         rentalSystem.addCustomer(jef, dayOverview);
         //rentalSystem.addItemToCart(theMatrix, cartManager);
         //rentalSystem.addItemToCart(theLionKing, cartManager);
+        rentalSystem.addItemToCart(tombRaider, cartManager);
         rentalSystem.checkOut(jef,cartManager,dayOverview,stockManager);
 
 
         //System.out.println(rentalSystem.getCart(cartManager));
         //System.out.println(rentalSystem.viewCart(cartManager));
 
-        rentalSystem.returnItem(theLionKing, dayOverview, stockManager);
+        //rentalSystem.returnItem(theLionKing, dayOverview, stockManager);
 
         rentalSystem.createOverview(currentSystemDate, dayOverview);
         rentalSystem.viewOverview(currentSystemDate, dayOverview);
