@@ -14,8 +14,8 @@ public class CartManager {
     public ArrayList<RentalItem> addItemToCart(RentalItem item, Customer customer) throws IOException {
         if (stockManager.getStockFromCSV(item) <= 0) {
             System.out.println("This item is out of stock");
-        } else if (loader.getRatingfromCSV(item).equals("A") && customer.checkUnderaged()) {
-            System.out.println("You are to young to be able to rent this item. Please contact support for more information.\n");
+        } else if (loader.getRatinFromCSV(item).equals("A") && customer.checkUnderaged()) {
+            System.out.println(item.getTitle() + " has been rated " + loader.getRatinFromCSV(item) + ". You must be age 18 or higher to be able to rent this item.\n");
         } else {
             itemCart.add(item);
         }

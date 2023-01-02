@@ -70,7 +70,7 @@ public class TestRental {
         rentalSystem.createOverview(currentSystemDate, dayOverview);
         rentalSystem.viewOverview(currentSystemDate, dayOverview);
 
-        //System.out.println(rentalSystem.getRatingfromCSV(tombRaider));
+        //System.out.println(rentalSystem.getRatingFromCSV(tombRaider));
 
 
 

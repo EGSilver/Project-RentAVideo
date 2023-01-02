@@ -36,15 +36,15 @@ public class RentalSystem {
     }
 
     public boolean movieExists(String title) {
-        return itemManager.movieExists(title);
+        return loader.movieExists(title);
     }
 
     public void addMovieToCSV(Movie movie) {
-        itemManager.addMovieToMoviesCSV(movie);
+        loader.addMovieToMoviesCSV(movie);
     }
 
     public void addGameToCSV(Game game) {
-        itemManager.addGameToGamesCSV(game);
+        loader.addGameToGamesCSV(game);
     }
 
     public void returnItem(RentalItem item, DayOverview overview, StockManager stockManager) throws IOException {
@@ -79,8 +79,8 @@ public class RentalSystem {
         day.setLateReturns(lateReturns);
     }
 
-    public String getRatingfromCSV(RentalItem item) throws IOException {
-        return loader.getRatingfromCSV(item);
+    public String getRatingFromCSV(RentalItem item) throws IOException {
+        return loader.getRatinFromCSV(item);
     }
 
 }
