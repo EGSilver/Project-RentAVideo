@@ -7,7 +7,6 @@ public class RentalSystem {
     private RentalItemLoader loader;
     private ItemManager itemManager;
     private CartManager cartManager;
-    private CheckOutManager checkOutManager;
     private DayOverview dayOverview;
 
     public RentalSystem() {
@@ -15,7 +14,6 @@ public class RentalSystem {
         this.loader = new RentalItemLoader();
         this.itemManager = new ItemManager();
         this.cartManager = new CartManager();
-        this.checkOutManager = new CheckOutManager();
         this.dayOverview = new DayOverview(0,0,0,0);
     }
 
@@ -74,7 +72,7 @@ public class RentalSystem {
     }
 
     public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, StockManager stockManager) throws IOException {
-        checkOutManager.checkout(customer, cartManager, overview, stockManager);
+        cartManager.checkout(customer, cartManager, overview, stockManager);
     }
 
     public void setLateReturns(int lateReturns, DayOverview day) {

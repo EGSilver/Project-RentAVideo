@@ -1,9 +1,13 @@
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartManager {
     private ArrayList<RentalItem> itemCart = new ArrayList<>();
     StockManager stockManager = new StockManager();
+    private double totalPrice;
+    private final double TAX = 1.21;
+    private DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
     public ArrayList<RentalItem> addItemToCart(RentalItem item) throws IOException {
         if (stockManager.getStockFromCSV(item) <= 0) {
@@ -21,6 +25,35 @@ public class CartManager {
                 s +=  item.getTitle() + "\n";
         }
         return s;
+    }
+
+    public void checkout(Customer customer, CartManager cartManager, DayOverview overview, StockManager stockManager) throws IOException {
+        System.out.println(cartManager.getItemCart());
+        String s = customer.getName() + "\n";
+        totalPrice = 0;
+        for (RentalItem item : cartManager.getItemCart()) {
+            if (item.getType().equals("Movie")) {
+                s += item.getTitle() + "\n";
+                stockManager.setStockMinusOne(item);
+                overview.setRentals(overview.getRentals()+1);
+                if (stockManager.getStockFromCSV(item) <= 1) {
+                    item.setOutOfStock(true);
+                }
+            } else if (item.getType().equals("Game")) {
+                stockManager.setStockMinusOne(item);
+                overview.setRentals(overview.getRentals()+1);
+                s += item.getTitle() + "\n";
+                if (stockManager.getStockFromCSV(item) <= 1) {
+                    item.setOutOfStock(true);
+                }
+            }
+        }
+        for (RentalItem c : cartManager.getItemCart()) {
+            totalPrice += c.getRentalPrice();
+        }
+        String formattedTotalPrice = decimalFormat.format(totalPrice * TAX);
+        s += "\nTotal price to pay: €" + formattedTotalPrice;
+        System.out.println(s);
     }
 
     public ArrayList<RentalItem> getItemCart() {

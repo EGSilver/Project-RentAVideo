@@ -11,7 +11,7 @@ public class StockManager {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(",");
-                    if (((Movie) item).getTitle().equals(parts[4])) {
+                    if (item.getTitle().equals(parts[4])) {
                         stock = Integer.parseInt(parts[3]);
                     }
                 }
@@ -72,7 +72,7 @@ public class StockManager {
         for (int i = 0; i < arrayLines.size(); i++) {
             String line = arrayLines.get(i);
             String[] parts = line.split(",");
-            if (item.getType().equals("Movie") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0
+            if (parts[7].equals(item.getType()) && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0
                     || item.getType().equals("Game") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0) {
                 parts[3] = String.valueOf(getStockFromCSV(item)+1);
                 arrayLines.set(i, String.join(",", parts));
