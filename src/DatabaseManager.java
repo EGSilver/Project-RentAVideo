@@ -4,11 +4,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DatabaseLoader {
+public class DatabaseManager {
     private ArrayList<RentalItem> games = new ArrayList<>();
     private ArrayList<RentalItem> movies = new ArrayList<>();
-
-    //load all movies from the csv file.
+    
     public ArrayList<RentalItem> loadMovies() {
         File movieData = new File(("G:\\Git\\Project-RentAVideo\\data\\test.csv"));
         try (BufferedReader reader = new BufferedReader(new FileReader(movieData))) {
@@ -34,7 +33,6 @@ public class DatabaseLoader {
         return movies;
     }
 
-    //load all games from the csv file.
     public ArrayList<RentalItem> loadGames() {
         File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
         try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {

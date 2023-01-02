@@ -4,7 +4,7 @@ import java.io.IOException;
 public class TestRental {
     public static void main(String[] args) throws IOException {
     Panel panel = new Panel();
-    DatabaseLoader itemLoader = new DatabaseLoader();
+    DatabaseManager itemLoader = new DatabaseManager();
     StockManager stockManager = new StockManager();
     ItemManager itemManager = new ItemManager();
     CartManager cartManager = new CartManager();

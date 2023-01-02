@@ -1,12 +1,11 @@
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class CartManager {
     private ArrayList<RentalItem> itemCart = new ArrayList<>();
     StockManager stockManager = new StockManager();
-    DatabaseLoader loader = new DatabaseLoader();
+    DatabaseManager loader = new DatabaseManager();
 
     private double totalPrice;
     private final double TAX = 1.21;

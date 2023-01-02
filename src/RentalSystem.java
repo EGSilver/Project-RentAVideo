@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class RentalSystem {
     private ArrayList<Customer> customers;
-    private DatabaseLoader loader;
+    private DatabaseManager loader;
     private ItemManager itemManager;
     private CartManager cartManager;
     private DayOverview dayOverview;
 
     public RentalSystem() {
         this.customers = new ArrayList<>();
-        this.loader = new DatabaseLoader();
+        this.loader = new DatabaseManager();
         this.itemManager = new ItemManager();
         this.cartManager = new CartManager();
         this.dayOverview = new DayOverview(0,0,0,0);
