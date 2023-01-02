@@ -23,32 +23,32 @@ public class TestRental {
 
     //***//
     //Print out loaded Arrays
-        //System.out.println(databaseManager.getRentalMovies());
-        //System.out.println(databaseManager.getRentalGames());
+        //System.out.println(rentalSystem.getRentalMovies(databaseManager));
+        //System.out.println(rentalSystem.getRentalGames(databaseManager));
         //System.out.println();
     //***//
     //Add customer to Array
-        //m.addCustomer(jef, dayOverview);
-        //System.out.println(m.getCustomers());
+        //rentalSystem.addCustomer(jef, dayOverview);
+        //System.out.println(rentalSystem.getCustomers());
         //Add items to cart
-        //cartManager.addItemToCart(theMatrix);
-        //cartManager.addItemToCart(theLionKing);
+        //rentalSystem.addItemToCart(theMatrix, jef, cartManager);
+        //rentalSystem.addItemToCart(theLionKing, jef, cartManager);
         //System.out.println(cartManager.viewCart());
-        //checkOutManager.checkout(jef, cartManager, dayOverview, stockManager);
+        //rentalSystem.checkOut(jef, cartManager, dayOverview, databaseManager);
         //System.out.println(cartManager.getItemCart());
         //System.out.println();
     //***//
     //Adding movies/games to the CSV databases & Testing changes in stock value's
-        //itemManager.addMovieToMoviesCSV(theLionKing);
-        //System.out.println(stockManager.getStockFromCSV(theLionKing));
-        //stockManager.setStockMinusOne(theLionKing);
-        //stockManager.returnItem(theMatrix, dayOverview);
-        //System.out.println(checkSetStock.getStockFromCSV(theMatrix) + "\n");
+        //rentalSystem.addToDatabse(theLionKing);
+        //System.out.println(rentalSystem.getStockFromCSV(theLionKing));
+        //rentalSystem.setStockMinusOne(theLionKing, databaseManager);
+        //rentalSystem.returnItem(theMatrix, dayOverview);
+        //System.out.println(rentalSystem.getStockFromCSV(theMatrix) + "\n");
     //***//
-        //System.out.println(date);
+        //System.out.println(currentSystemDate);
         //System.out.println();
-        //dayOverview.createOverview(date);
-        //dayOverview.viewOverview(date);
+        //dayOverview.createOverview(currentSystemDate);
+        //dayOverview.viewOverview(currentSystemDate);
 
     //***/Rental System/***//
         //rentalSystem.movieExists("The Matrix");
@@ -62,8 +62,8 @@ public class TestRental {
 
         //System.out.println(rentalSystem.getCart(cartManager));
         //System.out.println(rentalSystem.viewCart(cartManager));
-
-        //rentalSystem.returnItem(theLionKing, dayOverview, stockManager);
+        //rentalSystem.returnItem(tombRaider,dayOverview);
+        //rentalSystem.returnItem(theLionKing, dayOverview);
 
         rentalSystem.createOverview(currentSystemDate, dayOverview);
         rentalSystem.viewOverview(currentSystemDate, dayOverview);

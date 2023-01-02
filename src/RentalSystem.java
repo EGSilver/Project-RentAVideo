@@ -25,11 +25,11 @@ public class RentalSystem {
         return customers;
     }
 
-    public ArrayList<RentalItem> getRentalMovies() {
+    public ArrayList<RentalItem> getRentalMovies(DatabaseManager databaseManager) {
         return databaseManager.getRentalMovies();
     }
 
-    public ArrayList<RentalItem> getRentalGames() {
+    public ArrayList<RentalItem> getRentalGames(DatabaseManager databaseManager) {
         return databaseManager.getRentalGames();
     }
 
@@ -37,16 +37,29 @@ public class RentalSystem {
         return databaseManager.movieExists(title);
     }
 
-    public void addMovieToCSV(Movie movie) {
-        databaseManager.addMovieToMoviesCSV(movie);
+    public void addToDatabse(RentalItem item) {
+        if (item.getType().equals("Movie")) {
+            databaseManager.addMovieToMoviesCSV((Movie) item);
+        } else {
+            databaseManager.addGameToGamesCSV((Game) item);
+        }
+
+    }
+
+    public int getStockFromCSV(RentalItem item) throws IOException {
+        return databaseManager.getStockFromCSV(item);
     }
 
     public void addGameToCSV(Game game) {
         databaseManager.addGameToGamesCSV(game);
     }
 
-    public void returnItem(RentalItem item, DayOverview overview, DatabaseManager databaseManager) throws IOException {
-        databaseManager.returnItem(item, overview);
+    public void returnItem(RentalItem item, DayOverview overview) throws IOException {
+        if (item.getType().equals("Movie")) {
+            databaseManager.returnMovieItem(item, overview);
+        } else {
+            databaseManager.returnGameItem(item, overview);
+        }
     }
 
     public void createOverview(Date date, DayOverview day) {
@@ -79,6 +92,14 @@ public class RentalSystem {
 
     public String getRatingFromCSV(RentalItem item) throws IOException {
         return databaseManager.getRatinFromCSV(item);
+    }
+
+    public void setStockMinusOne(RentalItem item, DatabaseManager databaseManager) throws IOException {
+        if (item.getType().equals("Movie")) {
+            databaseManager.setMovieStockMinusOne(item);
+        } else {
+            databaseManager.setGameStockMinusOne(item);
+        }
     }
 
 }

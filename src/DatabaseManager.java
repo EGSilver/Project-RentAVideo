@@ -222,7 +222,7 @@ public class DatabaseManager {
     }
 
     //customer can return a rented item, updates the stock field in the CSV file
-    public void returnItem(RentalItem item, DayOverview overview) throws IOException {
+    public RentalItem returnMovieItem(RentalItem item, DayOverview overview) throws IOException {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\test.csv";
         ArrayList<String> arrayLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -234,8 +234,7 @@ public class DatabaseManager {
         for (int i = 0; i < arrayLines.size(); i++) {
             String line = arrayLines.get(i);
             String[] parts = line.split(",");
-            if (parts[7].equals(item.getType()) && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0
-                    || item.getType().equals("Game") && parts[4].equals(item.getTitle()) && getStockFromCSV(item) > 0) {
+            if (parts[7].equals(item.getType()) && parts[4].equals(item.getTitle())) {
                 parts[3] = String.valueOf(getStockFromCSV(item)+1);
                 arrayLines.set(i, String.join(",", parts));
                 System.out.println("Movie: " + parts[4] + " has been been returned");
@@ -248,6 +247,35 @@ public class DatabaseManager {
                 writer.newLine();
             }
         }
+        return item;
+    }
+
+    public RentalItem returnGameItem(RentalItem item, DayOverview overview) throws IOException {
+        String filePath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
+        ArrayList<String> arrayLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                arrayLines.add(line);
+            }
+        }
+        for (int i = 0; i < arrayLines.size(); i++) {
+            String line = arrayLines.get(i);
+            String[] parts = line.split(",");
+            if (item.getType().equals("Game") && parts[4].equals(item.getTitle())) {
+                parts[3] = String.valueOf(getStockFromCSV(item)+1);
+                arrayLines.set(i, String.join(",", parts));
+                System.out.println("Game: " + parts[4] + " has been been returned");
+                overview.setReturns(overview.getReturns()+1);
+            }
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
+            for (String line : arrayLines) {
+                writer.write(line);
+                writer.newLine();
+            }
+        }
+        return item;
     }
 
     public ArrayList<RentalItem> getRentalMovies() {
