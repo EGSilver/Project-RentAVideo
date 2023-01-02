@@ -1,20 +1,24 @@
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class CartManager {
     private ArrayList<RentalItem> itemCart = new ArrayList<>();
     StockManager stockManager = new StockManager();
+    DatabaseLoader loader = new DatabaseLoader();
+
     private double totalPrice;
     private final double TAX = 1.21;
     private DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
-    public ArrayList<RentalItem> addItemToCart(RentalItem item) throws IOException {
+    public ArrayList<RentalItem> addItemToCart(RentalItem item, Customer customer) throws IOException {
         if (stockManager.getStockFromCSV(item) <= 0) {
             System.out.println("This item is out of stock");
+        } else if (loader.getRatingfromCSV(item).equals("A") && customer.checkUnderaged()) {
+            System.out.println("You are to young to be able to rent this item. Please contact support for more information.\n");
         } else {
             itemCart.add(item);
-            //System.out.println(item.getRentalPrice());
         }
         return itemCart;
     }

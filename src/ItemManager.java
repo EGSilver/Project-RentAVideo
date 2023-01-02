@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class ItemManager {
 
@@ -52,7 +51,7 @@ public class ItemManager {
                     + game.getTitle() + ","
                     + game.getPublisher() + ","
                     + game.getPlatform() + ","
-                    + game.getRating();
+                    + game.getEsrbRating();
             writer.write(movieData);
             writer.newLine();
         } catch (IOException e) {

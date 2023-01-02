@@ -1,13 +1,13 @@
 public class Game extends RentalItem {
     private String platform;
     private String publisher;
-    private double rating;
+    private double criticRating;
 
-    public Game(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String platform, String publisher, double rating) {
-        super(title, rentalPrice, rentalDuration, outOfStock, stock, type);
+    public Game(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String platform, String publisher, String esrbRating, double criticRating) {
+        super(title, rentalPrice, rentalDuration, outOfStock, stock, type, esrbRating);
         this.platform = platform;
         this.publisher = publisher;
-        this.rating = rating;
+        this.criticRating = criticRating;
     }
 
     public String getPlatform() {
@@ -24,21 +24,21 @@ public class Game extends RentalItem {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-    public double getRating() {
-        return rating;
+
+    public double getCriticRating() {
+        return criticRating;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setCriticRating(double criticRating) {
+        this.criticRating = criticRating;
     }
 
     @Override
     public String toString() {
-        return "Game: {" +
-                "title='" + super.getTitle() + '\'' +
-                ", platform='" + platform + '\'' +
+        return "Game{" +
+                "platform='" + platform + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", rating=" + rating +
+                ", criticRating=" + criticRating +
                 '}';
     }
 }

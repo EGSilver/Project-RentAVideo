@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.time.Period;
+import java.time.LocalDate;
 
 public class Customer {
     private String name;
@@ -54,6 +55,15 @@ public class Customer {
 
     public void setYearsSubscribed(int yearsSubscribed) {
         this.yearsSubscribed = yearsSubscribed;
+    }
+    public boolean checkUnderaged() {
+        LocalDate dateOfBirth = LocalDate.parse(birthdate);
+        Period age = Period.between(dateOfBirth, LocalDate.now());
+        if (age.getYears() < 18) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void rent() {

@@ -59,8 +59,8 @@ public class RentalSystem {
         day.viewOverview(date);
     }
 
-    public void addItemToCart(RentalItem item, CartManager cart) throws IOException {
-        cart.addItemToCart(item);
+    public void addItemToCart(RentalItem item, Customer customer, CartManager cart) throws IOException {
+        cart.addItemToCart(item, customer);
     }
 
     public String viewCart(CartManager cart) {
@@ -77,6 +77,10 @@ public class RentalSystem {
 
     public void setLateReturns(int lateReturns, DayOverview day) {
         day.setLateReturns(lateReturns);
+    }
+
+    public String getRatingfromCSV(RentalItem item) throws IOException {
+        return loader.getRatingfromCSV(item);
     }
 
 }
