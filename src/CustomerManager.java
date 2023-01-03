@@ -13,6 +13,8 @@ public class CustomerManager {
         return customers;
     }
 
+    //TODO Itterate through Array and remove customers (itterator)
+
     @Override
     public String toString() {
         return "CustomerManager{" +
