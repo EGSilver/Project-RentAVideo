@@ -50,7 +50,7 @@ public class TestRental {
         //dayOverview.createOverview(currentSystemDate);
         //dayOverview.viewOverview(currentSystemDate);
 
-    //***/Rental System/***//
+    //***/Rental System Testing/***//
         //rentalSystem.movieExists("The Matrix");
         //rentalSystem.setLateReturns(10, dayOverview);
         rentalSystem.addCustomer(klant1, dayOverview);
@@ -60,16 +60,18 @@ public class TestRental {
         //rentalSystem.viewCart(cartManager);
         rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager);
 
-
         //System.out.println(rentalSystem.getCart(cartManager));
         //System.out.println(rentalSystem.viewCart(cartManager));
+
+    //***/DayOverview Class/***//
         //rentalSystem.returnItem(tombRaider,dayOverview);
         //rentalSystem.returnItem(theLionKing, dayOverview);
-
         //rentalSystem.returnItem(tombRaider, dayOverview);
         //rentalSystem.returnItem(theLionKing, dayOverview);
         rentalSystem.createOverview(currentSystemDate, dayOverview);
-        rentalSystem.viewOverview(currentSystemDate, dayOverview);
+        rentalSystem.viewDayOverview(currentSystemDate, dayOverview);
+        rentalSystem.createIncomeOverview(currentSystemDate, dayOverview);
+        rentalSystem.viewIncomeOverview(currentSystemDate, dayOverview);
 
         //System.out.println(rentalSystem.getRatingFromCSV(tombRaider));
 

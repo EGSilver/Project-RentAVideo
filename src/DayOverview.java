@@ -5,7 +5,10 @@ public class DayOverview {
     private int rentals;
     private int lateReturns;
     private int newMembers;
+
+    private double income;
     private HashMap<Date, DayOverview> dayOverviewMap = new HashMap<>();
+    private HashMap<Date, Double> dayIncomeOverviewMap = new HashMap<>();
 
     //TODO hashmap with overview of earning of the day.
 
@@ -14,19 +17,29 @@ public class DayOverview {
         this.rentals = rentals;
         this.lateReturns = lateReturns;
         this.newMembers = newMembers;
+        this.income = income;
     }
 
+    public void createIncomeOverview(Date currentDate) {
+        dayIncomeOverviewMap.put(currentDate, income);
+    }
+
+    public void viewIncomeOverview(Date specificDate) {
+        Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(specificDate);
+        System.out.println(specificDate
+                + ":\nTotal amount of income: €" + income);
+    }
     public void createOverview(Date currentDate) {
         dayOverviewMap.put(currentDate, new DayOverview(returns,rentals,lateReturns,newMembers));
     }
 
-    public void viewOverview(Date date) {
-        DayOverview overviewOfCertainDate = dayOverviewMap.get(date);
+    public void viewDayOverview(Date specificDate) {
+        DayOverview overviewOfCertainDate = dayOverviewMap.get(specificDate);
         int rentals = overviewOfCertainDate.getRentals();
         int returns = overviewOfCertainDate.getReturns();
         int lateReturns = overviewOfCertainDate.getLateReturns();
         int newMembers = overviewOfCertainDate.getNewMembers();
-        System.out.println(date
+        System.out.println(specificDate
                + "\nAmount of rentals: " + rentals
                + "\nAmount of returns: " + returns
                + "\nAmount of late returns: " + lateReturns
@@ -63,6 +76,14 @@ public class DayOverview {
 
     public void setNewMembers(int newMembers) {
         this.newMembers = newMembers;
+    }
+
+    public double getIncome() {
+        return income;
+    }
+
+    public void setIncome(double income) {
+        this.income = income;
     }
 
     @Override

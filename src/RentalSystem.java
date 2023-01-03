@@ -60,8 +60,16 @@ public class RentalSystem {
         day.createOverview(date);
     }
 
-    public void viewOverview(Date date, DayOverview day) {
-        day.viewOverview(date);
+    public void viewDayOverview(Date date, DayOverview day) {
+        day.viewDayOverview(date);
+    }
+
+    public void createIncomeOverview(Date date, DayOverview day) {
+        day.createIncomeOverview(date);
+    }
+
+    public void viewIncomeOverview(Date date, DayOverview day) {
+        day.viewIncomeOverview(date);
     }
 
     public void addItemToCart(RentalItem item, Customer customer, CartManager cart) throws IOException {

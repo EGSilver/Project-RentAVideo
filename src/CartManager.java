@@ -61,6 +61,8 @@ public class CartManager {
         } else {
             s += "Total price to pay: €" + formattedTotalPrice;
             System.out.println(s + "\n");
+            //TODO Re-evaluate
+            overview.setIncome(totalPrice * TAX);
         }
 
     }
