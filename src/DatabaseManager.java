@@ -1,8 +1,6 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class DatabaseManager {
     private ArrayList<RentalItem> games = new ArrayList<>();
@@ -143,11 +141,21 @@ public class DatabaseManager {
         return false;
     }
 
-    public void addMovieToMoviesCSV(Movie movie) {
+    public void addMovieToMoviesCsv(Movie movie) {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\movies.csv";
         if (!movieTitleExists(movie.getTitle())) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                String movieData = movie.getRentalPrice() + "," + movie.getRentalDuration() + "," + movie.isOutOfStock() + "," + movie.getStock() + "," + movie.getTitle() + "," + movie.getReleaseDate() + "," + movie.getGenre();
+                String movieData = movie.getRentalPrice()
+                        + "," + movie.getRentalDuration()
+                        + "," + movie.isOutOfStock()
+                        + "," + movie.getStock()
+                        + "," + movie.getTitle()
+                        + "," + movie.getReleaseDate()
+                        + "," + movie.getGenre()
+                        + "," + movie.getType()
+                        + "," + movie.getDescription()
+                        + "," + movie.getEsrbRating()
+                        + "," + movie.getDaysSinceLastRented();
                 writer.write(movieData);
                 writer.newLine();
             } catch (IOException e) {

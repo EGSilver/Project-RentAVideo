@@ -43,7 +43,7 @@ public class RentalSystem {
 
     public void addItemToDatabase(RentalItem item) {
         if (item.getType().equals("Movie")) {
-            databaseManager.addMovieToMoviesCSV((Movie) item);
+            databaseManager.addMovieToMoviesCsv((Movie) item);
         } else {
             databaseManager.addGameToGamesCsv((Game) item);
         }
