@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class RentalSystem {
     private ArrayList<Customer> customers;
+    private CustomerManager customerManager;
     private DatabaseManager databaseManager;
     private CartManager cartManager;
     private DayOverview dayOverview;
@@ -13,11 +14,13 @@ public class RentalSystem {
         this.databaseManager = new DatabaseManager();
         this.cartManager = new CartManager();
         this.dayOverview = new DayOverview(0,0,0,0);
+        this.customerManager = new CustomerManager(customers);
     }
 
     public void addCustomer(Customer customer, DayOverview overview) {
         overview.setNewMembers(+1);
         customers.add(customer);
+        addCustomerToDatabase(customer);
     }
 
     public ArrayList<Customer> getCustomers() {
@@ -34,32 +37,23 @@ public class RentalSystem {
     }
 
     public boolean movieExists(String title) {
-        return databaseManager.movieExists(title);
+        return databaseManager.movieTitleExists(title);
     }
 
-    public void addToDatabse(RentalItem item) {
+    public void addItemToDatabase(RentalItem item) {
         if (item.getType().equals("Movie")) {
             databaseManager.addMovieToMoviesCSV((Movie) item);
         } else {
-            databaseManager.addGameToGamesCSV((Game) item);
+            databaseManager.addGameToGamesCsv((Game) item);
         }
-
     }
 
     public int getStockFromCSV(RentalItem item) throws IOException {
-        return databaseManager.getStockFromCSV(item);
+        return databaseManager.getStockFromCsv(item);
     }
 
     public void addGameToCSV(Game game) {
-        databaseManager.addGameToGamesCSV(game);
-    }
-
-    public void returnItem(RentalItem item, DayOverview overview) throws IOException {
-        if (item.getType().equals("Movie")) {
-            databaseManager.returnMovieItem(item, overview);
-        } else {
-            databaseManager.returnGameItem(item, overview);
-        }
+        databaseManager.addGameToGamesCsv(game);
     }
 
     public void createOverview(Date date, DayOverview day) {
@@ -91,15 +85,19 @@ public class RentalSystem {
     }
 
     public String getRatingFromCSV(RentalItem item) throws IOException {
-        return databaseManager.getRatinFromCSV(item);
+        return databaseManager.getAgeRatingFromCsv(item);
     }
 
     public void setStockMinusOne(RentalItem item, DatabaseManager databaseManager) throws IOException {
-        if (item.getType().equals("Movie")) {
-            databaseManager.setMovieStockMinusOne(item);
-        } else {
-            databaseManager.setGameStockMinusOne(item);
-        }
+        databaseManager.updateItemStockInCsv(item);
+    }
+
+    public void returnItem(RentalItem item, DayOverview overview) throws IOException {
+        databaseManager.returnItem(item, overview);
+    }
+
+    public void addCustomerToDatabase(Customer customer) {
+        databaseManager.addCustomerToDatabase(customer);
     }
 
 }

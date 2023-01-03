@@ -11,10 +11,10 @@ public class CartManager {
     private DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
     public ArrayList<RentalItem> addItemToCart(RentalItem item, Customer customer) throws IOException {
-        if (databaseManager.getStockFromCSV(item) <= 0) {
+        if (databaseManager.getStockFromCsv(item) <= 0) {
             System.out.println("This item is out of stock");
-        } else if (databaseManager.getRatinFromCSV(item).equals("A") && customer.checkUnderaged()) {
-            System.out.println(item.getTitle() + " has been rated " + databaseManager.getRatinFromCSV(item) + ". You must be age 18 or higher to be able to rent this item.\n");
+        } else if (databaseManager.getAgeRatingFromCsv(item).equals("A") && customer.checkUnderaged()) {
+            System.out.println(item.getTitle() + " has been rated " + databaseManager.getAgeRatingFromCsv(item) + ". You must be age 18 or higher to be able to rent this item.\n");
         } else {
             itemCart.add(item);
         }
@@ -36,16 +36,16 @@ public class CartManager {
         for (RentalItem item : cartManager.getItemCart()) {
             if (item.getType().equals("Movie")) {
                 s += item.getTitle() + "\n";
-                databaseManager.setMovieStockMinusOne(item);
+                databaseManager.updateItemStockInCsv(item);
                 overview.setRentals(overview.getRentals() + 1);
-                if (databaseManager.getStockFromCSV(item) <= 1) {
+                if (databaseManager.getStockFromCsv(item) <= 1) {
                     item.setOutOfStock(true);
                 }
             } else if (item.getType().equals("Game")) {
-                databaseManager.setGameStockMinusOne(item);
+                databaseManager.updateItemStockInCsv(item);
                 overview.setRentals(overview.getRentals() + 1);
                 s += item.getTitle() + "\n";
-                if (databaseManager.getStockFromCSV(item) <= 1) {
+                if (databaseManager.getStockFromCsv(item) <= 1) {
                     item.setOutOfStock(true);
                 }
             }
@@ -62,6 +62,7 @@ public class CartManager {
             s += "Total price to pay: €" + formattedTotalPrice;
             System.out.println(s + "\n");
         }
+
     }
 
     public ArrayList<RentalItem> getItemCart() {

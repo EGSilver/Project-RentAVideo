@@ -6,8 +6,9 @@ public class RentalItem {
     private int stock;
     private String type;
     private String esrbRating;
+    private int daysSinceLastRented;
 
-    public RentalItem(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String esrbRating) {
+    public RentalItem(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String esrbRating, int daysSinceLastRented) {
         this.title = title;
         this.rentalPrice = rentalPrice;
         this.rentalDuration = rentalDuration;
@@ -15,6 +16,7 @@ public class RentalItem {
         this.stock = stock;
         this.type = type;
         this.esrbRating = esrbRating;
+        this.daysSinceLastRented = daysSinceLastRented;
     }
 
     public String getType() {
@@ -75,6 +77,15 @@ public class RentalItem {
     public void setOutOfStock(boolean outOfStock) {
         this.outOfStock = outOfStock;
     }
+
+    public int getDaysSinceLastRented() {
+        return daysSinceLastRented;
+    }
+
+    public void setDaysSinceLastRented(int daysSinceLastRented) {
+        this.daysSinceLastRented = daysSinceLastRented;
+    }
+
     @Override
     public String toString() {
         return "RentalItem{" +
@@ -83,6 +94,9 @@ public class RentalItem {
                 ", rentalDuration=" + rentalDuration +
                 ", outOfStock=" + outOfStock +
                 ", stock=" + stock +
+                ", type='" + type + '\'' +
+                ", esrbRating='" + esrbRating + '\'' +
+                ", daysSinceLastRented=" + daysSinceLastRented +
                 '}';
     }
 }

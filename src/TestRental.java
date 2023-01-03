@@ -8,9 +8,9 @@ public class TestRental {
     CartManager cartManager = new CartManager();
     java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
     DayOverview dayOverview = new DayOverview(0,0,0,0);
-    Customer jef = new Customer("Jef","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
+    Customer klant1 = new Customer("Jef","Vermassen","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
     Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6);
-    RentalItem rentalItem = new RentalItem("",0,0,false, 0, "","");
+    RentalItem rentalItem = new RentalItem("",0,0,false, 0, "","",0);
     Movie theMatrix = new Movie("The Matrix",3.5,3, false,0, "Movie","1999","Action", "","");
     Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "");
     RentalSystem rentalSystem = new RentalSystem();
@@ -28,13 +28,13 @@ public class TestRental {
         //System.out.println();
     //***//
     //Add customer to Array
-        //rentalSystem.addCustomer(jef, dayOverview);
+        //rentalSystem.addCustomer(klant1, dayOverview);
         //System.out.println(rentalSystem.getCustomers());
         //Add items to cart
-        //rentalSystem.addItemToCart(theMatrix, jef, cartManager);
-        //rentalSystem.addItemToCart(theLionKing, jef, cartManager);
+        //rentalSystem.addItemToCart(theMatrix, klant1, cartManager);
+        //rentalSystem.addItemToCart(theLionKing, klant1, cartManager);
         //System.out.println(cartManager.viewCart());
-        //rentalSystem.checkOut(jef, cartManager, dayOverview, databaseManager);
+        //rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager);
         //System.out.println(cartManager.getItemCart());
         //System.out.println();
     //***//
@@ -53,11 +53,12 @@ public class TestRental {
     //***/Rental System/***//
         //rentalSystem.movieExists("The Matrix");
         //rentalSystem.setLateReturns(10, dayOverview);
-        rentalSystem.addCustomer(jef, dayOverview);
-        rentalSystem.addItemToCart(theMatrix, jef, cartManager);
-        //rentalSystem.addItemToCart(theLionKing, cartManager);
-        rentalSystem.addItemToCart(tombRaider, jef, cartManager);
-        rentalSystem.checkOut(jef, cartManager, dayOverview, databaseManager);
+        rentalSystem.addCustomer(klant1, dayOverview);
+        //rentalSystem.addItemToCart(theMatrix, klant1, cartManager);
+        rentalSystem.addItemToCart(theLionKing, klant1, cartManager);
+        rentalSystem.addItemToCart(tombRaider, klant1, cartManager);
+        //rentalSystem.viewCart(cartManager);
+        rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager);
 
 
         //System.out.println(rentalSystem.getCart(cartManager));
@@ -65,6 +66,8 @@ public class TestRental {
         //rentalSystem.returnItem(tombRaider,dayOverview);
         //rentalSystem.returnItem(theLionKing, dayOverview);
 
+        //rentalSystem.returnItem(tombRaider, dayOverview);
+        //rentalSystem.returnItem(theLionKing, dayOverview);
         rentalSystem.createOverview(currentSystemDate, dayOverview);
         rentalSystem.viewOverview(currentSystemDate, dayOverview);
 
