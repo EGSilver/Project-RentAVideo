@@ -1,11 +1,14 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class DatabaseManager {
     private ArrayList<RentalItem> games = new ArrayList<>();
     private ArrayList<RentalItem> movies = new ArrayList<>();
+
+    // Iterate through Movies & Games array and remove items from arraylist.
 
     // Loads movie data from a CSV file into an ArrayList of RentalItem objects
     public ArrayList<RentalItem> loadMovies() {
@@ -68,13 +71,7 @@ public class DatabaseManager {
             //When or if the CSV file is empty, we write the customer in the file as the first customer.
             if (reader.readLine() == null) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                    String customerData = customer.getClientNumber() + ","
-                            + customer.getFirstName() + ","
-                            + customer.getName() + ","
-                            + customer.getBirthdate() + ","
-                            + customer.getAdres() + ","
-                            + customer.getPhoneNumber() + ","
-                            + customer.getYearsSubscribed();
+                    String customerData = customer.getClientNumber() + "," + customer.getFirstName() + "," + customer.getName() + "," + customer.getBirthdate() + "," + customer.getAdres() + "," + customer.getPhoneNumber() + "," + customer.getYearsSubscribed();
                     writer.write(customerData);
                     writer.newLine();
                 } catch (IOException e) {
@@ -89,12 +86,7 @@ public class DatabaseManager {
                     } else {
                         //If the customer is not located inside the CSV file, write the customer to the CSV file.
                         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                            String customerData = customer.getFirstName() + ","
-                                    + customer.getName() + ","
-                                    + customer.getBirthdate() + ","
-                                    + customer.getAdres() + ","
-                                    + customer.getPhoneNumber() + ","
-                                    + customer.getYearsSubscribed();
+                            String customerData = customer.getFirstName() + "," + customer.getName() + "," + customer.getBirthdate() + "," + customer.getAdres() + "," + customer.getPhoneNumber() + "," + customer.getYearsSubscribed();
                             writer.write(customerData);
                             writer.newLine();
                         } catch (IOException e) {
@@ -155,13 +147,7 @@ public class DatabaseManager {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\movies.csv";
         if (!movieTitleExists(movie.getTitle())) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                String movieData = movie.getRentalPrice() + ","
-                        + movie.getRentalDuration() + ","
-                        + movie.isOutOfStock() + ","
-                        + movie.getStock() + ","
-                        + movie.getTitle() + ","
-                        + movie.getReleaseDate() + ","
-                        + movie.getGenre();
+                String movieData = movie.getRentalPrice() + "," + movie.getRentalDuration() + "," + movie.isOutOfStock() + "," + movie.getStock() + "," + movie.getTitle() + "," + movie.getReleaseDate() + "," + movie.getGenre();
                 writer.write(movieData);
                 writer.newLine();
             } catch (IOException e) {
@@ -173,14 +159,7 @@ public class DatabaseManager {
     public void addGameToGamesCsv(Game game) {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String movieData = game.getRentalPrice() + ","
-                    + game.getRentalDuration() + ","
-                    + game.isOutOfStock() + ","
-                    + game.getStock() + ","
-                    + game.getTitle() + ","
-                    + game.getPublisher() + ","
-                    + game.getPlatform() + ","
-                    + game.getEsrbRating();
+            String movieData = game.getRentalPrice() + "," + game.getRentalDuration() + "," + game.isOutOfStock() + "," + game.getStock() + "," + game.getTitle() + "," + game.getPublisher() + "," + game.getPlatform() + "," + game.getEsrbRating();
             writer.write(movieData);
             writer.newLine();
         } catch (IOException e) {
@@ -369,8 +348,6 @@ public class DatabaseManager {
         }
     }
 
-    //TODO Itterate through Movies & Games array and remove items from list.
-
     public ArrayList<RentalItem> getRentalMovies() {
         System.out.println("Here's a list of all movies: ");
         return movies;
@@ -381,4 +358,29 @@ public class DatabaseManager {
         return games;
     }
 
+    public void removeItemFromArraylist(RentalItem item, DatabaseManager databaseManager) {
+        String title = item.getTitle();
+        Iterator<RentalItem> itMovie = databaseManager.movies.iterator();
+        Iterator<RentalItem> itGame = databaseManager.games.iterator();
+        if (item.getType().equals("Movie")) {
+            while (itMovie.hasNext()) {
+                RentalItem i = itMovie.next();
+                if (i.getTitle().equals(title)) {
+                    itMovie.remove();
+                }
+            }
+        } else {
+            while (itGame.hasNext()) {
+                RentalItem i = itGame.next();
+                if (i.getTitle().equals(title)) {
+                    itGame.remove();
+                }
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "DatabaseManager{" + "games=" + games + ", movies=" + movies + '}';
+    }
 }
