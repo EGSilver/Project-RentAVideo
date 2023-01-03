@@ -66,7 +66,7 @@ public class DatabaseManager {
             //When or if the CSV file is empty, we write the customer in the file as the first customer.
             if (reader.readLine() == null) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                    String customerData = customer.getKlantnummer() + ","
+                    String customerData = customer.getClientNumber() + ","
                             + customer.getFirstName() + ","
                             + customer.getName() + ","
                             + customer.getBirthdate() + ","

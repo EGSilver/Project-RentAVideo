@@ -3,7 +3,7 @@ import java.time.LocalDate;
 
 public class Customer {
 
-    private int klantnummer;
+    private int clientNumber;
     private String firstName;
     private String name;
     private String adres;
@@ -12,8 +12,8 @@ public class Customer {
     private int yearsSubscribed = 0;
 
 
-    public Customer(int klantnummer, String firstname, String name, String adres, String birthdate, String phoneNumber, int yearsSubscribed) {
-        this.klantnummer = klantnummer;
+    public Customer(int clientNumber, String firstname, String name, String adres, String birthdate, String phoneNumber, int yearsSubscribed) {
+        this.clientNumber = clientNumber;
         this.firstName = firstname;
         this.name = name;
         this.adres = adres;
@@ -22,12 +22,12 @@ public class Customer {
         this.yearsSubscribed = yearsSubscribed;
     }
 
-    public int getKlantnummer() {
-        return klantnummer;
+    public int getClientNumber() {
+        return clientNumber;
     }
 
-    public void setKlantnummer(int klantnummer) {
-        this.klantnummer = klantnummer;
+    public void setClientNumber(int clientNumber) {
+        this.clientNumber = clientNumber;
     }
     public String getFirstName() {
         return firstName;
@@ -89,7 +89,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "klantnummer=" + klantnummer +
+                "klantnummer=" + clientNumber +
                 ", firstName='" + firstName + '\'' +
                 ", name='" + name + '\'' +
                 ", adres='" + adres + '\'' +

@@ -16,8 +16,8 @@ public class DayOverview {
         this.newMembers = newMembers;
     }
 
-    public void createOverview(Date today) {
-        dayOverviewMap.put(today, new DayOverview(returns,rentals,lateReturns,newMembers));
+    public void createOverview(Date currentDate) {
+        dayOverviewMap.put(currentDate, new DayOverview(returns,rentals,lateReturns,newMembers));
     }
 
     public void viewOverview(Date date) {
