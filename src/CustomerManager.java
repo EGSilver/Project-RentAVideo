@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+//TODO Hashmap? for when customer checks out so we can track what the customer has rented.
+
 public class CustomerManager {
     private List<Customer> customers;
 
