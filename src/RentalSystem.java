@@ -1,5 +1,5 @@
-import javax.xml.crypto.Data;
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,13 +20,13 @@ public class RentalSystem {
 
     public void addCustomer(Customer customer, DayOverview overview) {
         overview.setNewMembers(+1);
-        customers.add(customer);
+        customerManager.addCustomer(customer);
         addCustomerToDatabase(customer);
     }
 
     public ArrayList<Customer> getCustomers() {
-        System.out.println("Here's a list of all customers: ");
-        return customers;
+        System.out.println("Here's a list of all members: ");
+        return (ArrayList<Customer>) customerManager.getCustomers();
     }
 
     public ArrayList<RentalItem> getRentalMovies(DatabaseManager databaseManager) {
@@ -85,7 +85,7 @@ public class RentalSystem {
         return cart.getItemCart();
     }
 
-    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException {
+    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         cartManager.checkout(customer, cartManager, overview, databaseManager);
     }
 
@@ -117,4 +117,11 @@ public class RentalSystem {
         databaseManager.addCustomerToDatabase(customer);
     }
 
+    public void removeCustomerFromArray(Customer customer) {
+        customerManager.removeCustomer(customer);
+    }
+
+    public void removeItemFromArraylist(RentalItem item, DatabaseManager databaseManager) {
+        databaseManager.removeItemFromArraylist(item, databaseManager);
+    }
 }

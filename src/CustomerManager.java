@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CustomerManager {
@@ -9,11 +10,23 @@ public class CustomerManager {
         this.customers = customers;
     }
 
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+    }
+
     public List<Customer> getCustomers() {
         return customers;
     }
 
-    //TODO Itterate through Array and remove customers (itterator)
+    public void removeCustomer(Customer customer) {
+        //Iterate through Array and remove customer
+        Iterator<Customer> it = customers.iterator();
+        while (it.hasNext()) {
+            if (it.next().equals(customer)) {
+                it.remove();
+            }
+        }
+    }
 
     @Override
     public String toString() {
