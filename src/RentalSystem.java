@@ -121,6 +121,14 @@ public class RentalSystem {
         customerManager.removeCustomer(customer);
     }
 
+    public void removeIncomeOverviewFromMap(Date date, DayOverview dayOverview) {
+        dayOverview.removeIncomeOverviewFromMap(date);
+    }
+
+    public void removeDayOverviewFromMap(Date date, DayOverview dayOverview) {
+        dayOverview.removeDayOverviewFromMap(date);
+    }
+
     public void removeItemFromArraylist(RentalItem item, DatabaseManager databaseManager) {
         databaseManager.removeItemFromArraylist(item, databaseManager);
     }

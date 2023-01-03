@@ -79,6 +79,11 @@ public class TestRental {
         rentalSystem.viewDayOverview(currentSystemDate, dayOverview);
         rentalSystem.createIncomeOverview(currentSystemDate, dayOverview);
         rentalSystem.viewIncomeOverview(currentSystemDate, dayOverview);
+
+    //***/Remove overview from hashmap/***///
+        rentalSystem.removeDayOverviewFromMap(currentSystemDate, dayOverview);
+        rentalSystem.removeIncomeOverviewFromMap(currentSystemDate, dayOverview);
+
         //System.out.println(rentalSystem.getRatingFromCSV(tombRaider));
 
     //***//
@@ -93,7 +98,7 @@ public class TestRental {
         //System.out.println(rentalSystem.getCustomers());
 
     //***//
-    //***/Remove item (Movie or Gamee) from arraylist
+    //***/Remove item (Movie or Game) from arraylist
         //System.out.println(rentalSystem.getRentalMovies(databaseManager));
         //rentalSystem.removeItemFromArraylist(theLionKing, databaseManager);
         //System.out.println(rentalSystem.getRentalMovies(databaseManager));

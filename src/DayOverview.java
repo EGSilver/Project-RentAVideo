@@ -33,7 +33,24 @@ public class DayOverview {
         dayOverviewMap.put(currentDate, new DayOverview(returns,rentals,lateReturns,newMembers));
     }
 
-    //TODO itterate over dayoverview and or incomeOverview be able to remove keys & pairs from the hashmap
+    // Iterate over dayOverview / incomeOverview be able to remove keys & pairs from the hashmap
+    public void removeDayOverviewFromMap(Date specificDate) {
+        Iterator<Date> it = dayOverviewMap.keySet().iterator();
+        while (it.hasNext()) {
+            if (it.next().equals(specificDate)) {
+                it.remove();
+            }
+        }
+    }
+
+    public void removeIncomeOverviewFromMap(Date specificDate) {
+        Iterator<Date> it = dayIncomeOverviewMap.keySet().iterator();
+        while (it.hasNext()) {
+            if (it.next().equals(specificDate)) {
+                it.remove();
+            }
+        }
+    }
 
     public void viewDayOverview(Date specificDate) {
         DayOverview overviewOfCertainDate = dayOverviewMap.get(specificDate);
