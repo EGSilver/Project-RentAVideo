@@ -5,8 +5,9 @@ public class DatabaseManager {
     private ArrayList<RentalItem> games = new ArrayList<>();
     private ArrayList<RentalItem> movies = new ArrayList<>();
 
+    // Loads movie data from a CSV file into an ArrayList of RentalItem objects
     public ArrayList<RentalItem> loadMovies() {
-        File movieData = new File(("G:\\Git\\Project-RentAVideo\\data\\test.csv"));
+        File movieData = new File(("G:\\Git\\Project-RentAVideo\\data\\movies.csv"));
         try (BufferedReader reader = new BufferedReader(new FileReader(movieData))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -21,7 +22,8 @@ public class DatabaseManager {
                 String type = parts[7];
                 String discription = parts[8];
                 String esrbRating = parts[9];
-                RentalItem r = new Movie(title, rentalPrice, rentalDuration, rentalStatus, stock, type, releaseDate, genre, discription, esrbRating);
+                int daySinceLastRented = Integer.parseInt(parts[10]);
+                RentalItem r = new Movie(title, rentalPrice, rentalDuration, rentalStatus, stock, type, releaseDate, genre, discription, esrbRating, daySinceLastRented);
                 movies.add(r);
             }
         } catch (IOException e) {
@@ -30,6 +32,7 @@ public class DatabaseManager {
         return movies;
     }
 
+    // Loads game data from a CSV file into an ArrayList of RentalItem objects
     public ArrayList<RentalItem> loadGames() {
         File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
         try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
@@ -46,7 +49,8 @@ public class DatabaseManager {
                 String rating = parts[7];
                 String type = parts[8];
                 double criticRating = Double.parseDouble(parts[9]);
-                RentalItem r = new Game(title, rentalPrice, rentalDuration, rentalStatus, stock, type, platform, publisher, rating, criticRating);
+                int daySinceLastRented = Integer.parseInt(parts[10]);
+                RentalItem r = new Game(title, rentalPrice, rentalDuration, rentalStatus, stock, type, platform, publisher, rating, criticRating, daySinceLastRented);
                 games.add(r);
             }
         } catch (IOException e) {
@@ -59,6 +63,7 @@ public class DatabaseManager {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\customers.csv";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
+            //When or if the CSV file is empty, we write the customer in the file as the first customer.
             if (reader.readLine() == null) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                     String customerData = customer.getKlantnummer() + ","
@@ -74,11 +79,13 @@ public class DatabaseManager {
                     throw new RuntimeException(e);
                 }
             } else {
+                //Check if the customer already exists inside the CSV.
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(",");
                     if (parts[1].equals(customer.getName()) && parts[2].equals(customer.getFirstName())) {
                         System.out.println("Customer: " + customer.getName() + customer.getFirstName() + " already exists inside the database");
                     } else {
+                        //If the customer is not located inside the CSV file, write the customer to the CSV file.
                         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                             String customerData = customer.getFirstName() + ","
                                     + customer.getName() + ","
@@ -100,7 +107,7 @@ public class DatabaseManager {
         }
     }
 
-    //checks if the Movie is already present inside the database file.
+    // Determines if the movie is already present in the CSV file.
     public boolean movieTitleExists(String title) {
         try (BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\movies.csv"))) {
             String line;
@@ -121,7 +128,7 @@ public class DatabaseManager {
         return false;
     }
 
-    //checks if the Movie is already present inside the database file.
+    // Determines if the game is already present in the CSV file.
     public boolean GameTitleExists(String title) {
         try (BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\games.csv"))) {
             String line;
@@ -236,7 +243,7 @@ public class DatabaseManager {
         return stock;
     }
 
-    //final, function gets called when a customer checks out his cart, works with both types "Movies" & "Games"
+    // Function gets called when a customer checks out his cart, works with both types "Movies" & "Games"
     public void updateItemStockInCsv(RentalItem item) throws IOException {
         String filePath = "";
         if (item.getType().equals("Movie")) {
@@ -267,7 +274,7 @@ public class DatabaseManager {
         }
     }
 
-    //final, takes care of being able to return an item to the store no matter the type "Movies" & "Games".
+    // Takes care of being able to return an item to the "store" no matter the type "Movies" & "Games".
     public RentalItem returnItem(RentalItem item, DayOverview overview) throws IOException {
         String filepath = "";
         if (item.getType().equals("Movie")) {
