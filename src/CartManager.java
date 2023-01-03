@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class CartManager {
@@ -29,7 +31,7 @@ public class CartManager {
         return s;
     }
 
-    public void checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException {
+    public void checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         System.out.println(cartManager.getItemCart());
         String s = customer.getName() + "\n";
         totalPrice = 0;
@@ -54,7 +56,12 @@ public class CartManager {
             totalPrice += c.getRentalPrice();
             //todo rentalDays & lateReturns
         }
+        // Make total value only print 2 digits behind the decimal
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
         String formattedTotalPrice = decimalFormat.format(totalPrice * TAX);
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        Number number = numberFormat.parse(formattedTotalPrice);
+        double income = number.doubleValue();
         if (totalPrice == 0) {
             s += ("Total price to pay: €" + "0");
             System.out.println(s + "\n");
@@ -62,7 +69,7 @@ public class CartManager {
             s += "Total price to pay: €" + formattedTotalPrice;
             System.out.println(s + "\n");
             //TODO Re-evaluate
-            overview.setIncome(totalPrice * TAX);
+            overview.setIncome(income);
         }
 
     }
