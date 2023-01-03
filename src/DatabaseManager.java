@@ -167,7 +167,17 @@ public class DatabaseManager {
     public void addGameToGamesCsv(Game game) {
         String filePath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String movieData = game.getRentalPrice() + "," + game.getRentalDuration() + "," + game.isOutOfStock() + "," + game.getStock() + "," + game.getTitle() + "," + game.getPublisher() + "," + game.getPlatform() + "," + game.getEsrbRating();
+            String movieData = game.getRentalPrice()
+                    + "," + game.getRentalDuration()
+                    + "," + game.isOutOfStock()
+                    + "," + game.getStock()
+                    + "," + game.getTitle()
+                    + "," + game.getPublisher()
+                    + "," + game.getPlatform()
+                    + "," + game.getEsrbRating()
+                    + "," + game.getType()
+                    + "," + game.getCriticRating()
+                    + "," + game.getDaysSinceLastRented();
             writer.write(movieData);
             writer.newLine();
         } catch (IOException e) {
