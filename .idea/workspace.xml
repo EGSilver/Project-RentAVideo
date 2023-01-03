@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f95643d7-1e26-4ef1-b631-b34d5737b794" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/customers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/customers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/games.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/games.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/test.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CartManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CustomerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RentalItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentalItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RentalSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentalSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TestRental.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRental.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +85,7 @@
       <workItem from="1672656293590" duration="14114000" />
       <workItem from="1672690862565" duration="63000" />
       <workItem from="1672690938694" duration="135000" />
-      <workItem from="1672691083170" duration="13014000" />
+      <workItem from="1672691083170" duration="13359000" />
     </task>
     <servers />
   </component>

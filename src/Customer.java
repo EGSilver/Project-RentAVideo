@@ -9,7 +9,7 @@ public class Customer {
     private String adres;
     private String birthdate;
     private String phoneNumber;
-    private int yearsSubscribed;
+    private int yearsSubscribed = 0;
 
 
     public Customer(int klantnummer, String firstname, String name, String adres, String birthdate, String phoneNumber, int yearsSubscribed) {

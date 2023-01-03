@@ -3,8 +3,8 @@ public class Game extends RentalItem {
     private String publisher;
     private double criticRating;
 
-    public Game(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String platform, String publisher, String esrbRating, double criticRating) {
-        super(title, rentalPrice, rentalDuration, outOfStock, stock, type, esrbRating);
+    public Game(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String platform, String publisher, String esrbRating, double criticRating, int daysSinceLastRented) {
+        super(title, rentalPrice, rentalDuration, outOfStock, stock, type, esrbRating, daysSinceLastRented);
         this.platform = platform;
         this.publisher = publisher;
         this.criticRating = criticRating;

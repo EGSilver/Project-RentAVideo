@@ -3,8 +3,8 @@ public class Movie extends RentalItem {
     private String genre;
     private String description;
 
-    public Movie(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String releaseDate, String genre, String description, String esrbRating) {
-        super(title, rentalPrice, rentalDuration, outOfStock, stock, type, esrbRating);
+    public Movie(String title, double rentalPrice, int rentalDuration, boolean outOfStock, int stock, String type, String releaseDate, String genre, String description, String esrbRating, int daysSinceLastRented) {
+        super(title, rentalPrice, rentalDuration, outOfStock, stock, type, esrbRating, daysSinceLastRented);
         this.releaseDate = releaseDate;
         this.genre = genre;
         this.description = description;
