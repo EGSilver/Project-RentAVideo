@@ -7,6 +7,7 @@ public class TestRental {
     DatabaseManager databaseManager = new DatabaseManager();
     CartManager cartManager = new CartManager();
     java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
+
     DayOverview dayOverview = new DayOverview(0,0,0,0);
     Customer klant1 = new Customer(0000001,"Jef","Vermassen","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
     Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6, 1);
@@ -49,6 +50,9 @@ public class TestRental {
         //System.out.println();
         //dayOverview.createOverview(currentSystemDate);
         //dayOverview.viewOverview(currentSystemDate);
+    //***//
+    //Removing items from CSV database
+
 
     //***/Rental System Testing/***//
         //rentalSystem.movieExists("The Matrix");
@@ -72,10 +76,11 @@ public class TestRental {
         rentalSystem.viewDayOverview(currentSystemDate, dayOverview);
         rentalSystem.createIncomeOverview(currentSystemDate, dayOverview);
         rentalSystem.viewIncomeOverview(currentSystemDate, dayOverview);
-
         //System.out.println(rentalSystem.getRatingFromCSV(tombRaider));
 
-
+    //***/Test DaysSinceLastRented/***///
+        //System.out.println(rentalSystem.checkDaysSinceLastRented(theMatrix, databaseManager));
+        //rentalSystem.removeItemFromDatabase(theMatrix, databaseManager);
 
     }
 }

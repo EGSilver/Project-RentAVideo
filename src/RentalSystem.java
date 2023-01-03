@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -86,6 +87,14 @@ public class RentalSystem {
 
     public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException {
         cartManager.checkout(customer, cartManager, overview, databaseManager);
+    }
+
+    public int checkDaysSinceLastRented(RentalItem item, DatabaseManager databaseManager) {
+        return databaseManager.checkDaysSinceLastRented(item);
+    }
+
+    public void removeItemFromDatabase(RentalItem item, DatabaseManager databaseManager) {
+        databaseManager.removeItemFromCsv(item, databaseManager);
     }
 
     public void setLateReturns(int lateReturns, DayOverview day) {

@@ -1,5 +1,7 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseManager {
     private ArrayList<RentalItem> games = new ArrayList<>();
@@ -186,7 +188,6 @@ public class DatabaseManager {
         }
     }
 
-
     public String getAgeRatingFromCsv(RentalItem item) throws IOException {
         String esrbRating = "";
         if (item.getType().equals("Movie")) {
@@ -307,6 +308,68 @@ public class DatabaseManager {
         }
         return item;
     }
+
+    public int checkDaysSinceLastRented(RentalItem item) {
+        int daysSinceLastRented = 0;
+        if (item.getType().equals("Movie")) {
+            for (RentalItem movie : movies) {
+                daysSinceLastRented = movie.getDaysSinceLastRented();
+            }
+        } else {
+            for (RentalItem game : games) {
+                daysSinceLastRented = game.getDaysSinceLastRented();
+            }
+        }
+        return daysSinceLastRented;
+    }
+
+    public void removeItemFromCsv(RentalItem item, DatabaseManager databaseManager) {
+        if (item.getType().equals("Movie") && movieTitleExists(item.getTitle())) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\movies.csv"));
+                PrintWriter writer = new PrintWriter(new FileWriter("temp.csv"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    if (!parts[4].equals(item.getTitle())) {
+                        writer.println(line);
+                    }
+                }
+                reader.close();
+                writer.close();
+                File original = new File("G:\\Git\\Project-RentAVideo\\data\\movies.csv");
+                original.delete();
+                File temp = new File("temp.csv");
+                temp.renameTo(original);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (item.getType().equals("Game")) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
+                PrintWriter writer = new PrintWriter(new FileWriter("temp.csv"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    if (!parts[4].equals(item.getTitle())) {
+                        writer.println(line);
+                    }
+                }
+                reader.close();
+                writer.close();
+
+                File original = new File("G:\\Git\\Project-RentAVideo\\data\\games.csv");
+                original.delete();
+
+                File temp = new File("temp.csv");
+                temp.renameTo(original);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //TODO Itterate through Movies & Games array and remove items from list.
 
     public ArrayList<RentalItem> getRentalMovies() {
         System.out.println("Here's a list of all movies: ");
