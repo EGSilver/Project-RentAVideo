@@ -54,8 +54,7 @@ public class RentAVideo {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
-                Boolean cartEmpty = false;
-                if (!(shoppingCart.size() == 0) && !cartEmpty) {
+                if (!(shoppingCart.size() == 0)) {
                     for (RentalItem item : shoppingCart) {
                         try {
                             rentalSystem.checkOut(klant1, cartManager, overview, cartManager.databaseManager, item);
@@ -63,7 +62,6 @@ public class RentAVideo {
                             throw new RuntimeException(ex);
                         } catch (ParseException ex) {
                             JOptionPane.showMessageDialog(null, "An error occurred while processing the order. Please try again later.");
-
                         }
                     }
                 } else {
@@ -73,7 +71,6 @@ public class RentAVideo {
                 rentalSystem.clearShoppingCart();
                 clearCartModel();
                 ShoppingCartList.setModel(createCartModel());
-
             }
         });
     }
