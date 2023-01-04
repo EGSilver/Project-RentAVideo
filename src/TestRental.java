@@ -42,7 +42,7 @@ public class TestRental {
         //System.out.println();
     //***//
     //Adding movies/games to the CSV databases & Testing changes in stock value's
-        //rentalSystem.addToDatabse(theLionKing);
+        //rentalSystem.addToDatabase(theLionKing);
         //System.out.println(rentalSystem.getStockFromCSV(theLionKing));
         //rentalSystem.setStockMinusOne(theLionKing, databaseManager);
         //rentalSystem.returnItem(theMatrix, dayOverview);
@@ -70,11 +70,14 @@ public class TestRental {
         //System.out.println(rentalSystem.viewCart(cartManager));
 
     //***///
-    //***/DayOverview Class/***//
+    //***/Testing if we can return Items
         //rentalSystem.returnItem(tombRaider,dayOverview);
         //rentalSystem.returnItem(theLionKing, dayOverview);
         //rentalSystem.returnItem(tombRaider, dayOverview);
         //rentalSystem.returnItem(theLionKing, dayOverview);
+
+    //***///
+    //***/DayOverview Class/***//
         rentalSystem.createOverview(currentSystemDate, dayOverview);
         rentalSystem.viewDayOverview(currentSystemDate, dayOverview);
         System.out.println();
