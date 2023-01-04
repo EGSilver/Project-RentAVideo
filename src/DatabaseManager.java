@@ -376,6 +376,10 @@ public class DatabaseManager {
         return games;
     }
 
+    public void clearShoppingCart() {
+
+    }
+
     public void removeItemFromArraylist(RentalItem item, DatabaseManager databaseManager) {
         String title = item.getTitle();
         Iterator<RentalItem> itMovie = databaseManager.movies.iterator();

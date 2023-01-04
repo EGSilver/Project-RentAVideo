@@ -78,7 +78,6 @@ public class CartManager {
             JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
             overview.setIncome(getIncome + income);
-
         }
     }
 
@@ -140,6 +139,10 @@ public class CartManager {
 
     public Date getDate() {
         return new Date();
+    }
+
+    public void clearShoppingCart() {
+        itemCart.clear();
     }
 
     @Override

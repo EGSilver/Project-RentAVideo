@@ -98,6 +98,10 @@ public class RentalSystem {
         return cart.getItemCart();
     }
 
+    public void clearShoppingCart() {
+        cartManager.clearShoppingCart();
+    }
+
     public int checkDaysSinceLastRented(RentalItem item, DatabaseManager databaseManager) {
         return databaseManager.checkDaysSinceLastRented(item);
     }
@@ -152,7 +156,6 @@ public class RentalSystem {
 
     public String viewRentedItemDate(RentalItem item) {
         return customerManager.viewRentedItemDate(item);
-
     }
 
 }
