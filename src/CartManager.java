@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 public class CartManager {
     private ArrayList<RentalItem> itemCart = new ArrayList<>();
     DatabaseManager databaseManager = new DatabaseManager();
+
     private Date rentalDate = getDate();
     private double totalPrice;
     private final double TAX = 1.21;
@@ -36,6 +37,7 @@ public class CartManager {
 
     public void checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         System.out.println(cartManager.getItemCart());
+        double getIncome = overview.getIncome();
         String s = "Your Ticket:\n" + customer.getName() + " " + customer.getFirstName() + ", items rented:\n";
         totalPrice = 0;
         for (RentalItem item : cartManager.getItemCart()) {
@@ -70,9 +72,8 @@ public class CartManager {
         } else {
             s += "Total price to pay: €" + formattedTotalPrice;
             System.out.println(s + "\n");
-            overview.setIncome(income);
+            overview.setIncome(getIncome + income);
         }
-
     }
 
     public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) {
