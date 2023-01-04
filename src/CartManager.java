@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -62,7 +63,7 @@ public class CartManager {
         for (RentalItem c : cartManager.getItemCart()) {
             totalPrice += c.getRentalPrice();
         }
-        // Make total value only print 2 digits behind the decimal
+        // Making sure total value only print 2 digits after the decimal
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         String formattedTotalPrice = decimalFormat.format(totalPrice * TAX);
         NumberFormat numberFormat = NumberFormat.getInstance();
@@ -70,11 +71,14 @@ public class CartManager {
         double income = number.doubleValue();
         if (totalPrice == 0) {
             s += ("Total price to pay: €" + "0");
+            JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
         } else {
             s += "Total price to pay: €" + formattedTotalPrice;
+            JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
             overview.setIncome(getIncome + income);
+
         }
     }
 
@@ -87,7 +91,8 @@ public class CartManager {
         double income = overview.getIncome();
         double fineIncome = 0;
         int returns = overview.getLateReturns();
-        int duration = calcRentalDuration(pastDate);
+        //int duration = calcRentalDuration(pastDate);
+        int duration = calcRentalDuration(rentalDate);
         int currentStock = item.getStock();
         item.setStock(currentStock + 1);
         if (duration > 3 && duration > 7) {
