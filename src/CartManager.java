@@ -79,11 +79,14 @@ public class CartManager {
     }
 
     public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) throws ParseException {
+        // For testing late returns.
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date pastDate = dateFormat.parse("2022-12-04");
+        // End
         double fine = 0;
         double income = overview.getIncome();
         double fineIncome = 0;
+        int returns = overview.getLateReturns();
         int duration = calcRentalDuration(pastDate);
         int currentStock = item.getStock();
         item.setStock(currentStock + 1);
@@ -94,7 +97,8 @@ public class CartManager {
                     + (duration - item.getRentalDuration())
                     + " day(s). The calculated fine is = €"
                     + fine);
-            overview.setIncome(income + fineIncome);
+            overview.setLateReturns((returns) +1);
+            overview.setIncome((income) + fineIncome);
         } else if (duration > 3 && duration > 14) {
             fine = (duration * item.getRentalPrice() * 0.1);
             fineIncome = fine;
@@ -102,7 +106,8 @@ public class CartManager {
                     + (duration - item.getRentalDuration())
                     + " day(s). The calculated fine is = €"
                     + fine);
-            overview.setIncome(income + fineIncome);
+            overview.setLateReturns((returns) +1);
+            overview.setIncome((income) + fineIncome);
         } else if (duration > 3 && duration > 21) {
             fine = (duration * (item.getRentalPrice() * 2 ) * 0.05);
             fineIncome = fine;
@@ -110,7 +115,8 @@ public class CartManager {
                     + (duration - item.getRentalDuration())
                     + " day(s). The calculated fine is = €"
                     + fine);
-            overview.setIncome(income + fineIncome);
+            overview.setLateReturns((returns) +1);
+            overview.setIncome((income) + fineIncome);
         } else {
             System.out.println("This item was returned on time");
         }
