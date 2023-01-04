@@ -5,17 +5,17 @@ import java.text.ParseException;
 
 public class TestRental {
     public static void main(String[] args) throws IOException, ParseException {
-    Panel panel = new Panel();
+    RentAVideo rentAVideoPanel = new RentAVideo();
     DatabaseManager databaseManager = new DatabaseManager();
-    CartManager cartManager = new CartManager();
-    java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
-    DayOverview dayOverview = new DayOverview(0,0,0,0);
-    Customer klant1 = new Customer(0000001,"Jef","Vermassen","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
-    Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6, 1);
-    RentalItem rentalItem = new RentalItem("",0,0,false, 0, "","",0);
-    Movie theMatrix = new Movie("The Matrix",0,3, false,0, "Movie","1999","Action", "","", 1);
-    Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "", 1);
-    Movie SnowWhtie = new Movie("Snow White",0,0,false,0,"Movie","","","","",1);
+    //CartManager cartManager = new CartManager();
+    //java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
+    //DayOverview dayOverview = new DayOverview(0,0,0,0);
+    //Customer klant1 = new Customer(0000001,"Jef","Vermassen","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
+    //Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6, 1);
+    //RentalItem rentalItem = new RentalItem("",0,0,false, 0, "","",0);
+    //Movie theMatrix = new Movie("The Matrix",0,3, false,0, "Movie","1999","Action", "","", 1);
+    //Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "", 1);
+    //Movie SnowWhtie = new Movie("Snow White",0,0,false,0,"Movie","","","","",1);
     RentalSystem rentalSystem = new RentalSystem();
     //m.addGame(tombRaider);
 
@@ -23,6 +23,8 @@ public class TestRental {
     //Load CSV file into Arrays
         databaseManager.loadMovies();
         databaseManager.loadGames();
+        rentAVideoPanel.run(rentalSystem, databaseManager);
+        //System.out.println(rentalSystem.getRentalMovies(databaseManager));
 
     //***//
     //Print out loaded Arrays
@@ -59,12 +61,12 @@ public class TestRental {
     //***/Rental System Testing/***//
         //rentalSystem.movieExists("The Matrix");
         //rentalSystem.setLateReturns(10, dayOverview);
-        rentalSystem.addCustomer(klant1, dayOverview);
-        rentalSystem.addItemToCart(theMatrix, klant1, cartManager);
-        rentalSystem.addItemToCart(theLionKing, klant1, cartManager);
-        rentalSystem.addItemToCart(tombRaider, klant1, cartManager);
+        //rentalSystem.addCustomer(klant1, dayOverview);
+        //rentalSystem.addItemToCart(theMatrix, klant1, cartManager);
+        //rentalSystem.addItemToCart(theLionKing, klant1, cartManager);
+        //rentalSystem.addItemToCart(tombRaider, klant1, cartManager);
         //rentalSystem.viewCart(cartManager);
-        rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager, rentalItem);
+        //rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager, rentalItem);
 
 
         //System.out.println(rentalSystem.getCart(cartManager));
@@ -75,15 +77,15 @@ public class TestRental {
         //rentalSystem.returnItem(tombRaider,dayOverview, cartManager);
         //rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
         //rentalSystem.returnItem(tombRaider, dayOverview, cartManager);
-        rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
+        //rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
 
     //***///
     //***/DayOverview Class/***//
-        rentalSystem.createOverview(currentSystemDate, dayOverview);
-        rentalSystem.viewDayOverview(currentSystemDate, dayOverview);
-        System.out.println();
-        rentalSystem.createIncomeOverview(currentSystemDate, dayOverview);
-        rentalSystem.viewIncomeOverview(currentSystemDate, dayOverview);
+        //rentalSystem.createOverview(currentSystemDate, dayOverview);
+        //rentalSystem.viewDayOverview(currentSystemDate, dayOverview);
+        // System.out.println();
+        //rentalSystem.createIncomeOverview(currentSystemDate, dayOverview);
+        //rentalSystem.viewIncomeOverview(currentSystemDate, dayOverview);
 
     //***/Remove overview from hashmap/***///
         //System.out.println();
