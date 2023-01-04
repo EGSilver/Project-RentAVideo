@@ -76,15 +76,36 @@ public class CartManager {
     }
 
     public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) {
+        double fine = 0;
         double income = overview.getIncome();
         double fineIncome = 0;
         Date rentalDate = getDate();
         int duration = calcRentalDuration(rentalDate);
         int currentStock = item.getStock();
         item.setStock(currentStock + 1);
-        if (duration > 3) {
-            System.out.println("This item was returned late by " + (duration - 3) + " day(s)");
-            
+        if (duration > 3 && duration < 7) {
+            fine = duration * item.getRentalPrice();
+            fineIncome = fine;
+            System.out.println("This item was returned late by "
+                    + (duration - item.getRentalDuration())
+                    + " day(s). The calculated fine is = "
+                    + fine);
+            overview.setIncome(income + fineIncome);
+        } else if (duration > 3 && duration < 14) {
+            fine = (duration * item.getRentalPrice() * 0.1);
+            fineIncome = fine;
+            System.out.println("This item was returned late by "
+                    + (duration - item.getRentalDuration())
+                    + " day(s). The calculated fine is = "
+                    + fine);
+            overview.setIncome(income + fineIncome);
+        } else if (duration > 3 && duration < 21) {
+            fine = (duration * (item.getRentalPrice() *2) * 0.05);
+            fineIncome = fine;
+            System.out.println("This item was returned late by "
+                    + (duration - item.getRentalDuration())
+                    + " day(s). The calculated fine is = "
+                    + fine);
             overview.setIncome(income + fineIncome);
         } else {
             System.out.println("This item was returned on time");

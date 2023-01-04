@@ -75,7 +75,7 @@ public class TestRental {
         //rentalSystem.returnItem(tombRaider,dayOverview, cartManager);
         //rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
         //rentalSystem.returnItem(tombRaider, dayOverview, cartManager);
-        //rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
+        rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
 
     //***///
     //***/DayOverview Class/***//
