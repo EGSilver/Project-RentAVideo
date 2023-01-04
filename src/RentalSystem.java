@@ -158,4 +158,8 @@ public class RentalSystem {
         return customerManager.viewRentedItemDate(item);
     }
 
-}
+    public ArrayList<RentalItem> searchForMovieOrGameInCsv(String title, DatabaseManager databaseManager) {
+        return databaseManager.searchForMovieOrGameInCsv(title, databaseManager);
+    }
+
+ }

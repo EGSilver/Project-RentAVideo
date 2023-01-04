@@ -73,6 +73,12 @@ public class RentAVideo {
                 ShoppingCartList.setModel(createCartModel());
             }
         });
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     // Add items from the Movie Array into the model

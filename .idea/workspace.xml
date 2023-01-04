@@ -6,17 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f95643d7-1e26-4ef1-b631-b34d5737b794" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/movies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/movies.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/CartManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/CartManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/DatabaseManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CartManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/TestRental.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/TestRental.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RentAVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RentalSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentalSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestRental.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRental.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +94,7 @@
       <workItem from="1672690938694" duration="135000" />
       <workItem from="1672691083170" duration="57588000" />
       <workItem from="1672840669314" duration="9814000" />
-      <workItem from="1672858237955" duration="5121000" />
+      <workItem from="1672858237955" duration="7137000" />
     </task>
     <servers />
   </component>
@@ -114,6 +113,19 @@
     </option>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/DatabaseManager.java</url>
+          <line>14</line>
+          <properties class="DatabaseManager" method="loadMovies">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="CartManager" memberName="itemCart" />
@@ -121,6 +133,6 @@
     </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Project_RentAVideo$TestRental.ic" NAME="TestRental Coverage Results" MODIFIED="1672849067985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Project_RentAVideo$TestRental.ic" NAME="TestRental Coverage Results" MODIFIED="1672867773431" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

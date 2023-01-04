@@ -5,6 +5,9 @@ import java.util.Iterator;
 public class DatabaseManager {
     private ArrayList<RentalItem> games = new ArrayList<>();
     private ArrayList<RentalItem> movies = new ArrayList<>();
+    private ArrayList<RentalItem> searchItem = new ArrayList<>();
+
+
 
     // Iterate through Movies & Games array and remove items from arraylist.
 
@@ -376,8 +379,12 @@ public class DatabaseManager {
         return games;
     }
 
-    public void clearShoppingCart() {
-
+    public ArrayList<RentalItem> searchForMovieOrGameInCsv(String title, DatabaseManager databaseManager) {
+        for (int i = 0; i < databaseManager.movies.size(); i++) {
+            if (databaseManager.movies.get(i).getTitle().equals(title) || databaseManager.games.get(i).getTitle().equals(title)) {
+                searchItem.add(movies.get(i));
+            }
+        } return searchItem;
     }
 
     public void removeItemFromArraylist(RentalItem item, DatabaseManager databaseManager) {
