@@ -10,8 +10,6 @@ public class DayOverview {
     private HashMap<Date, DayOverview> dayOverviewMap = new HashMap<>();
     private HashMap<Date, Double> dayIncomeOverviewMap = new HashMap<>();
 
-    //TODO hashmap with overview of earning of the day.
-
     public DayOverview(int returns, int rentals, int lateReturns, int newMembers) {
         this.returns = returns;
         this.rentals = rentals;
@@ -27,7 +25,7 @@ public class DayOverview {
     public void viewIncomeOverview(Date specificDate) {
         Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(specificDate);
         System.out.println(specificDate
-                + ":\nTotal amount of income: €" + income);
+                + "\nTotal amount of income: €" + income);
     }
     public void createOverview(Date currentDate) {
         dayOverviewMap.put(currentDate, new DayOverview(returns,rentals,lateReturns,newMembers));

@@ -77,10 +77,12 @@ public class TestRental {
         //rentalSystem.returnItem(theLionKing, dayOverview);
         rentalSystem.createOverview(currentSystemDate, dayOverview);
         rentalSystem.viewDayOverview(currentSystemDate, dayOverview);
+        System.out.println();
         rentalSystem.createIncomeOverview(currentSystemDate, dayOverview);
         rentalSystem.viewIncomeOverview(currentSystemDate, dayOverview);
 
     //***/Remove overview from hashmap/***///
+        System.out.println();
         rentalSystem.removeDayOverviewFromMap(currentSystemDate, dayOverview);
         rentalSystem.removeIncomeOverviewFromMap(currentSystemDate, dayOverview);
 
@@ -88,11 +90,13 @@ public class TestRental {
 
     //***//
     //***/Test DaysSinceLastRented/***///
+        //System.out.println();
         //System.out.println(rentalSystem.checkDaysSinceLastRented(theMatrix, databaseManager));
         //rentalSystem.removeItemFromDatabase(theMatrix, databaseManager);
 
     //***//
     //***/Test Remove members (customers)/***///
+        //System.out.println();
         //System.out.println(rentalSystem.getCustomers());
         //rentalSystem.removeCustomerFromArray(klant1);
         //System.out.println(rentalSystem.getCustomers());
@@ -102,6 +106,12 @@ public class TestRental {
         //System.out.println(rentalSystem.getRentalMovies(databaseManager));
         //rentalSystem.removeItemFromArraylist(theLionKing, databaseManager);
         //System.out.println(rentalSystem.getRentalMovies(databaseManager));
+
+    //***//
+    //***/Testing the Hashmap in dayOverview that keeps track of customer rental items
+        //System.out.println();
+        //rentalSystem.createRentalHistory(klant1, cartManager);
+        System.out.println(rentalSystem.viewRentalHistory(klant1));
 
     }
 }

@@ -87,6 +87,7 @@ public class RentalSystem {
 
     public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         cartManager.checkout(customer, cartManager, overview, databaseManager);
+        createRentalHistory(customer,cartManager);
     }
 
     public int checkDaysSinceLastRented(RentalItem item, DatabaseManager databaseManager) {
@@ -132,4 +133,13 @@ public class RentalSystem {
     public void removeItemFromArraylist(RentalItem item, DatabaseManager databaseManager) {
         databaseManager.removeItemFromArraylist(item, databaseManager);
     }
+
+    public void createRentalHistory(Customer customer, CartManager cartManager) {
+        customerManager.createRentalHistory(customer, cartManager);
+    }
+
+    public ArrayList<RentalItem> viewRentalHistory(Customer customer) {
+        return customerManager.viewRentalHistory(customer);
+    }
+
 }

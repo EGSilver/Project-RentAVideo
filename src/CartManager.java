@@ -77,5 +77,16 @@ public class CartManager {
     public ArrayList<RentalItem> getItemCart() {
         return itemCart;
     }
+
+    @Override
+    public String toString() {
+        return "CartManager{" +
+                "itemCart=" + itemCart +
+                ", databaseManager=" + databaseManager +
+                ", totalPrice=" + totalPrice +
+                ", TAX=" + TAX +
+                ", decimalFormat=" + decimalFormat +
+                '}';
+    }
 }
 
