@@ -14,13 +14,21 @@ public class RentalSystem {
         this.customers = new ArrayList<>();
         this.databaseManager = new DatabaseManager();
         this.cartManager = new CartManager();
-        this.dayOverview = new DayOverview(0,0,0,0);
+        this.dayOverview = new DayOverview(0, 0, 0, 0);
         this.customerManager = new CustomerManager(customers);
     }
 
-    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
+    public void returnItem(RentalItem item, DayOverview overview, CartManager cartManager) throws IOException {
+        databaseManager.returnItem(item, overview);
+        cartManager.returnItemAndCalculateFine(item, overview);
+
+    }
+
+
+    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager, RentalItem item) throws IOException, ParseException {
         cartManager.checkout(customer, cartManager, overview, databaseManager);
         createRentalHistory(customer, cartManager);
+        saveRentalDate(item);
     }
 
     public void addCustomer(Customer customer, DayOverview overview) {
@@ -86,7 +94,7 @@ public class RentalSystem {
         return cart.viewCart();
     }
 
-    public ArrayList<RentalItem> getCart (CartManager cart) {
+    public ArrayList<RentalItem> getCart(CartManager cart) {
         return cart.getItemCart();
     }
 
@@ -108,10 +116,6 @@ public class RentalSystem {
 
     public void setStockMinusOne(RentalItem item, DatabaseManager databaseManager) throws IOException {
         databaseManager.updateItemStockInCsv(item);
-    }
-
-    public void returnItem(RentalItem item, DayOverview overview) throws IOException {
-        databaseManager.returnItem(item, overview);
     }
 
     public void addCustomerToDatabase(Customer customer) {
@@ -140,6 +144,15 @@ public class RentalSystem {
 
     public ArrayList<RentalItem> viewRentalHistory(Customer customer) {
         return customerManager.viewRentalHistory(customer);
+    }
+
+    public void saveRentalDate(RentalItem item) {
+        customerManager.saveRentalDate(item, cartManager.getDate());
+    }
+
+    public String viewRentedItemDate(RentalItem item) {
+        return customerManager.viewRentedItemDate(item);
+
     }
 
 }

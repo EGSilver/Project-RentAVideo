@@ -3,13 +3,16 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class CartManager {
     private ArrayList<RentalItem> itemCart = new ArrayList<>();
     DatabaseManager databaseManager = new DatabaseManager();
-
+    private Date rentalDate = getDate();
     private double totalPrice;
     private final double TAX = 1.21;
+
     private DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
     public ArrayList<RentalItem> addItemToCart(RentalItem item, Customer customer) throws IOException {
@@ -74,8 +77,35 @@ public class CartManager {
 
     }
 
+    public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) {
+        Date rentalDate = getDate();
+        int duration = calcRentalDuration(rentalDate);
+        int currentStock = item.getStock();
+        item.setStock(currentStock + 1);
+        if (duration > 3) {
+            System.out.println("This item was returned late by " + (duration - 3) + " day(s)");
+        } else {
+            System.out.println("This item was returned on time");
+        }
+    }
+
     public ArrayList<RentalItem> getItemCart() {
         return itemCart;
+    }
+
+    public void calculateLateFine() {
+        calcRentalDuration(rentalDate);
+    }
+
+    public int calcRentalDuration(Date rentalDate) {
+        Date currentDate = getDate();
+        long difference = currentDate.getTime() - rentalDate.getTime();
+        int duration = (int) TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+        return duration;
+    }
+
+    public Date getDate() {
+        return new Date();
     }
 
     @Override

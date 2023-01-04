@@ -14,7 +14,7 @@ public class TestRental {
     Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6, 1);
     RentalItem rentalItem = new RentalItem("",0,0,false, 0, "","",0);
     Movie theMatrix = new Movie("The Matrix",0,3, false,0, "Movie","1999","Action", "","", 1);
-    Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "", 1);
+    Movie theLionKing = new Movie("The Lion King",3.5,0,false, 0,"Movie","1994","Adventure", "", "", 1);
     Movie SnowWhtie = new Movie("Snow White",0,0,false,0,"Movie","","","","",1);
     RentalSystem rentalSystem = new RentalSystem();
     //m.addGame(tombRaider);
@@ -64,17 +64,18 @@ public class TestRental {
         rentalSystem.addItemToCart(theLionKing, klant1, cartManager);
         rentalSystem.addItemToCart(tombRaider, klant1, cartManager);
         //rentalSystem.viewCart(cartManager);
-        rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager);
+        rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager, rentalItem);
+
 
         //System.out.println(rentalSystem.getCart(cartManager));
         //System.out.println(rentalSystem.viewCart(cartManager));
 
     //***///
     //***/Testing if we can return Items
-        //rentalSystem.returnItem(tombRaider,dayOverview);
-        //rentalSystem.returnItem(theLionKing, dayOverview);
-        //rentalSystem.returnItem(tombRaider, dayOverview);
-        //rentalSystem.returnItem(theLionKing, dayOverview);
+        //rentalSystem.returnItem(tombRaider,dayOverview, cartManager);
+        //rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
+        //rentalSystem.returnItem(tombRaider, dayOverview, cartManager);
+        rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
 
     //***///
     //***/DayOverview Class/***//
@@ -85,9 +86,9 @@ public class TestRental {
         rentalSystem.viewIncomeOverview(currentSystemDate, dayOverview);
 
     //***/Remove overview from hashmap/***///
-        System.out.println();
-        rentalSystem.removeDayOverviewFromMap(currentSystemDate, dayOverview);
-        rentalSystem.removeIncomeOverviewFromMap(currentSystemDate, dayOverview);
+        //System.out.println();
+        //rentalSystem.removeDayOverviewFromMap(currentSystemDate, dayOverview);
+        //rentalSystem.removeIncomeOverviewFromMap(currentSystemDate, dayOverview);
 
         //System.out.println(rentalSystem.getRatingFromCSV(tombRaider));
 
@@ -114,7 +115,11 @@ public class TestRental {
     //***/Testing the Hashmap in dayOverview that keeps track of customer rental items
         //System.out.println();
         //rentalSystem.createRentalHistory(klant1, cartManager);
-        System.out.println(rentalSystem.viewRentalHistory(klant1));
+        //System.out.println(rentalSystem.viewRentalHistory(klant1));
+
+    //***//
+    //***/Checking when the movie was rented out
+        //System.out.println(rentalSystem.viewRentedItemDate(theMatrix));
 
     }
 }

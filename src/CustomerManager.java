@@ -1,16 +1,26 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
-//TODO Hashmap? for when customer checks out so we can track what the customer has rented.
+import java.util.*;
 
 public class CustomerManager {
     private List<Customer> customers;
     private HashMap<Customer, ArrayList<RentalItem>> rentalHistory = new HashMap<>();
 
+    private HashMap<RentalItem, Date> rentalDates = new HashMap<>();
+
     public CustomerManager(ArrayList<Customer> customers) {
         this.customers = customers;
+    }
+
+    public void saveRentalDate(RentalItem item, Date rentalDate) {
+        rentalDates.put(item, rentalDate);
+    }
+
+    public String viewRentedItemDate(RentalItem inboundItem) {
+        String s = "";
+        for (Map.Entry<RentalItem, Date> entry : rentalDates.entrySet()) {
+            Date rentalDate = entry.getValue();
+            s += inboundItem.getType() + ": " + inboundItem.getTitle() + ", Date rented out: " + rentalDate;
+        }
+        return s;
     }
 
     public void createRentalHistory(Customer customer, CartManager cartManager) {
