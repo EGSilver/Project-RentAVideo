@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CartManager {
     private ArrayList<RentalItem> itemCart = new ArrayList<>();
-    DatabaseManager databaseManager = new DatabaseManager();
+    private DatabaseManager databaseManager = new DatabaseManager();
 
     private Date rentalDate;
     private double totalPrice;

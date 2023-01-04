@@ -381,10 +381,16 @@ public class DatabaseManager {
 
     public ArrayList<RentalItem> searchForMovieOrGameInCsv(String title, DatabaseManager databaseManager) {
         for (int i = 0; i < databaseManager.movies.size(); i++) {
-            if (databaseManager.movies.get(i).getTitle().equals(title) || databaseManager.games.get(i).getTitle().equals(title)) {
+            if (databaseManager.movies.get(i).getTitle().equals(title)) {
                 searchItem.add(movies.get(i));
             }
-        } return searchItem;
+        }
+        for (int i = 0; i < games.size(); i++) {
+            if (databaseManager.games.get(i).getTitle().equals(title)) {
+                searchItem.add(games.get(i));
+            }
+        }
+        return searchItem;
     }
 
     public void removeItemFromArraylist(RentalItem item, DatabaseManager databaseManager) {

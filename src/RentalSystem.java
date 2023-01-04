@@ -6,9 +6,9 @@ import java.util.Date;
 public class RentalSystem {
     private ArrayList<Customer> customers;
     private CustomerManager customerManager;
-    private DatabaseManager databaseManager;
     private CartManager cartManager;
     private DayOverview dayOverview;
+    private DatabaseManager databaseManager;
 
     public RentalSystem() {
         this.customers = new ArrayList<>();

@@ -24,7 +24,7 @@ public class TestRental {
     //Load CSV file into Arrays
         databaseManager.loadMovies();
         databaseManager.loadGames();
-        System.out.println(rentalSystem.searchForMovieOrGameInCsv("The Lion King", databaseManager));
+        System.out.println(rentalSystem.searchForMovieOrGameInCsv("The Matrix", databaseManager));
         //rentAVideoPanel.run(rentalSystem, databaseManager);
         //System.out.println(rentalSystem.getRentalMovies(databaseManager));
 

@@ -22,6 +22,8 @@ public class RentAVideo {
     private JList ShoppingCartList;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
+
+    private final DatabaseManager databaseManager = new DatabaseManager();
     private final DayOverview overview = new DayOverview(0, 0, 0, 0);
     private ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
     private Customer klant1 = new Customer(0000001, "Jef", "Vermassen", "Kabouterstraat 8 2800 Mechelen", "2016-02-09", "0499/99/66/33", 0);
@@ -57,7 +59,7 @@ public class RentAVideo {
                 if (!(shoppingCart.size() == 0)) {
                     for (RentalItem item : shoppingCart) {
                         try {
-                            rentalSystem.checkOut(klant1, cartManager, overview, cartManager.databaseManager, item);
+                            rentalSystem.checkOut(klant1, cartManager, overview, databaseManager, item);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         } catch (ParseException ex) {
@@ -76,7 +78,15 @@ public class RentAVideo {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String searchText = textFieldSearch.getText();
+                ArrayList<RentalItem> searchResults = rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager);
+                System.out.println(rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager));
+                System.out.println(searchResults);
+                DefaultListModel model = new DefaultListModel<>();
+                for (RentalItem searchResult : searchResults) {
+                    model.addElement(searchResult);
+                }
+                databaseList.setModel(model);
             }
         });
     }
