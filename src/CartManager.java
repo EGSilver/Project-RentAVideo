@@ -93,10 +93,6 @@ public class CartManager {
         return itemCart;
     }
 
-    public void calculateLateFine() {
-        calcRentalDuration(rentalDate);
-    }
-
     public int calcRentalDuration(Date rentalDate) {
         Date currentDate = getDate();
         long difference = currentDate.getTime() - rentalDate.getTime();
