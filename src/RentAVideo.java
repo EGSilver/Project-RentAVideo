@@ -1,9 +1,8 @@
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,25 +22,22 @@ public class RentAVideo {
     private JList ShoppingCartList;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
+    private final DayOverview overview = new DayOverview(0, 0, 0, 0);
+    private ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
+    private Customer klant1 = new Customer(0000001, "Jef", "Vermassen", "Kabouterstraat 8 2800 Mechelen", "2016-02-09", "0499/99/66/33", 0);
 
 
     public RentAVideo() {
-        databaseList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                //TODO update list ie. Refresh list
-            }
-        });
+        // Add item to shopping cart
         addToCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Customer klant1 = new Customer(0000001,"Jef","Vermassen","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
                 List<RentalItem> selectedItems = databaseList.getSelectedValuesList();
                 for (RentalItem item : selectedItems) {
                     try {
                         rentalSystem.addItemToCart(item, klant1, cartManager);
                     } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                        JOptionPane.showMessageDialog(null, "An error occurred while adding your item to the cart. Please try again later.");
                     }
                 }
                 for (RentalItem item : selectedItems) {
@@ -53,14 +49,36 @@ public class RentAVideo {
                 ShoppingCartList.setModel(createCartModel());
             }
         });
+        // Checkout
         checkoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
+                Boolean cartEmpty = false;
+                if (!(shoppingCart.size() == 0) && !cartEmpty) {
+                    for (RentalItem item : shoppingCart) {
+                        try {
+                            rentalSystem.checkOut(klant1, cartManager, overview, cartManager.databaseManager, item);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } catch (ParseException ex) {
+                            JOptionPane.showMessageDialog(null, "An error occurred while processing the order. Please try again later.");
+
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart",1);
+                }
+                // Update the shopping cart list
+                rentalSystem.clearShoppingCart();
+                clearCartModel();
+                ShoppingCartList.setModel(createCartModel());
 
             }
         });
     }
 
+    // Add items from the Movie Array into the model
     public void createMovieModel(RentalSystem rentalSystem, DatabaseManager databaseManager) {
         ArrayList<RentalItem> rentalMovies = rentalSystem.getRentalMovies(databaseManager);
         DefaultListModel<RentalItem> model = new DefaultListModel<>();
@@ -70,8 +88,13 @@ public class RentAVideo {
         }
     }
 
+    public void clearCartModel() {
+        shoppingCart.clear();
+    }
+
+    // Add items from the shopping cart to the model
     public DefaultListModel<RentalItem> createCartModel() {
-        ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
+
         System.out.println(shoppingCart);
         DefaultListModel<RentalItem> model = new DefaultListModel<>();
         for (RentalItem item : shoppingCart) {
@@ -85,7 +108,7 @@ public class RentAVideo {
     public void run(RentalSystem rentalSystem, DatabaseManager databaseManager) {
         frame = new JFrame();
         frame.setContentPane(mainPanel);
-        createMovieModel(rentalSystem ,databaseManager);
+        createMovieModel(rentalSystem, databaseManager);
         frame.setTitle("RentAVideo");
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
