@@ -10,7 +10,7 @@ public class CustomerManager {
         this.customers = customers;
     }
 
-    public void saveRentalDate(RentalItem item, Date rentalDate) {
+    public void saveRentalDateInMap(RentalItem item, Date rentalDate) {
         rentalDates.put(item, rentalDate);
     }
 

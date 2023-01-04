@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -10,7 +11,7 @@ public class CartManager {
     private ArrayList<RentalItem> itemCart = new ArrayList<>();
     DatabaseManager databaseManager = new DatabaseManager();
 
-    private Date rentalDate = getDate();
+    private Date rentalDate;
     private double totalPrice;
     private final double TAX = 1.21;
 
@@ -36,6 +37,7 @@ public class CartManager {
     }
 
     public void checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
+        rentalDate = getDate();
         System.out.println(cartManager.getItemCart());
         double getIncome = overview.getIncome();
         String s = "Your Ticket:\n" + customer.getName() + " " + customer.getFirstName() + ", items rented:\n";
@@ -76,36 +78,37 @@ public class CartManager {
         }
     }
 
-    public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) {
+    public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date pastDate = dateFormat.parse("2022-12-04");
         double fine = 0;
         double income = overview.getIncome();
         double fineIncome = 0;
-        Date rentalDate = getDate();
-        int duration = calcRentalDuration(rentalDate);
+        int duration = calcRentalDuration(pastDate);
         int currentStock = item.getStock();
         item.setStock(currentStock + 1);
-        if (duration > 3 && duration < 7) {
+        if (duration > 3 && duration > 7) {
             fine = duration * item.getRentalPrice();
             fineIncome = fine;
             System.out.println("This item was returned late by "
                     + (duration - item.getRentalDuration())
-                    + " day(s). The calculated fine is = "
+                    + " day(s). The calculated fine is = €"
                     + fine);
             overview.setIncome(income + fineIncome);
-        } else if (duration > 3 && duration < 14) {
+        } else if (duration > 3 && duration > 14) {
             fine = (duration * item.getRentalPrice() * 0.1);
             fineIncome = fine;
             System.out.println("This item was returned late by "
                     + (duration - item.getRentalDuration())
-                    + " day(s). The calculated fine is = "
+                    + " day(s). The calculated fine is = €"
                     + fine);
             overview.setIncome(income + fineIncome);
-        } else if (duration > 3 && duration < 21) {
-            fine = (duration * (item.getRentalPrice() *2) * 0.05);
+        } else if (duration > 3 && duration > 21) {
+            fine = (duration * (item.getRentalPrice() * 2 ) * 0.05);
             fineIncome = fine;
             System.out.println("This item was returned late by "
                     + (duration - item.getRentalDuration())
-                    + " day(s). The calculated fine is = "
+                    + " day(s). The calculated fine is = €"
                     + fine);
             overview.setIncome(income + fineIncome);
         } else {

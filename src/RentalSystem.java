@@ -18,7 +18,7 @@ public class RentalSystem {
         this.customerManager = new CustomerManager(customers);
     }
 
-    public void returnItem(RentalItem item, DayOverview overview, CartManager cartManager) throws IOException {
+    public void returnItem(RentalItem item, DayOverview overview, CartManager cartManager) throws IOException, ParseException {
         databaseManager.returnItem(item, overview);
         cartManager.returnItemAndCalculateFine(item, overview);
 
@@ -147,7 +147,7 @@ public class RentalSystem {
     }
 
     public void saveRentalDate(RentalItem item) {
-        customerManager.saveRentalDate(item, cartManager.getDate());
+        customerManager.saveRentalDateInMap(item, cartManager.getDate());
     }
 
     public String viewRentedItemDate(RentalItem item) {
