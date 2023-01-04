@@ -33,11 +33,11 @@ public class CartManager {
 
     public void checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         System.out.println(cartManager.getItemCart());
-        String s = customer.getName() + "\n";
+        String s = "Your Ticket:\n\n" + customer.getName() + " " + customer.getFirstName() + " Items rented:\n";
         totalPrice = 0;
         for (RentalItem item : cartManager.getItemCart()) {
             if (item.getType().equals("Movie")) {
-                s += item.getTitle() + "\n";
+                s += item.getType() + ": " + item.getTitle() + "\n";
                 databaseManager.updateItemStockInCsv(item);
                 overview.setRentals(overview.getRentals() + 1);
                 if (databaseManager.getStockFromCsv(item) <= 1) {
@@ -46,7 +46,7 @@ public class CartManager {
             } else if (item.getType().equals("Game")) {
                 databaseManager.updateItemStockInCsv(item);
                 overview.setRentals(overview.getRentals() + 1);
-                s += item.getTitle() + "\n";
+                s += item.getType() + ": " + item.getTitle() + "\n";
                 if (databaseManager.getStockFromCsv(item) <= 1) {
                     item.setOutOfStock(true);
                 }
