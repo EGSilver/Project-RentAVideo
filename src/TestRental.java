@@ -60,7 +60,7 @@ public class TestRental {
         //rentalSystem.movieExists("The Matrix");
         //rentalSystem.setLateReturns(10, dayOverview);
         rentalSystem.addCustomer(klant1, dayOverview);
-        //rentalSystem.addItemToCart(theMatrix, klant1, cartManager);
+        rentalSystem.addItemToCart(theMatrix, klant1, cartManager);
         rentalSystem.addItemToCart(theLionKing, klant1, cartManager);
         rentalSystem.addItemToCart(tombRaider, klant1, cartManager);
         //rentalSystem.viewCart(cartManager);
@@ -75,7 +75,7 @@ public class TestRental {
         //rentalSystem.returnItem(tombRaider,dayOverview, cartManager);
         //rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
         //rentalSystem.returnItem(tombRaider, dayOverview, cartManager);
-        rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
+        //rentalSystem.returnItem(theLionKing, dayOverview, cartManager);
 
     //***///
     //***/DayOverview Class/***//

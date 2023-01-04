@@ -36,7 +36,7 @@ public class CartManager {
 
     public void checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         System.out.println(cartManager.getItemCart());
-        String s = "Your Ticket:\n\n" + customer.getName() + " " + customer.getFirstName() + " Items rented:\n";
+        String s = "Your Ticket:\n" + customer.getName() + " " + customer.getFirstName() + ", items rented:\n";
         totalPrice = 0;
         for (RentalItem item : cartManager.getItemCart()) {
             if (item.getType().equals("Movie")) {
@@ -57,7 +57,6 @@ public class CartManager {
         }
         for (RentalItem c : cartManager.getItemCart()) {
             totalPrice += c.getRentalPrice();
-            //todo rentalDays & lateReturns
         }
         // Make total value only print 2 digits behind the decimal
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
@@ -71,19 +70,22 @@ public class CartManager {
         } else {
             s += "Total price to pay: €" + formattedTotalPrice;
             System.out.println(s + "\n");
-            //TODO Re-evaluate
             overview.setIncome(income);
         }
 
     }
 
     public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) {
+        double income = overview.getIncome();
+        double fineIncome = 0;
         Date rentalDate = getDate();
         int duration = calcRentalDuration(rentalDate);
         int currentStock = item.getStock();
         item.setStock(currentStock + 1);
         if (duration > 3) {
             System.out.println("This item was returned late by " + (duration - 3) + " day(s)");
+            
+            overview.setIncome(income + fineIncome);
         } else {
             System.out.println("This item was returned on time");
         }
