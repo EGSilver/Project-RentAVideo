@@ -18,6 +18,11 @@ public class RentalSystem {
         this.customerManager = new CustomerManager(customers);
     }
 
+    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
+        cartManager.checkout(customer, cartManager, overview, databaseManager);
+        createRentalHistory(customer, cartManager);
+    }
+
     public void addCustomer(Customer customer, DayOverview overview) {
         overview.setNewMembers(+1);
         customerManager.addCustomer(customer);
@@ -83,11 +88,6 @@ public class RentalSystem {
 
     public ArrayList<RentalItem> getCart (CartManager cart) {
         return cart.getItemCart();
-    }
-
-    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
-        cartManager.checkout(customer, cartManager, overview, databaseManager);
-        createRentalHistory(customer,cartManager);
     }
 
     public int checkDaysSinceLastRented(RentalItem item, DatabaseManager databaseManager) {
