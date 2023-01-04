@@ -10,7 +10,7 @@ public class DatabaseManager {
 
     // Loads movie data from a CSV file into an ArrayList of RentalItem objects
     public ArrayList<RentalItem> loadMovies() {
-        File movieData = new File(("G:\\Git\\Project-RentAVideo\\data\\movies.csv"));
+        File movieData = new File((".\\data\\movies.csv"));
         try (BufferedReader reader = new BufferedReader(new FileReader(movieData))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -37,7 +37,7 @@ public class DatabaseManager {
 
     // Loads game data from a CSV file into an ArrayList of RentalItem objects
     public ArrayList<RentalItem> loadGames() {
-        File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
+        File gameData = new File((".\\data\\games.csv"));
         try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -63,7 +63,7 @@ public class DatabaseManager {
     }
 
     public void addCustomerToDatabase(Customer customer) {
-        String filePath = "G:\\Git\\Project-RentAVideo\\data\\customers.csv";
+        String filePath = ".\\data\\customers.csv";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             //When or if the CSV file is empty, we write the customer in the file as the first customer.
@@ -101,7 +101,7 @@ public class DatabaseManager {
 
     // Determines if the movie is already present in the CSV file.
     public boolean movieTitleExists(String title) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\movies.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(".\\data\\movies.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -122,7 +122,7 @@ public class DatabaseManager {
 
     // Determines if the game is already present in the CSV file.
     public boolean GameTitleExists(String title) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\games.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(".\\data\\games.csv"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -142,7 +142,7 @@ public class DatabaseManager {
     }
 
     public void addMovieToMoviesCsv(Movie movie) {
-        String filePath = "G:\\Git\\Project-RentAVideo\\data\\movies.csv";
+        String filePath = ".\\data\\movies.csv";
         if (!movieTitleExists(movie.getTitle())) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                 String movieData = movie.getRentalPrice()
@@ -165,7 +165,7 @@ public class DatabaseManager {
     }
 
     public void addGameToGamesCsv(Game game) {
-        String filePath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
+        String filePath = ".\\data\\games.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             String movieData = game.getRentalPrice()
                     + "," + game.getRentalDuration()
@@ -188,7 +188,7 @@ public class DatabaseManager {
     public String getAgeRatingFromCsv(RentalItem item) throws IOException {
         String esrbRating = "";
         if (item.getType().equals("Movie")) {
-            File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\movies.csv"));
+            File gameData = new File((".\\data\\movies.csv"));
             try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -199,7 +199,7 @@ public class DatabaseManager {
                 }
             }
         } else {
-            File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
+            File gameData = new File((".\\data\\games.csv"));
             try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -216,7 +216,7 @@ public class DatabaseManager {
     public int getStockFromCsv(RentalItem item) throws IOException {
         int stock = 0;
         if (item.getType().equals("Movie")) {
-            File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\movies.csv"));
+            File gameData = new File((".\\data\\movies.csv"));
             try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -227,7 +227,7 @@ public class DatabaseManager {
                 }
             }
         } else {
-            File gameData = new File(("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
+            File gameData = new File((".\\data\\games.csv"));
             try (BufferedReader reader = new BufferedReader(new FileReader(gameData))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -245,9 +245,9 @@ public class DatabaseManager {
     public void updateItemStockInCsv(RentalItem item) throws IOException {
         String filePath = "";
         if (item.getType().equals("Movie")) {
-            filePath = "G:\\Git\\Project-RentAVideo\\data\\movies.csv";
+            filePath = ".\\data\\movies.csv";
         } else {
-            filePath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
+            filePath = ".\\data\\games.csv";
         }
         ArrayList<String> arrayLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -276,9 +276,9 @@ public class DatabaseManager {
     public RentalItem returnItem(RentalItem item, DayOverview overview) throws IOException {
         String filepath = "";
         if (item.getType().equals("Movie")) {
-            filepath = "G:\\Git\\Project-RentAVideo\\data\\movies.csv";
+            filepath = ".\\data\\movies.csv";
         } else {
-            filepath = "G:\\Git\\Project-RentAVideo\\data\\games.csv";
+            filepath = ".\\data\\games.csv";
         }
         ArrayList<String> arrayLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
@@ -323,7 +323,7 @@ public class DatabaseManager {
     public void removeItemFromCsv(RentalItem item, DatabaseManager databaseManager) {
         if (item.getType().equals("Movie") && movieTitleExists(item.getTitle())) {
             try {
-                BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\movies.csv"));
+                BufferedReader reader = new BufferedReader(new FileReader(".\\data\\movies.csv"));
                 PrintWriter writer = new PrintWriter(new FileWriter("temp.csv"));
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -334,7 +334,7 @@ public class DatabaseManager {
                 }
                 reader.close();
                 writer.close();
-                File original = new File("G:\\Git\\Project-RentAVideo\\data\\movies.csv");
+                File original = new File(".\\data\\movies.csv");
                 original.delete();
                 File temp = new File("temp.csv");
                 temp.renameTo(original);
@@ -343,7 +343,7 @@ public class DatabaseManager {
             }
         } else if (item.getType().equals("Game")) {
             try {
-                BufferedReader reader = new BufferedReader(new FileReader("G:\\Git\\Project-RentAVideo\\data\\games.csv"));
+                BufferedReader reader = new BufferedReader(new FileReader(".\\data\\games.csv"));
                 PrintWriter writer = new PrintWriter(new FileWriter("temp.csv"));
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -355,7 +355,7 @@ public class DatabaseManager {
                 reader.close();
                 writer.close();
 
-                File original = new File("G:\\Git\\Project-RentAVideo\\data\\games.csv");
+                File original = new File(".\\data\\games.csv");
                 original.delete();
 
                 File temp = new File("temp.csv");
