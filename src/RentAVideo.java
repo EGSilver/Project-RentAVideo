@@ -14,13 +14,18 @@ public class RentAVideo {
     private JButton addToCartButton;
     private JButton checkoutButton;
     private JTextField textFieldSearch;
-    private JTabbedPane tabbedpane;
+    private JTabbedPane RentScreen;
     private JPanel RentalSystem;
-    private JPanel AdministratorTab;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JPanel AdminPanel;
     private JList databaseList;
     private JList ShoppingCartList;
+    private JList ticketList;
+    private JTextField textFieldCustomerName;
+    private JTextField textFieldYearsSubscribed;
+    private JTextField textFieldCustomerNumber;
+    private JLabel yearsSubscribedLabel;
+    private JLabel customerNumberLabel;
+    private JLabel customerNameLabel;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
 
@@ -33,6 +38,8 @@ public class RentAVideo {
 
 
     public RentAVideo() {
+        textFieldCustomerNumber.setEditable(false);
+        textFieldYearsSubscribed.setEditable(false);
         // Add item to shopping cart
         addToCartButton.addActionListener(new ActionListener() {
             @Override
@@ -138,7 +145,7 @@ public class RentAVideo {
 
 
     public void run(RentalSystem rentalSystem) {
-        mainPanel.setPreferredSize(new Dimension(600,800));
+        mainPanel.setPreferredSize(new Dimension(700,600));
         loadGames();
         loadMovies();
         frame = new JFrame();
