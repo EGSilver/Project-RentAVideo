@@ -94,11 +94,14 @@ public class RentAVideo {
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
     private ArrayList<Customer> customers = new ArrayList<>();
+
     private final CustomerManager customerManager = new CustomerManager(customers);
     private final DatabaseManager databaseManager = new DatabaseManager();
     private final DayOverview overview = new DayOverview(0, 0, 0, 0);
     private ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
     private ArrayList<RentalItem> searchResults = new ArrayList<>();
+
+    private DefaultListModel<String> customerDefaultListModel = new DefaultListModel<String>();
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
     private Customer klant1 = new Customer(0000001, "Jef", "Vermassen", "Kabouterstraat 8 2800 Mechelen", "2016-02-09", "0499/99/66/33", 0);
 
@@ -185,6 +188,14 @@ public class RentAVideo {
         });
     }
 
+    public void createAdminPanelCustomerModel() {
+        for (Customer customer : customers) {
+            String customerInformation = customer.getFirstName() + " " + customer.getName() + " " + customer.getPhoneNumber();
+            customerDefaultListModel.addElement(customerInformation);
+        }
+        customerListList.setModel(customerDefaultListModel);
+    }
+
     // Add items from the Movie/Games Array into the model
     public void createListModel(DatabaseManager databaseManager) {
         ArrayList<RentalItem> rentalMovies = databaseManager.getRentalMovies();
@@ -226,9 +237,11 @@ public class RentAVideo {
 
 
     public void run(RentalSystem rentalSystem) {
+        customers.add(klant1);
         //mainPanel.setPreferredSize(new Dimension(1200,500));
         loadGames();
         loadMovies();
+        createAdminPanelCustomerModel();
         frame = new JFrame();
         frame.setContentPane(mainPanel);
         createListModel(databaseManager);
