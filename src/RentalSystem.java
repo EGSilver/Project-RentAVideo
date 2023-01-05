@@ -24,6 +24,13 @@ public class RentalSystem {
 
     }
 
+    public void loadMovies(DatabaseManager databaseManager) {
+        databaseManager.loadMovies();
+    }
+
+    public void loadGames(DatabaseManager databaseManager) {
+        databaseManager.loadGames();
+    }
 
     public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager, RentalItem item) throws IOException, ParseException {
         cartManager.checkout(customer, cartManager, overview, databaseManager);
