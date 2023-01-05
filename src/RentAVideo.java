@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -14,7 +13,6 @@ public class RentAVideo {
     private JButton addToCartButton;
     private JButton checkoutButton;
     private JTextField textFieldSearch;
-    private JTabbedPane RentScreen;
     private JPanel rentalSystemPanel;
     private JPanel adminPanel;
     private JList databaseList;
@@ -28,36 +26,75 @@ public class RentAVideo {
     private JLabel customerNameLabel;
     private JButton enterButton;
     private JPanel newCustomerPanel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JButton submitButton;
-    private JList list1;
+    private JTextField textFieldNewCustomerAdres;
+    private JTextField textFieldNewCustomerFirstName;
+    private JTextField textFieldNewCustomerBirthdate;
+    private JTextField textFieldNewCustomerLastName;
+    private JTextField textFieldNewCustomerPhoneNumber;
+    private JTextField textFieldNewCustomerEmail;
+    private JButton submitNewCustomerButton;
     private JButton submitDateButton1;
     private JButton submitDateButton;
-    private JList list2;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JButton submitNameButton;
-    private JTextField textField9;
-    private JList list4;
+    private JTextField textFieldDayRapportDateInput;
+    private JTextField textFieldEarningsRapportDateInput;
+    private JButton searchCustomerListSearch;
+    private JTextField textFieldCustomerListSearch;
     private JButton deleteCustomerButton;
-    private JTextField textField10;
-    private JTextField textField11;
-    private JTextField textField12;
-    private JTextField textField13;
-    private JTextField textField14;
-    private JTextField textField15;
-    private JTextField textField16;
-    private JButton addGameMovieButton;
-    private JTextField textField17;
-    private JTextField textField18;
+    private JTextField TextFieldMovieTitle;
+    private JTextField textFieldMovieRentalPrice;
+    private JTextField textFieldMovieRentalDuration;
+    private JTextField textFieldMovieStock;
+    private JTextField textFieldMovieType;
+    private JTextField textFieldMovieReleaseDate;
+    private JTextField textFieldMovieDescription;
+    private JTextField textFieldMovieEsrbRating;
+    private JList earningsRapportList;
+    private JButton addMovieButton;
+    private JList customerListList;
+    private JLabel labelFirstName;
+    private JLabel labelLastName;
+    private JLabel labelAdres;
+    private JLabel labelBirthdate;
+    private JLabel textfieldPhoneNumber;
+    private JLabel labelEmail;
+    private JLabel labelMovieRentalPrice;
+    private JLabel labelMovieRentalDuration;
+    private JLabel labelMovieStock;
+    private JLabel labelMovieType;
+    private JLabel labelMovieReleaseDate;
+    private JLabel labelMovieDescription;
+    private JLabel labelMovieEsrbRating;
+    private JLabel labelMovieTitle;
+    private JLabel labelGameTitle;
+    private JLabel labelGameRentalPrice;
+    private JLabel labelGameRentalDuration;
+    private JLabel labelGameStock;
+    private JLabel labelGameType;
+    private JLabel labelGamePlatform;
+    private JLabel labelGamePublisher;
+    private JLabel labelGameEsrbRating;
+    private JTextField textFieldGameTitle;
+    private JTextField textFieldGameRentalPrice;
+    private JTextField textFieldGameRentalDuration;
+    private JTextField textFieldGameStock;
+    private JTextField textFieldGameType;
+    private JTextField textFieldGamePlatform;
+    private JTextField textFieldGamePublisher;
+    private JTextField textFieldGameEsrbRating;
+    private JButton addGameButton;
+    private JLabel labelDayRapport;
+    private JLabel labelEarningsRapport;
+    private JLabel labelCustomerList;
+    private JPanel customerListPanel;
+    private JScrollPane earningsScrollRapportPane;
+    private JPanel moviePanel;
+    private JPanel gamePanel;
+    private JScrollPane customerListScrollPane;
+    private JPanel overviewTicketPanel;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
-
+    private ArrayList<Customer> customers = new ArrayList<>();
+    private final CustomerManager customerManager = new CustomerManager(customers);
     private final DatabaseManager databaseManager = new DatabaseManager();
     private final DayOverview overview = new DayOverview(0, 0, 0, 0);
     private ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
@@ -131,6 +168,21 @@ public class RentAVideo {
                 }
             }
         });
+        submitNewCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Customer customer = new Customer(0,textFieldNewCustomerFirstName.getText().toLowerCase(),
+                        textFieldNewCustomerLastName.getText().toLowerCase(),
+                        textFieldNewCustomerAdres.getText().toLowerCase(),
+                        textFieldNewCustomerBirthdate.getText(),
+                        textfieldPhoneNumber.getText().toLowerCase(),
+                        0);
+                customers.add(customer);
+                for (Customer c : customers) {
+                    System.out.println(c);
+                }
+            }
+        });
     }
 
     // Add items from the Movie/Games Array into the model
@@ -174,7 +226,7 @@ public class RentAVideo {
 
 
     public void run(RentalSystem rentalSystem) {
-        mainPanel.setPreferredSize(new Dimension(700,600));
+        //mainPanel.setPreferredSize(new Dimension(1200,500));
         loadGames();
         loadMovies();
         frame = new JFrame();
@@ -187,4 +239,7 @@ public class RentAVideo {
         frame.setVisible(true);
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }

@@ -54,9 +54,8 @@ public class DatabaseManager {
                 String publisher = parts[6];
                 String rating = parts[7];
                 String type = parts[8];
-                double criticRating = Double.parseDouble(parts[9]);
-                int daySinceLastRented = Integer.parseInt(parts[10]);
-                RentalItem r = new Game(title, rentalPrice, rentalDuration, rentalStatus, stock, type, platform, publisher, rating, criticRating, daySinceLastRented);
+                int daySinceLastRented = Integer.parseInt(parts[9]);
+                RentalItem r = new Game(title, rentalPrice, rentalDuration, rentalStatus, stock, type, platform, publisher, rating, daySinceLastRented);
                 games.add(r);
             }
         } catch (IOException e) {
@@ -179,7 +178,6 @@ public class DatabaseManager {
                     + "," + game.getPlatform()
                     + "," + game.getEsrbRating()
                     + "," + game.getType()
-                    + "," + game.getCriticRating()
                     + "," + game.getDaysSinceLastRented();
             writer.write(movieData);
             writer.newLine();

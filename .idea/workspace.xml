@@ -7,6 +7,7 @@
     <list default="true" id="f95643d7-1e26-4ef1-b631-b34d5737b794" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/games.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/games.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/movies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/movies.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/CartManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/CartManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/Customer.class" afterDir="false" />
@@ -22,6 +23,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalItem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalSystem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/TestRental.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/TestRental.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RentAVideo.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RentAVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.java" afterDir="false" />
     </list>
@@ -54,11 +57,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE": "right",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "142",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "33",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE": "left",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "316",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "381",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/anpat/OneDrive/Documenten/Git/Project-RentAVideo",
+    "last_opened_file_path": "C:/Users/DeanV/OneDrive/Programming Fun/Project-RentAVideo-main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -109,6 +112,7 @@
       <workItem from="1672858237955" duration="23271000" />
       <workItem from="1672928530031" duration="2158000" />
       <workItem from="1672940852684" duration="2493000" />
+      <workItem from="1672954418393" duration="1318000" />
     </task>
     <servers />
   </component>
