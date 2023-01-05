@@ -181,9 +181,7 @@ public class RentAVideo {
                         textfieldPhoneNumber.getText().toLowerCase(),
                         0);
                 customers.add(customer);
-                for (Customer c : customers) {
-                    System.out.println(c);
-                }
+                rentalSystem.addCustomerToDatabase(customer);
             }
         });
         deleteCustomerButton.addActionListener(new ActionListener() {
