@@ -26,6 +26,7 @@ public class RentAVideo {
     private final DatabaseManager databaseManager = new DatabaseManager();
     private final DayOverview overview = new DayOverview(0, 0, 0, 0);
     private ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
+    ArrayList<RentalItem> searchResults = new ArrayList<>();
     private Customer klant1 = new Customer(0000001, "Jef", "Vermassen", "Kabouterstraat 8 2800 Mechelen", "2016-02-09", "0499/99/66/33", 0);
 
 
@@ -44,9 +45,7 @@ public class RentAVideo {
                 }
                 for (RentalItem item : selectedItems) {
                     createCartModel().addElement(item);
-                    break;
                 }
-                System.out.println(rentalSystem.viewCart(cartManager));
                 // Update the shopping cart list
                 ShoppingCartList.setModel(createCartModel());
             }
@@ -75,14 +74,14 @@ public class RentAVideo {
                 ShoppingCartList.setModel(createCartModel());
             }
         });
+        // Search for specific item
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                clearSearchResultScreen();
                 String searchText = textFieldSearch.getText();
-                ArrayList<RentalItem> searchResults = rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager);
-                System.out.println(rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager));
-                System.out.println(searchResults);
-                DefaultListModel model = new DefaultListModel<>();
+                searchResults = rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager);
+                DefaultListModel<RentalItem> model = new DefaultListModel<>();
                 for (RentalItem searchResult : searchResults) {
                     model.addElement(searchResult);
                 }
@@ -93,9 +92,19 @@ public class RentAVideo {
 
     // Add items from the Movie Array into the model
     public void createMovieModel(RentalSystem rentalSystem, DatabaseManager databaseManager) {
-        ArrayList<RentalItem> rentalMovies = rentalSystem.getRentalMovies(databaseManager);
+        ArrayList<RentalItem> rentalMovies = databaseManager.getRentalMovies();
         DefaultListModel<RentalItem> model = new DefaultListModel<>();
         for (RentalItem movie : rentalMovies) {
+            model.addElement(movie);
+            databaseList.setModel(model);
+        }
+    }
+
+    public void createGameModel(RentalSystem rentalSystem, DatabaseManager databaseManager) {
+        loadMovies();
+        ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();
+        DefaultListModel<RentalItem> model = new DefaultListModel<>();
+        for (RentalItem movie : rentalGames) {
             model.addElement(movie);
             databaseList.setModel(model);
         }
@@ -105,10 +114,12 @@ public class RentAVideo {
         shoppingCart.clear();
     }
 
+    public void clearSearchResultScreen() {
+        searchResults.clear();
+    }
+
     // Add items from the shopping cart to the model
     public DefaultListModel<RentalItem> createCartModel() {
-
-        System.out.println(shoppingCart);
         DefaultListModel<RentalItem> model = new DefaultListModel<>();
         for (RentalItem item : shoppingCart) {
             model.addElement(item);
@@ -117,11 +128,22 @@ public class RentAVideo {
         return model;
     }
 
+    public void loadMovies() {
+        rentalSystem.loadMovies(databaseManager);
+    }
 
-    public void run(RentalSystem rentalSystem, DatabaseManager databaseManager) {
+    public void loadGames() {
+        rentalSystem.loadGames(databaseManager);
+    }
+
+
+    public void run(RentalSystem rentalSystem) {
+        loadGames();
+        loadMovies();
         frame = new JFrame();
         frame.setContentPane(mainPanel);
         createMovieModel(rentalSystem, databaseManager);
+        //createGameModel(rentalSystem, databaseManager);
         frame.setTitle("RentAVideo");
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

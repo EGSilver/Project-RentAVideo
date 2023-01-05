@@ -17,15 +17,12 @@ public class TestRental {
     Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "", 1);
     //Movie SnowWhtie = new Movie("Snow White",0,0,false,0,"Movie","","","","",1);
     RentalSystem rentalSystem = new RentalSystem();
+    rentAVideoPanel.run(rentalSystem);
 
-    //m.addGame(tombRaider);
-
-    //***//
-    //Load CSV file into Arrays
-        databaseManager.loadMovies();
-        databaseManager.loadGames();
-        System.out.println(rentalSystem.searchForMovieOrGameInCsv("The Matrix", databaseManager));
-        //rentAVideoPanel.run(rentalSystem, databaseManager);
+        //rentalSystem.loadMovies(databaseManager);
+        //rentalSystem.loadGames(databaseManager);
+        //System.out.println(rentalSystem.searchForMovieOrGameInCsv("The Matrix", databaseManager));
+        //System.out.println(rentalSystem.searchForMovieOrGameInCsv("Tomb Raider", databaseManager));
         //System.out.println(rentalSystem.getRentalMovies(databaseManager));
 
     //***//
