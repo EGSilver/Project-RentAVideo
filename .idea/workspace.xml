@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f95643d7-1e26-4ef1-b631-b34d5737b794" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/movies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/movies.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo.class" afterDir="false" />
@@ -37,19 +36,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/Git/Project-RentAVideo&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "316",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "G:/Git/Project-RentAVideo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Git\Project-RentAVideo\data" />
@@ -90,7 +90,7 @@
       <workItem from="1672690938694" duration="135000" />
       <workItem from="1672691083170" duration="57588000" />
       <workItem from="1672840669314" duration="9814000" />
-      <workItem from="1672858237955" duration="16151000" />
+      <workItem from="1672858237955" duration="17400000" />
     </task>
     <servers />
   </component>

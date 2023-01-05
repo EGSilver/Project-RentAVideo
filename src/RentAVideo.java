@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class RentAVideo {
                     try {
                         rentalSystem.addItemToCart(item, klant1, cartManager);
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "An error occurred while adding your item to the cart. Please try again later.");
+                        JOptionPane.showMessageDialog(mainPanel, "An error occurred while adding your item to the cart. Please try again later.");
                     }
                 }
                 for (RentalItem item : selectedItems) {
@@ -61,13 +62,13 @@ public class RentAVideo {
                         try {
                             rentalSystem.checkOut(klant1, cartManager, overview, databaseManager, item);
                         } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                            JOptionPane.showMessageDialog(mainPanel,"An error occurred while processing the order. Please try again later.");
                         } catch (ParseException ex) {
-                            JOptionPane.showMessageDialog(null, "An error occurred while processing the order. Please try again later.");
+                            JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart",1);
+                    JOptionPane.showMessageDialog(mainPanel, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart",1);
                 }
                 // Update the shopping cart list
                 rentalSystem.clearShoppingCart();
@@ -89,29 +90,24 @@ public class RentAVideo {
                     }
                     databaseList.setModel(model);
                 } else {
+                    JOptionPane.showMessageDialog(mainPanel,"Please enter a Movie or Game title.");
                     databaseList.setModel(defaultModel);
                 }
             }
         });
     }
 
-    // Add items from the Movie Array into the model
-    public void createMovieModel(DatabaseManager databaseManager) {
+    // Add items from the Movie/Games Array into the model
+    public void createListModel(DatabaseManager databaseManager) {
         ArrayList<RentalItem> rentalMovies = databaseManager.getRentalMovies();
+        ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();
         for (RentalItem movie : rentalMovies) {
             defaultModel.addElement(movie);
-            databaseList.setModel(defaultModel);
         }
-    }
-
-    public void createGameModel(DatabaseManager databaseManager) {
-        loadMovies();
-        ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();
-        DefaultListModel<RentalItem> model = new DefaultListModel<>();
-        for (RentalItem movie : rentalGames) {
-            model.addElement(movie);
-            databaseList.setModel(model);
+        for (RentalItem game : rentalGames) {
+            defaultModel.addElement(game);
         }
+        databaseList.setModel(defaultModel);
     }
 
     public void clearCartModel() {
@@ -142,11 +138,12 @@ public class RentAVideo {
 
 
     public void run(RentalSystem rentalSystem) {
+        mainPanel.setPreferredSize(new Dimension(600,800));
         loadGames();
         loadMovies();
         frame = new JFrame();
         frame.setContentPane(mainPanel);
-        createMovieModel(databaseManager);
+        createListModel(databaseManager);
         //createGameModel(rentalSystem, databaseManager);
         frame.setTitle("RentAVideo");
         frame.pack();
