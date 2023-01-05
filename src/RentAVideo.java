@@ -26,7 +26,8 @@ public class RentAVideo {
     private final DatabaseManager databaseManager = new DatabaseManager();
     private final DayOverview overview = new DayOverview(0, 0, 0, 0);
     private ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
-    ArrayList<RentalItem> searchResults = new ArrayList<>();
+    private ArrayList<RentalItem> searchResults = new ArrayList<>();
+    private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
     private Customer klant1 = new Customer(0000001, "Jef", "Vermassen", "Kabouterstraat 8 2800 Mechelen", "2016-02-09", "0499/99/66/33", 0);
 
 
@@ -78,29 +79,32 @@ public class RentAVideo {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearSearchResultScreen();
-                String searchText = textFieldSearch.getText();
-                searchResults = rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager);
                 DefaultListModel<RentalItem> model = new DefaultListModel<>();
-                for (RentalItem searchResult : searchResults) {
-                    model.addElement(searchResult);
+                String searchText = textFieldSearch.getText();
+                if (!searchText.equals("")) {
+                    clearSearchResultScreen();
+                    searchResults = rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager);
+                    for (RentalItem searchResult : searchResults) {
+                        model.addElement(searchResult);
+                    }
+                    databaseList.setModel(model);
+                } else {
+                    databaseList.setModel(defaultModel);
                 }
-                databaseList.setModel(model);
             }
         });
     }
 
     // Add items from the Movie Array into the model
-    public void createMovieModel(RentalSystem rentalSystem, DatabaseManager databaseManager) {
+    public void createMovieModel(DatabaseManager databaseManager) {
         ArrayList<RentalItem> rentalMovies = databaseManager.getRentalMovies();
-        DefaultListModel<RentalItem> model = new DefaultListModel<>();
         for (RentalItem movie : rentalMovies) {
-            model.addElement(movie);
-            databaseList.setModel(model);
+            defaultModel.addElement(movie);
+            databaseList.setModel(defaultModel);
         }
     }
 
-    public void createGameModel(RentalSystem rentalSystem, DatabaseManager databaseManager) {
+    public void createGameModel(DatabaseManager databaseManager) {
         loadMovies();
         ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();
         DefaultListModel<RentalItem> model = new DefaultListModel<>();
@@ -142,7 +146,7 @@ public class RentAVideo {
         loadMovies();
         frame = new JFrame();
         frame.setContentPane(mainPanel);
-        createMovieModel(rentalSystem, databaseManager);
+        createMovieModel(databaseManager);
         //createGameModel(rentalSystem, databaseManager);
         frame.setTitle("RentAVideo");
         frame.pack();

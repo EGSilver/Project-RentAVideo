@@ -10,12 +10,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/TestRental.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/TestRental.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RentAVideo.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RentAVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RentalSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentalSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestRental.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRental.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +90,7 @@
       <workItem from="1672690938694" duration="135000" />
       <workItem from="1672691083170" duration="57588000" />
       <workItem from="1672840669314" duration="9814000" />
-      <workItem from="1672858237955" duration="13879000" />
+      <workItem from="1672858237955" duration="16151000" />
     </task>
     <servers />
   </component>
@@ -113,15 +109,6 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/RentAVideo.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="CartManager" memberName="itemCart" />
