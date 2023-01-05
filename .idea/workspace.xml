@@ -40,7 +40,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "140",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE": "right",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "142",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE": "left",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "316",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/DeanV/OneDrive/Documents/Q2/Object Oriented Programming/objectoriented_guipersonen-eindversie",
@@ -91,7 +93,7 @@
       <workItem from="1672690938694" duration="135000" />
       <workItem from="1672691083170" duration="57588000" />
       <workItem from="1672840669314" duration="9814000" />
-      <workItem from="1672858237955" duration="20913000" />
+      <workItem from="1672858237955" duration="23271000" />
     </task>
     <servers />
   </component>

@@ -26,6 +26,7 @@ public class RentAVideo {
     private JLabel yearsSubscribedLabel;
     private JLabel customerNumberLabel;
     private JLabel customerNameLabel;
+    private JButton enterButton;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
 
