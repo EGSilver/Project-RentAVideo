@@ -15,8 +15,8 @@ public class RentAVideo {
     private JButton checkoutButton;
     private JTextField textFieldSearch;
     private JTabbedPane RentScreen;
-    private JPanel RentalSystem;
-    private JPanel AdminPanel;
+    private JPanel rentalSystemPanel;
+    private JPanel adminPanel;
     private JList databaseList;
     private JList ShoppingCartList;
     private JList ticketList;
@@ -27,6 +27,14 @@ public class RentAVideo {
     private JLabel customerNumberLabel;
     private JLabel customerNameLabel;
     private JButton enterButton;
+    private JPanel newCustomerPanel;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField textField5;
+    private JTextField textField6;
+    private JButton submitButton;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
 
