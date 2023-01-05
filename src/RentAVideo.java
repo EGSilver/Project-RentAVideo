@@ -186,6 +186,15 @@ public class RentAVideo {
                 }
             }
         });
+        deleteCustomerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                customers.remove(customerListList.getSelectedIndex());
+                customerDefaultListModel.remove(customerListList.getSelectedIndex());
+                createAdminPanelCustomerModel();
+                customerListList.setModel(customerDefaultListModel);
+            }
+        });
     }
 
     public void createAdminPanelCustomerModel() {
