@@ -36,6 +36,7 @@ public class Game extends RentalItem {
     @Override
     public String toString() {
         return "Game{" +
+                "title='" + super.getTitle() + '\'' +
                 "platform='" + platform + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", criticRating=" + criticRating +
