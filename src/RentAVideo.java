@@ -35,6 +35,26 @@ public class RentAVideo {
     private JTextField textField5;
     private JTextField textField6;
     private JButton submitButton;
+    private JList list1;
+    private JButton submitDateButton1;
+    private JButton submitDateButton;
+    private JList list2;
+    private JTextField textField7;
+    private JTextField textField8;
+    private JButton submitNameButton;
+    private JTextField textField9;
+    private JList list4;
+    private JButton deleteCustomerButton;
+    private JTextField textField10;
+    private JTextField textField11;
+    private JTextField textField12;
+    private JTextField textField13;
+    private JTextField textField14;
+    private JTextField textField15;
+    private JTextField textField16;
+    private JButton addGameMovieButton;
+    private JTextField textField17;
+    private JTextField textField18;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
 
