@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RentAVideo {
@@ -102,6 +103,8 @@ public class RentAVideo {
     private final DayOverview overview = new DayOverview(0, 0, 0, 0);
     private ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
     private ArrayList<RentalItem> searchResults = new ArrayList<>();
+    private ArrayList<RentalItem> rentalMovies = databaseManager.getRentalMovies();
+    private ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();
 
     private DefaultListModel<String> customerDefaultListModel = new DefaultListModel<String>();
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
@@ -164,13 +167,14 @@ public class RentAVideo {
                     }
                 }
                 if (!(shoppingCart.size() == 0)) {
-                    RentalItem rentalItem = new RentalItem("",0,0,false,0,"","",0);
+                    RentalItem rentalItem = new RentalItem("", 0, 0, false, 0, "", "", 0);
                     //for (RentalItem item : shoppingCart) {
                     for (RentalItem item : shoppingCart) {
                         rentalItem = item;
                     }
                     try {
                         s = rentalSystem.checkOut(customer, cartManager, overview, databaseManager, rentalItem);
+                        rentalSystem.saveRentalDate(rentalItem);
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                     } catch (ParseException ex) {
@@ -196,11 +200,12 @@ public class RentAVideo {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DefaultListModel<RentalItem> model = new DefaultListModel<>();
-                String searchText = textFieldSearch.getText();
+                String searchText = textFieldSearch.getText().toLowerCase();
                 if (!searchText.equals("")) {
                     clearSearchResultScreen();
                     searchResults = rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager);
                     for (RentalItem searchResult : searchResults) {
+                        System.out.println(searchResult);
                         model.addElement(searchResult);
                     }
                     databaseList.setModel(model);
@@ -229,8 +234,8 @@ public class RentAVideo {
                 } else {
                     Customer customer = null;
                     try {
-                        customer = new Customer(rentalSystem.generateClientNumber(), textFieldNewCustomerFirstName.getText().toLowerCase(),
-                                textFieldNewCustomerLastName.getText().toLowerCase(),
+                        customer = new Customer(rentalSystem.generateClientNumber(), textFieldNewCustomerFirstName.getText(),
+                                textFieldNewCustomerLastName.getText(),
                                 textFieldNewCustomerAdres.getText().toLowerCase(),
                                 textFieldNewCustomerBirthdate.getText(),
                                 textFieldNewCustomerPhoneNumber.getText().toLowerCase(),
@@ -247,6 +252,11 @@ public class RentAVideo {
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(mainPanel, "An error occurred when trying to add the customer to the database.");
                     }
+                    textFieldNewCustomerFirstName.setText("");
+                    textFieldNewCustomerLastName.setText("");
+                    textFieldNewCustomerAdres.setText("");
+                    textFieldNewCustomerBirthdate.setText("");
+                    textFieldNewCustomerPhoneNumber.setText("");
                     customerListList.setModel(customerDefaultListModel);
                 }
             }
@@ -277,13 +287,25 @@ public class RentAVideo {
         searchCustomerListSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 boolean found = false;
                 DefaultListModel<String> model = new DefaultListModel<>();
+                int j = 1;
                 if (!textFieldCustomerListSearch.getText().equals("")) {
+                    String[] parts = textFieldCustomerListSearch.getText().split(" ");
                     for (int i = 0; i < customers.size() && !found; i++) {
-                        if (textFieldCustomerListSearch.getText().toLowerCase().equals(customers.get(i).getName().toLowerCase()) || textFieldCustomerListSearch.getText().toLowerCase().equals(customers.get(i).getFirstName().toLowerCase())) {
-                            model.addElement(customers.get(i).getFirstName() + " " + customers.get(i).getName() + " " + customers.get(i).getPhoneNumber());
-                            found = true;
+                        if (parts.length == 1) {
+                            if (parts[0].equalsIgnoreCase(customers.get(i).getName().toLowerCase())
+                                    || parts[0].equalsIgnoreCase(customers.get(i).getFirstName())) {
+                                model.addElement(customers.get(i).getFirstName() + " " + customers.get(i).getName() + " " + customers.get(i).getPhoneNumber());
+                                found = true;
+                            }
+                        } else if (parts.length == 2) {
+                            if (parts[0].equalsIgnoreCase(customers.get(i).getName()) && parts[1].equalsIgnoreCase(customers.get(i).getFirstName())
+                                    || parts[1].equalsIgnoreCase(customers.get(i).getName()) && parts[0].equalsIgnoreCase(customers.get(i).getFirstName()) ) {
+                                model.addElement(customers.get(i).getFirstName() + " " + customers.get(i).getName() + " " + customers.get(i).getPhoneNumber());
+                                found = true;
+                            }
                         }
                     }
                 }
@@ -309,11 +331,43 @@ public class RentAVideo {
                 try {
                     textFieldCustomerName.setText(identifyCustomer());
                 } catch (ArrayIndexOutOfBoundsException exception) {
-                    JOptionPane.showMessageDialog(mainPanel, "An entry for the provided name was not found in the database. Please register as a new customer before proceeding.");
+                    JOptionPane.showMessageDialog(mainPanel, "An entry for the provided name was not found in the database. Please enter your full name or register as a new customer before proceeding.");
                 }
                 if (textFieldCustomerNumber.getText().length() > 0) {
                     databaseList.setEnabled(true);
                 }
+            }
+        });
+        addMovieButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String title = TextFieldMovieTitle.getText();
+                Double rentalPrice = Double.valueOf(textFieldMovieRentalPrice.getText());
+                int rentalDuration = Integer.parseInt(textFieldMovieRentalDuration.getText());
+                boolean inStock = Boolean.parseBoolean(textFieldMovieStock.getText());
+                int stock = Integer.parseInt(textFieldMovieStock.getText());
+                Movie newMovie = new Movie(title, rentalPrice, rentalDuration, inStock, stock, "Movie", textFieldMovieReleaseDate.getText(), "placeholder", "", textFieldMovieEsrbRating.getText(), 0);
+                rentalSystem.addItemToDatabase(newMovie);
+                JOptionPane.showMessageDialog(mainPanel, "Movie " + newMovie.getTitle() + " has been added to the database");
+                rentalMovies.add(newMovie);
+                createListModel(databaseManager);
+                rentalMovies.clear();
+            }
+        });
+        addGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String title = textFieldGameTitle.getText();
+                Double rentalPrice = Double.valueOf(textFieldGameRentalPrice.getText());
+                int rentalDuration = Integer.parseInt(textFieldGameRentalDuration.getText());
+                boolean inStock = true;
+                int stock = Integer.parseInt(textFieldGameStock.getText());
+                Game newGame = new Game(title, rentalPrice, rentalDuration, inStock, stock, "Game", textFieldGamePlatform.getText(), textFieldGamePublisher.getText(), textFieldGameEsrbRating.getText(), 0);
+                rentalSystem.addItemToDatabase(newGame);
+                JOptionPane.showMessageDialog(mainPanel, "Game " + newGame.getTitle() + " has been added to the database");
+                rentalGames.add(newGame);
+                createListModel(databaseManager);
+                rentalGames.clear();
             }
         });
     }
@@ -352,8 +406,7 @@ public class RentAVideo {
     }
 
     public void createListModel(DatabaseManager databaseManager) {
-        ArrayList<RentalItem> rentalMovies = databaseManager.getRentalMovies();
-        ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();
+        defaultModel.clear();
         for (RentalItem movie : rentalMovies) {
             defaultModel.addElement(movie);
         }
@@ -396,8 +449,8 @@ public class RentAVideo {
     public void run(RentalSystem rentalSystem) {
         //mainPanel.setPreferredSize(new Dimension(1200,500));
         customers.addAll(loadCustomersFromCsv());
-        loadGames();
         loadMovies();
+        loadGames();
         createAdminPanelCustomerModel();
         frame = new JFrame();
         frame.setContentPane(mainPanel);

@@ -90,7 +90,7 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "klantnummer=" + clientNumber +
+                "clientNumber=" + clientNumber +
                 ", firstName='" + firstName + '\'' +
                 ", name='" + name + '\'' +
                 ", adres='" + address + '\'' +
