@@ -32,10 +32,10 @@ public class RentalSystem {
         databaseManager.loadGames();
     }
 
-    public void checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager, RentalItem item) throws IOException, ParseException {
-        cartManager.checkout(customer, cartManager, overview, databaseManager);
+    public String checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager, RentalItem item) throws IOException, ParseException {
         createRentalHistory(customer, cartManager);
         saveRentalDate(item);
+        return cartManager.checkout(customer, cartManager, overview, databaseManager);
     }
 
     public void addCustomer(Customer customer, DayOverview overview) throws IOException {

@@ -37,7 +37,7 @@ public class CartManager {
         return s;
     }
 
-    public void checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
+    public String checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         rentalDate = getDate();
         System.out.println(cartManager.getItemCart());
         double getIncome = overview.getIncome();
@@ -79,6 +79,7 @@ public class CartManager {
             System.out.println(s + "\n");
             overview.setIncome(getIncome + income);
         }
+        return s;
     }
 
     public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) throws ParseException {
