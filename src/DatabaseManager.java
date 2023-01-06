@@ -339,7 +339,11 @@ public class DatabaseManager {
         return item;
     }
 
-
+    /**
+     This function checks the number of days that have passed since the specified rental item was last rented.
+     If the rental item is a movie, it searches the movies list for the item and returns the number of days since it was last rented.
+     If the rental item is a game, it searches the games list for the item and returns the number of days since it was last rented.
+     */
     public int checkDaysSinceLastRented(RentalItem item) {
         int daysSinceLastRented = 0;
         if (item.getType().equals("Movie")) {
@@ -424,6 +428,10 @@ public class DatabaseManager {
         return searchItem;
     }
 
+     /**
+     Removes a rental item from the database based on its title.
+     @param item The rental item to be removed.
+     */
     public void removeItemFromArraylist(RentalItem item, DatabaseManager databaseManager) {
         String title = item.getTitle();
         Iterator<RentalItem> itMovie = databaseManager.movies.iterator();

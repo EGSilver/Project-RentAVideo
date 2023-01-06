@@ -37,6 +37,10 @@ public class CartManager {
         return s;
     }
 
+    /**
+     The checkout function processes the rental transaction for a customer and updates the day's overview with relevant information.
+     It also updates the stock of the rented items in the database and sets them as out of stock if necessary.
+     */
     public String checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         rentalDate = getDate();
         System.out.println(cartManager.getItemCart());
@@ -82,6 +86,10 @@ public class CartManager {
         return s;
     }
 
+    /**
+    The returnItemAndCalculateFine function processes the return of a rental item and calculates any applicable fines.
+    It also updates the day's overview with relevant information and updates the stock of the returned item.
+     */
     public void returnItemAndCalculateFine(RentalItem item, DayOverview overview) throws ParseException {
         // For testing late returns.
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -131,6 +139,10 @@ public class CartManager {
         return itemCart;
     }
 
+    /**
+     calcRentalDuration calculates the duration of a rental by calculating the difference between the current date and the rental date.
+     @param rentalDate the date when the rental started
+     */
     public int calcRentalDuration(Date rentalDate) {
         Date currentDate = getDate();
         long difference = currentDate.getTime() - rentalDate.getTime();

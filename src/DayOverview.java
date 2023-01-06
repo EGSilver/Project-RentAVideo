@@ -31,7 +31,10 @@ public class DayOverview {
         dayOverviewMap.put(currentDate, new DayOverview(returns,rentals,lateReturns,newMembers));
     }
 
-    // Iterate over dayOverview / incomeOverview be able to remove keys & pairs from the hashmap
+     /**
+     This function removes the specified date from the dayOverviewMap.
+     @param specificDate the date to be removed from the map
+     */
     public void removeDayOverviewFromMap(Date specificDate) {
         Iterator<Date> it = dayOverviewMap.keySet().iterator();
         while (it.hasNext()) {

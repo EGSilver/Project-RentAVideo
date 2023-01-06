@@ -14,10 +14,20 @@ public class CustomerManager {
         this.customers = customers;
     }
 
+     /**
+     saveRentalDateInMap is a function that stores the rental date of a rental item in a map.
+     @param item The rental item whose rental date is being stored.
+     @param rentalDate The rental date of the rental item.
+     */
     public void saveRentalDateInMap(RentalItem item, Date rentalDate) {
         rentalDates.put(item, rentalDate);
     }
 
+     /**
+     This function returns a string containing information about a rental item and the date it was rented out.
+     @param inboundItem The rental item for which the rental date information should be retrieved
+     @return A string containing the type of the rental item, its title, and the date it was rented out
+     */
     public String viewRentedItemDate(RentalItem inboundItem) {
         String s = "";
         for (Map.Entry<RentalItem, Date> entry : rentalDates.entrySet()) {
