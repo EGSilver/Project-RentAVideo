@@ -91,6 +91,8 @@ public class RentAVideo {
     private JPanel gamePanel;
     private JScrollPane customerListScrollPane;
     private JPanel overviewTicketPanel;
+    private JTextArea textAreaTicketResult;
+    private JTextField textFieldTicketResult;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
     private ArrayList<Customer> customers = new ArrayList<>();
@@ -110,6 +112,7 @@ public class RentAVideo {
     public RentAVideo() {
         textFieldCustomerNumber.setEditable(false);
         textFieldYearsSubscribed.setEditable(false);
+        textAreaTicketResult.setEditable(false);
         // Add item to shopping cart
         addToCartButton.addActionListener(new ActionListener() {
             @Override
@@ -133,26 +136,28 @@ public class RentAVideo {
         checkoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
-                if (!(shoppingCart.size() == 0)) {
-                    for (RentalItem item : shoppingCart) {
-                        try {
-                            rentalSystem.checkOut(klant1, cartManager, overview, databaseManager, item);
-                        } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
-                        } catch (ParseException ex) {
-                            JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
-                        }
+            String s = "";
+            ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
+            if (!(shoppingCart.size() == 0)) {
+                for (RentalItem item : shoppingCart) {
+                    try {
+                        s = rentalSystem.checkOut(klant1, cartManager, overview, databaseManager, item);
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
+                    } catch (ParseException ex) {
+                        JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                     }
-                } else {
-                    JOptionPane.showMessageDialog(mainPanel, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart", 1);
                 }
-                // Update the shopping cart list
-                rentalSystem.clearShoppingCart();
-                clearCartModel();
-                ShoppingCartList.setModel(createCartModel());
+            } else {
+                JOptionPane.showMessageDialog(mainPanel, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart", 1);
             }
-        });
+            textAreaTicketResult.setText(s);
+            // Update the shopping cart list
+            rentalSystem.clearShoppingCart();
+            clearCartModel();
+            ShoppingCartList.setModel(createCartModel());
+        }
+    });
         // Search for specific item
         searchButton.addActionListener(new ActionListener() {
             @Override
@@ -206,7 +211,6 @@ public class RentAVideo {
             public void actionPerformed(ActionEvent e) {
                 for (Customer c : customers) {
                     if (customerListList.getSelectedValue().equals(c.getFirstName() + " " + c.getName())) {
-                        System.out.println(customerListList.getSelectedValue());
                         rentalSystem.deleteCustomerFromCsv(c);
 
                     }

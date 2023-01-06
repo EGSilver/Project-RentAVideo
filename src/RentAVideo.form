@@ -372,9 +372,11 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="24ac0" class="javax.swing.JList" binding="ticketList">
+                      <component id="98d73" class="javax.swing.JTextArea" binding="textAreaTicketResult">
                         <constraints/>
-                        <properties/>
+                        <properties>
+                          <text value=""/>
+                        </properties>
                       </component>
                     </children>
                   </scrollpane>
