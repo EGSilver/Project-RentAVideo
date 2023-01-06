@@ -103,6 +103,7 @@ public class RentAVideo {
 
     private DefaultListModel<String> customerDefaultListModel = new DefaultListModel<String>();
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
+    private int clientNumber = 100000;
     private Customer klant1 = new Customer(0000001, "Jef", "Vermassen", "Kabouterstraat 8 2800 Mechelen", "2016-02-09", "0499/99/66/33", 0);
 
 
@@ -181,7 +182,7 @@ public class RentAVideo {
                         || labelPhoneNumber.getText().equals("")) {
                     JOptionPane.showMessageDialog(mainPanel,"Please fill out all field");
                 } else {
-                    Customer customer = new Customer(0, textFieldNewCustomerFirstName.getText().toLowerCase(),
+                    Customer customer = new Customer(generateClientNumber(), textFieldNewCustomerFirstName.getText().toLowerCase(),
                             textFieldNewCustomerLastName.getText().toLowerCase(),
                             textFieldNewCustomerAdres.getText().toLowerCase(),
                             textFieldNewCustomerBirthdate.getText(),
@@ -189,6 +190,7 @@ public class RentAVideo {
                             0);
                     String customerInformation = customer.getFirstName() + " " + customer.getName();
                     customerDefaultListModel.addElement(customerInformation);
+                    customers.add(customer);
                     JOptionPane.showMessageDialog(mainPanel,"You have been added to the system database.");
                     try {
                         rentalSystem.addCustomerToDatabase(customer);
@@ -217,26 +219,28 @@ public class RentAVideo {
         searchCustomerListSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean found = false;
                 DefaultListModel<String> model = new DefaultListModel<>();
                 if (!textFieldCustomerListSearch.getText().equals("")) {
-                    for (int i = 0; i < customers.size(); i++) {
-                        System.out.println(textFieldCustomerListSearch.getText().toLowerCase());
-                        System.out.println(customers.get(i).getName());
+                    for (int i = 0; i < customers.size() && !found; i++) {
                         if (textFieldCustomerListSearch.getText().toLowerCase().equals(customers.get(i).getName().toLowerCase()) || textFieldCustomerListSearch.getText().toLowerCase().equals(customers.get(i).getFirstName().toLowerCase())) {
                             model.addElement(customers.get(i).getFirstName() + " " + customers.get(i).getName() + " " + customers.get(i).getPhoneNumber());
-                            customerListList.setModel(model);
-                    } else {
-                            JOptionPane.showMessageDialog(mainPanel,"No results found");
-                            customerListList.setModel(customerDefaultListModel);
+                            found = true;
+                            }
                         }
                     }
+                if (!found) {
+                    JOptionPane.showMessageDialog(mainPanel, "No results found");
+                    customerListList.setModel(customerDefaultListModel);
+                } else {
+                    customerListList.setModel(model);
                 }
             }
         });
     }
 
-    public void generateClientNumber() {
-        int clientNumber = 0;
+    public int generateClientNumber() {
+        return clientNumber + 1;
     }
 
     public void createAdminPanelCustomerModel() {

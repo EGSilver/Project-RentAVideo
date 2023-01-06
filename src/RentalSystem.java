@@ -162,8 +162,7 @@ public class RentalSystem {
     }
 
     public ArrayList<Customer> loadCustomersFromCsv() {
-        return customerManager.loadCustomersFromCsv();
-
+        return databaseManager.loadCustomersFromCsv();
     }
 
     public void saveRentalDate(RentalItem item) {
