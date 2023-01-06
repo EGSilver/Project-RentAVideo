@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -64,8 +63,19 @@ public class CustomerManager {
         }
     }
 
-    public void generateClientNumber() {
-
+    public int generateClientNumber() throws IOException {
+        String fileName = ".\\data\\customers.csv";
+        int oldNumber = 0;
+        int newNumber = 0;
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            oldNumber = Integer.parseInt(parts[6]);
+        }
+        reader.close();
+        newNumber = oldNumber +1;
+        return newNumber;
     }
 
     @Override

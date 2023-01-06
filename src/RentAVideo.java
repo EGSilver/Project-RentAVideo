@@ -227,12 +227,17 @@ public class RentAVideo {
                         || labelPhoneNumber.getText().equals("")) {
                     JOptionPane.showMessageDialog(mainPanel, "Please fill out all field.");
                 } else {
-                    Customer customer = new Customer(generateClientNumber(), textFieldNewCustomerFirstName.getText().toLowerCase(),
-                            textFieldNewCustomerLastName.getText().toLowerCase(),
-                            textFieldNewCustomerAdres.getText().toLowerCase(),
-                            textFieldNewCustomerBirthdate.getText(),
-                            textFieldNewCustomerPhoneNumber.getText().toLowerCase(),
-                            0);
+                    Customer customer = null;
+                    try {
+                        customer = new Customer(rentalSystem.generateClientNumber(), textFieldNewCustomerFirstName.getText().toLowerCase(),
+                                textFieldNewCustomerLastName.getText().toLowerCase(),
+                                textFieldNewCustomerAdres.getText().toLowerCase(),
+                                textFieldNewCustomerBirthdate.getText(),
+                                textFieldNewCustomerPhoneNumber.getText().toLowerCase(),
+                                0);
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(mainPanel, "An error occurred when generating a new client number.");
+                    }
                     String customerInformation = customer.getFirstName() + " " + customer.getName();
                     customerDefaultListModel.addElement(customerInformation);
                     customers.add(customer);
@@ -338,10 +343,6 @@ public class RentAVideo {
         return identifiedCustomer;
     }
 
-    public int generateClientNumber() {
-        return clientNumber + 1;
-    }
-
     public void createAdminPanelCustomerModel() {
         for (Customer customer : customers) {
             String customerInformation = customer.getFirstName() + " " + customer.getName();
@@ -349,7 +350,7 @@ public class RentAVideo {
         }
         customerListList.setModel(customerDefaultListModel);
     }
-    
+
     public void createListModel(DatabaseManager databaseManager) {
         ArrayList<RentalItem> rentalMovies = databaseManager.getRentalMovies();
         ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();

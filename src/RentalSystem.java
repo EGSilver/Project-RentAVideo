@@ -177,4 +177,8 @@ public class RentalSystem {
         return databaseManager.searchForMovieOrGameInCsv(title, databaseManager);
     }
 
+    public int generateClientNumber() throws IOException {
+      return customerManager.generateClientNumber();
+    }
+
  }
