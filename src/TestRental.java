@@ -8,6 +8,7 @@ public class TestRental {
     //CartManager cartManager = new CartManager();
     //java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
     //DayOverview dayOverview = new DayOverview(0,0,0,0);
+    Customer klant2 = new Customer(0,"Swa","Backeljau","Onbekend", "1962", "xxxxx",0);
     //Customer klant1 = new Customer(0000001,"Jef","Vermassen","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
     //Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6, 1);
     //RentalItem rentalItem = new RentalItem("",0,0,false, 0, "","",0);
@@ -16,6 +17,8 @@ public class TestRental {
     //Movie SnowWhtie = new Movie("Snow White",0,0,false,0,"Movie","","","","",1);
     RentalSystem rentalSystem = new RentalSystem();
     rentAVideoPanel.run(rentalSystem);
+
+    //rentalSystem.addCustomerToDatabase(klant2);
 
         //rentalSystem.loadMovies(databaseManager);
         //rentalSystem.loadGames(databaseManager);

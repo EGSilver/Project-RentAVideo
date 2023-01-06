@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class CustomerManager {
@@ -8,6 +12,23 @@ public class CustomerManager {
 
     public CustomerManager(ArrayList<Customer> customers) {
         this.customers = customers;
+    }
+
+    public ArrayList<Customer> loadCustomersFromCsv() {
+        File filepath = new File(".\\data\\customers.csv");
+        ArrayList<Customer> customers = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                int yearsSubscribed = Integer.parseInt(parts[5]);
+                Customer customer = new Customer(0, parts[0], parts[1], parts[3], parts[2], parts[4], yearsSubscribed);
+                customers.add(customer);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return customers;
     }
 
     public void saveRentalDateInMap(RentalItem item, Date rentalDate) {
@@ -24,8 +45,8 @@ public class CustomerManager {
     }
 
     public void createRentalHistory(Customer customer, CartManager cartManager) {
-        ArrayList<RentalItem> rental  = cartManager.getItemCart();
-           rentalHistory.put(customer,rental);
+        ArrayList<RentalItem> rental = cartManager.getItemCart();
+        rentalHistory.put(customer, rental);
     }
 
     public ArrayList<RentalItem> viewRentalHistory(Customer customer) {

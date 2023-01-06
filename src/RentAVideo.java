@@ -55,7 +55,7 @@ public class RentAVideo {
     private JLabel labelLastName;
     private JLabel labelAdres;
     private JLabel labelBirthdate;
-    private JLabel textfieldPhoneNumber;
+    private JLabel labelPhoneNumber;
     private JLabel labelEmail;
     private JLabel labelMovieRentalPrice;
     private JLabel labelMovieRentalDuration;
@@ -138,13 +138,13 @@ public class RentAVideo {
                         try {
                             rentalSystem.checkOut(klant1, cartManager, overview, databaseManager, item);
                         } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(mainPanel,"An error occurred while processing the order. Please try again later.");
+                            JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                         } catch (ParseException ex) {
                             JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(mainPanel, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart",1);
+                    JOptionPane.showMessageDialog(mainPanel, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart", 1);
                 }
                 // Update the shopping cart list
                 rentalSystem.clearShoppingCart();
@@ -166,7 +166,7 @@ public class RentAVideo {
                     }
                     databaseList.setModel(model);
                 } else {
-                    JOptionPane.showMessageDialog(mainPanel,"Please enter a Movie or Game title.");
+                    JOptionPane.showMessageDialog(mainPanel, "Please enter a Movie or Game title.");
                     databaseList.setModel(defaultModel);
                 }
             }
@@ -174,30 +174,74 @@ public class RentAVideo {
         submitNewCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Customer customer = new Customer(0,textFieldNewCustomerFirstName.getText().toLowerCase(),
-                        textFieldNewCustomerLastName.getText().toLowerCase(),
-                        textFieldNewCustomerAdres.getText().toLowerCase(),
-                        textFieldNewCustomerBirthdate.getText(),
-                        textfieldPhoneNumber.getText().toLowerCase(),
-                        0);
-                customers.add(customer);
-                rentalSystem.addCustomerToDatabase(customer);
+                if (textFieldNewCustomerFirstName.getText().equals("")
+                        || textFieldNewCustomerLastName.getText().equals("")
+                        || textFieldNewCustomerAdres.getText().equals("")
+                        || textFieldNewCustomerBirthdate.getText().equals("")
+                        || labelPhoneNumber.getText().equals("")) {
+                    JOptionPane.showMessageDialog(mainPanel,"Please fill out all field");
+                } else {
+                    Customer customer = new Customer(0, textFieldNewCustomerFirstName.getText().toLowerCase(),
+                            textFieldNewCustomerLastName.getText().toLowerCase(),
+                            textFieldNewCustomerAdres.getText().toLowerCase(),
+                            textFieldNewCustomerBirthdate.getText(),
+                            textFieldNewCustomerPhoneNumber.getText().toLowerCase(),
+                            0);
+                    String customerInformation = customer.getFirstName() + " " + customer.getName();
+                    customerDefaultListModel.addElement(customerInformation);
+                    JOptionPane.showMessageDialog(mainPanel,"You have been added to the system database.");
+                    try {
+                        rentalSystem.addCustomerToDatabase(customer);
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(mainPanel, "An error occurred when trying to add the customer to the database");
+                    }
+                    customerListList.setModel(customerDefaultListModel);
+                }
             }
         });
         deleteCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                for (Customer c : customers) {
+                    if (customerListList.getSelectedValue().equals(c.getFirstName() + " " + c.getName())) {
+                        System.out.println(customerListList.getSelectedValue());
+                        rentalSystem.deleteCustomerFromCsv(c);
+
+                    }
+                }
                 customers.remove(customerListList.getSelectedIndex());
                 customerDefaultListModel.remove(customerListList.getSelectedIndex());
-                createAdminPanelCustomerModel();
                 customerListList.setModel(customerDefaultListModel);
+            }
+        });
+        searchCustomerListSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultListModel<String> model = new DefaultListModel<>();
+                if (!textFieldCustomerListSearch.getText().equals("")) {
+                    for (int i = 0; i < customers.size(); i++) {
+                        System.out.println(textFieldCustomerListSearch.getText().toLowerCase());
+                        System.out.println(customers.get(i).getName());
+                        if (textFieldCustomerListSearch.getText().toLowerCase().equals(customers.get(i).getName().toLowerCase()) || textFieldCustomerListSearch.getText().toLowerCase().equals(customers.get(i).getFirstName().toLowerCase())) {
+                            model.addElement(customers.get(i).getFirstName() + " " + customers.get(i).getName() + " " + customers.get(i).getPhoneNumber());
+                            customerListList.setModel(model);
+                    } else {
+                            JOptionPane.showMessageDialog(mainPanel,"No results found");
+                            customerListList.setModel(customerDefaultListModel);
+                        }
+                    }
+                }
             }
         });
     }
 
+    public void generateClientNumber() {
+        int clientNumber = 0;
+    }
+
     public void createAdminPanelCustomerModel() {
         for (Customer customer : customers) {
-            String customerInformation = customer.getFirstName() + " " + customer.getName() + " " + customer.getPhoneNumber();
+            String customerInformation = customer.getFirstName() + " " + customer.getName();
             customerDefaultListModel.addElement(customerInformation);
         }
         customerListList.setModel(customerDefaultListModel);
@@ -242,10 +286,14 @@ public class RentAVideo {
         rentalSystem.loadGames(databaseManager);
     }
 
+    public ArrayList<Customer> loadCustomersFromCsv() {
+        return rentalSystem.loadCustomersFromCsv();
+    }
+
 
     public void run(RentalSystem rentalSystem) {
-        customers.add(klant1);
         //mainPanel.setPreferredSize(new Dimension(1200,500));
+        customers.addAll(loadCustomersFromCsv());
         loadGames();
         loadMovies();
         createAdminPanelCustomerModel();

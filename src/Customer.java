@@ -6,17 +6,17 @@ public class Customer {
     private int clientNumber;
     private String firstName;
     private String name;
-    private String adres;
+    private String address;
     private String birthdate;
     private String phoneNumber;
     private int yearsSubscribed = 0;
 
 
-    public Customer(int clientNumber, String firstname, String name, String adres, String birthdate, String phoneNumber, int yearsSubscribed) {
+    public Customer(int clientNumber, String firstname, String name, String address, String birthdate, String phoneNumber, int yearsSubscribed) {
         this.clientNumber = clientNumber;
         this.firstName = firstname;
         this.name = name;
-        this.adres = adres;
+        this.address = address;
         this.birthdate = birthdate;
         this.phoneNumber = phoneNumber;
         this.yearsSubscribed = yearsSubscribed;
@@ -45,12 +45,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getAdres() {
-        return adres;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdres(String adres) {
-        this.adres = adres;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getBirthdate() {
@@ -73,6 +73,7 @@ public class Customer {
         return yearsSubscribed;
     }
 
+
     public void setYearsSubscribed(int yearsSubscribed) {
         this.yearsSubscribed = yearsSubscribed;
     }
@@ -92,7 +93,7 @@ public class Customer {
                 "klantnummer=" + clientNumber +
                 ", firstName='" + firstName + '\'' +
                 ", name='" + name + '\'' +
-                ", adres='" + adres + '\'' +
+                ", adres='" + address + '\'' +
                 ", birthdate='" + birthdate + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", yearsSubscribed=" + yearsSubscribed +

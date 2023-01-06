@@ -38,7 +38,7 @@ public class RentalSystem {
         saveRentalDate(item);
     }
 
-    public void addCustomer(Customer customer, DayOverview overview) {
+    public void addCustomer(Customer customer, DayOverview overview) throws IOException {
         overview.setNewMembers(+1);
         customerManager.addCustomer(customer);
         addCustomerToDatabase(customer);
@@ -129,8 +129,12 @@ public class RentalSystem {
         databaseManager.updateItemStockInCsv(item);
     }
 
-    public void addCustomerToDatabase(Customer customer) {
+    public void addCustomerToDatabase(Customer customer) throws IOException {
         databaseManager.addCustomerToDatabase(customer);
+    }
+
+    public void deleteCustomerFromCsv(Customer customer) {
+        databaseManager.deleteCustomerFromCsv(customer);
     }
 
     public void removeCustomerFromArray(Customer customer) {
@@ -155,6 +159,11 @@ public class RentalSystem {
 
     public ArrayList<RentalItem> viewRentalHistory(Customer customer) {
         return customerManager.viewRentalHistory(customer);
+    }
+
+    public ArrayList<Customer> loadCustomersFromCsv() {
+        return customerManager.loadCustomersFromCsv();
+
     }
 
     public void saveRentalDate(RentalItem item) {

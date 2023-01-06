@@ -64,37 +64,51 @@ public class DatabaseManager {
         return games;
     }
 
-    public void addCustomerToDatabase(Customer customer) {
-        String filePath = ".\\data\\customers.csv";
+    public void addCustomerToDatabase(Customer customer) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(".\\data\\customers.csv"));
+        String line;
+        boolean customerExists = false;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts[0].equals(customer.getFirstName())) {
+                customerExists = true;
+                break;
+            }
+        }
+        reader.close();
+        if (!customerExists) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(".\\data\\customers.csv", true));
+            writer.write(customer.getFirstName() +
+                    "," + customer.getName() +
+                    "," + customer.getBirthdate() +
+                    "," + customer.getAddress() +
+                    "," + customer.getPhoneNumber() +
+                    "," + customer.getYearsSubscribed());
+            writer.newLine();
+            writer.close();
+        }
+    }
+
+    public void deleteCustomerFromCsv(Customer customer) {
+        File filePath = new File(".\\data\\customers.csv");
+        ArrayList<Customer> remainingCustomers = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            //When or if the CSV file is empty, we write the customer in the file as the first customer.
-            if (reader.readLine() == null) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                    String customerData = customer.getClientNumber() + "," + customer.getFirstName() + "," + customer.getName() + "," + customer.getBirthdate() + "," + customer.getAdres() + "," + customer.getPhoneNumber() + "," + customer.getYearsSubscribed();
-                    writer.write(customerData);
-                    writer.newLine();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (!(parts[0].equals(customer.getFirstName()) && parts[1].equals(customer.getName()))) {
+                    int yearsSubscribed = Integer.parseInt(parts[5]);
+                    Customer remainingCustomer = new Customer(0, parts[0], parts[1], parts[3], parts[2], parts[4], yearsSubscribed);
+                    remainingCustomers.add(remainingCustomer);
                 }
-            } else {
-                //Check if the customer already exists inside the CSV.
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(",");
-                    if (parts[1].equals(customer.getName()) && parts[2].equals(customer.getFirstName())) {
-                        System.out.println("Customer: " + customer.getName() + customer.getFirstName() + " already exists inside the database");
-                    } else {
-                        //If the customer is not located inside the CSV file, write the customer to the CSV file.
-                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                            String customerData = customer.getFirstName() + "," + customer.getName() + "," + customer.getBirthdate() + "," + customer.getAdres() + "," + customer.getPhoneNumber() + "," + customer.getYearsSubscribed();
-                            writer.write(customerData);
-                            writer.newLine();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-
-                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Customer remainingCustomer : remainingCustomers) {
+                writer.write(remainingCustomer.getFirstName() + "," + remainingCustomer.getName() + "," + remainingCustomer.getBirthdate() + "," + remainingCustomer.getAddress() + "," + remainingCustomer.getPhoneNumber() + "," + remainingCustomer.getYearsSubscribed());
+                writer.newLine();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -306,6 +320,7 @@ public class DatabaseManager {
         }
         return item;
     }
+
 
     public int checkDaysSinceLastRented(RentalItem item) {
         int daysSinceLastRented = 0;
