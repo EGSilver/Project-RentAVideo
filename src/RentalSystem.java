@@ -24,6 +24,10 @@ public class RentalSystem {
 
     }
 
+    public void testHashMap() {
+        dayOverview.testHashMap();
+    }
+
     public void loadMovies(DatabaseManager databaseManager) {
         databaseManager.loadMovies();
     }
@@ -77,12 +81,13 @@ public class RentalSystem {
         databaseManager.addGameToGamesCsv(game);
     }
 
-    public void createOverview(Date date, DayOverview day) {
-        day.createOverview(date);
+    public DayOverview createOverview(String date, DayOverview overview) {
+        return dayOverview.createOverview(date, overview);
     }
 
-    public void viewDayOverview(Date date, DayOverview day) {
-        day.viewDayOverview(date);
+    public Object viewDayOverview(String date) {
+        return dayOverview.viewDayOverview(date);
+
     }
 
     public void createIncomeOverview(Date date, DayOverview day) {
@@ -145,7 +150,7 @@ public class RentalSystem {
         dayOverview.removeIncomeOverviewFromMap(date);
     }
 
-    public void removeDayOverviewFromMap(Date date, DayOverview dayOverview) {
+    public void removeDayOverviewFromMap(String date, DayOverview dayOverview) {
         dayOverview.removeDayOverviewFromMap(date);
     }
 

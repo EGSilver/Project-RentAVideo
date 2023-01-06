@@ -37,8 +37,8 @@ public class CustomerManager {
     }
 
     public void createRentalHistory(Customer customer, CartManager cartManager) {
-        ArrayList<RentalItem> rental = cartManager.getItemCart();
-        rentalHistory.put(customer, rental);
+        ArrayList<RentalItem> rentalItems = cartManager.getItemCart();
+        rentalHistory.put(customer, rentalItems);
     }
 
     public ArrayList<RentalItem> viewRentalHistory(Customer customer) {

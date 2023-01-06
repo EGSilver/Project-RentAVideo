@@ -6,8 +6,8 @@ public class DayOverview {
     private int lateReturns;
     private int newMembers;
 
-    private double income;
-    private HashMap<Date, DayOverview> dayOverviewMap = new HashMap<>();
+    private double income = 0;
+    private HashMap<String, DayOverview> dayOverviewMap = new HashMap<String, DayOverview>();
     private HashMap<Date, Double> dayIncomeOverviewMap = new HashMap<>();
 
     public DayOverview(int returns, int rentals, int lateReturns, int newMembers) {
@@ -22,21 +22,41 @@ public class DayOverview {
         dayIncomeOverviewMap.put(currentDate, income);
     }
 
+    public String viewDayOverview(String specificDate) {
+        DayOverview overviewOfCertainDate = dayOverviewMap.get(specificDate);
+        int rentals = overviewOfCertainDate.getRentals();
+        int returns = overviewOfCertainDate.getReturns();
+        int lateReturns = overviewOfCertainDate.getLateReturns();
+        int newMembers = overviewOfCertainDate.getNewMembers();
+        return specificDate
+                + "\nAmount of rentals: " + rentals
+                + "\nAmount of returns: " + returns
+                + "\nAmount of late returns: " + lateReturns
+                + "\nAmount of New Members: " + newMembers;
+    }
+
     public void viewIncomeOverview(Date specificDate) {
         Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(specificDate);
         System.out.println(specificDate
                 + "\nTotal amount of income: €" + income);
     }
-    public void createOverview(Date currentDate) {
-        dayOverviewMap.put(currentDate, new DayOverview(returns,rentals,lateReturns,newMembers));
+
+    public void testHashMap() {
+        String key = "2023-01-06";
+        DayOverview overview = new DayOverview(5,5,5,5);
+        dayOverviewMap.put(key, overview);
+    }
+
+    public DayOverview createOverview(String currentDate, DayOverview overview) {
+      return dayOverviewMap.put(currentDate, overview);
     }
 
      /**
      This function removes the specified date from the dayOverviewMap.
      @param specificDate the date to be removed from the map
      */
-    public void removeDayOverviewFromMap(Date specificDate) {
-        Iterator<Date> it = dayOverviewMap.keySet().iterator();
+    public void removeDayOverviewFromMap(String specificDate) {
+        Iterator<String> it = dayOverviewMap.keySet().iterator();
         while (it.hasNext()) {
             if (it.next().equals(specificDate)) {
                 it.remove();
@@ -51,19 +71,6 @@ public class DayOverview {
                 it.remove();
             }
         }
-    }
-
-    public void viewDayOverview(Date specificDate) {
-        DayOverview overviewOfCertainDate = dayOverviewMap.get(specificDate);
-        int rentals = overviewOfCertainDate.getRentals();
-        int returns = overviewOfCertainDate.getReturns();
-        int lateReturns = overviewOfCertainDate.getLateReturns();
-        int newMembers = overviewOfCertainDate.getNewMembers();
-        System.out.println(specificDate
-               + "\nAmount of rentals: " + rentals
-               + "\nAmount of returns: " + returns
-               + "\nAmount of late returns: " + lateReturns
-               + "\nAmount of New Members: " + newMembers);
     }
 
     public int getReturns() {

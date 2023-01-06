@@ -6,8 +6,8 @@ public class TestRental {
     RentAVideo rentAVideoPanel = new RentAVideo();
     DatabaseManager databaseManager = new DatabaseManager();
     //CartManager cartManager = new CartManager();
-    //java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
-    //DayOverview dayOverview = new DayOverview(0,0,0,0);
+    java.sql.Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
+    DayOverview dayOverview = new DayOverview(0,5,0,0);
     Customer klant2 = new Customer(0,"Swa","Backeljau","Onbekend", "1962", "xxxxx",0);
     //Customer klant1 = new Customer(0000001,"Jef","Vermassen","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
     //Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6, 1);
@@ -16,6 +16,8 @@ public class TestRental {
     Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "", 1);
     //Movie SnowWhtie = new Movie("Snow White",0,0,false,0,"Movie","","","","",1);
     RentalSystem rentalSystem = new RentalSystem();
+    //rentalSystem.createOverview(currentSystemDate, dayOverview);
+    //System.out.println(rentalSystem.viewDayOverview(currentSystemDate));
     rentAVideoPanel.run(rentalSystem);
 
     //rentalSystem.addCustomerToDatabase(klant2);
