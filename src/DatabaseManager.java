@@ -416,12 +416,12 @@ public class DatabaseManager {
 
     public ArrayList<RentalItem> searchForMovieOrGameInCsv(String title, DatabaseManager databaseManager) {
         for (int i = 0; i < databaseManager.movies.size(); i++) {
-            if (databaseManager.movies.get(i).getTitle().equals(title)) {
+            if (databaseManager.movies.get(i).getTitle().toLowerCase().contains(title)) {
                 searchItem.add(movies.get(i));
             }
         }
         for (int i = 0; i < games.size(); i++) {
-            if (databaseManager.games.get(i).getTitle().equals(title)) {
+            if (databaseManager.games.get(i).getTitle().toLowerCase().contains(title)) {
                 searchItem.add(games.get(i));
             }
         }
