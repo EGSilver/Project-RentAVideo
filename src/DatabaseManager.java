@@ -7,8 +7,6 @@ public class DatabaseManager {
     private ArrayList<RentalItem> movies = new ArrayList<>();
     private ArrayList<RentalItem> searchItem = new ArrayList<>();
 
-
-
     // Iterate through Movies & Games array and remove items from arraylist.
 
     // Loads movie data from a CSV file into an ArrayList of RentalItem objects
@@ -83,7 +81,8 @@ public class DatabaseManager {
                     "," + customer.getBirthdate() +
                     "," + customer.getAddress() +
                     "," + customer.getPhoneNumber() +
-                    "," + customer.getYearsSubscribed());
+                    "," + customer.getYearsSubscribed() +
+                    "," + customer.getClientNumber());
             writer.newLine();
             writer.close();
         }
@@ -107,12 +106,31 @@ public class DatabaseManager {
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Customer remainingCustomer : remainingCustomers) {
-                writer.write(remainingCustomer.getFirstName() + "," + remainingCustomer.getName() + "," + remainingCustomer.getBirthdate() + "," + remainingCustomer.getAddress() + "," + remainingCustomer.getPhoneNumber() + "," + remainingCustomer.getYearsSubscribed());
+                writer.write(remainingCustomer.getFirstName() + "," + remainingCustomer.getName() + "," + remainingCustomer.getBirthdate() + "," + remainingCustomer.getAddress() + "," + remainingCustomer.getPhoneNumber() + "," + remainingCustomer.getYearsSubscribed() + "," + remainingCustomer.getClientNumber());
                 writer.newLine();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public ArrayList<Customer> loadCustomersFromCsv() {
+        File filepath = new File(".\\data\\customers.csv");
+        ArrayList<Customer> customers = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                int yearsSubscribed = Integer.parseInt(parts[5]);
+                int clientNumber = Integer.parseInt(parts[6]);
+                Customer customer = new Customer(clientNumber, parts[0], parts[1], parts[3], parts[2], parts[4], yearsSubscribed);
+                System.out.println(customers);
+                customers.add(customer);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return customers;
     }
 
     // Determines if the movie is already present in the CSV file.

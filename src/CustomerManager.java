@@ -5,30 +5,13 @@ import java.io.IOException;
 import java.util.*;
 
 public class CustomerManager {
-    private List<Customer> customers;
+    private ArrayList<Customer> customers;
     private HashMap<Customer, ArrayList<RentalItem>> rentalHistory = new HashMap<>();
 
     private HashMap<RentalItem, Date> rentalDates = new HashMap<>();
 
     public CustomerManager(ArrayList<Customer> customers) {
         this.customers = customers;
-    }
-
-    public ArrayList<Customer> loadCustomersFromCsv() {
-        File filepath = new File(".\\data\\customers.csv");
-        ArrayList<Customer> customers = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                int yearsSubscribed = Integer.parseInt(parts[5]);
-                Customer customer = new Customer(0, parts[0], parts[1], parts[3], parts[2], parts[4], yearsSubscribed);
-                customers.add(customer);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return customers;
     }
 
     public void saveRentalDateInMap(RentalItem item, Date rentalDate) {
