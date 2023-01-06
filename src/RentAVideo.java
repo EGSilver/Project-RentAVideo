@@ -243,6 +243,11 @@ public class RentAVideo {
         });
     }
 
+    public Customer identifyCustomer() {
+        String customerName = textFieldCustomerName.getText().toLowerCase();
+        return null;
+    }
+
     public int generateClientNumber() {
         return clientNumber + 1;
     }
