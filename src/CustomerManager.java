@@ -64,6 +64,10 @@ public class CustomerManager {
         }
     }
 
+    public void generateClientNumber() {
+
+    }
+
     @Override
     public String toString() {
         return "CustomerManager{" +

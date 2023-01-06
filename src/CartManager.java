@@ -75,11 +75,11 @@ public class CartManager {
         double income = number.doubleValue();
         if (totalPrice == 0) {
             s += ("Total price to pay: €" + "0");
-            JOptionPane.showMessageDialog(null, s);
+            //JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
         } else {
             s += "Total price to pay: €" + formattedTotalPrice;
-            JOptionPane.showMessageDialog(null, s);
+            //JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
             overview.setIncome(getIncome + income);
         }

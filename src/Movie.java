@@ -35,6 +35,12 @@ public class Movie extends RentalItem {
 
     @Override
     public String toString() {
+        return super.getTitle() + " - " +
+                super.getType();
+    }
+
+/*    @Override
+    public String toString() {
         return "Movie: {" +
                 "title='" + super.getTitle() + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
@@ -42,5 +48,6 @@ public class Movie extends RentalItem {
                 ", description='" + description + '\'' +
                 ", type='" + super.getType() + '\'' +
                 '}';
-    }
+    }*/
+
 }

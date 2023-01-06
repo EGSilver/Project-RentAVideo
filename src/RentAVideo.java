@@ -113,52 +113,85 @@ public class RentAVideo {
         textFieldCustomerNumber.setEditable(false);
         textFieldYearsSubscribed.setEditable(false);
         textAreaTicketResult.setEditable(false);
-        // Add item to shopping cart
+        databaseList.setEnabled(false);
+        /**
+         * This method is called when the "Add to Cart" button is clicked.
+         * If the customer has not entered their name, an error message is displayed.
+         * Otherwise, the selected items are added to the cart and the cart list is updated.
+         *
+         * @throws IOException  if an error occurs while adding the items to the cart
+         */
         addToCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<RentalItem> selectedItems = databaseList.getSelectedValuesList();
-                for (RentalItem item : selectedItems) {
-                    try {
-                        rentalSystem.addItemToCart(item, klant1, cartManager);
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(mainPanel, "An error occurred while adding your item to the cart. Please try again later.");
+                String exampleText = "Enter your first and last name";
+                if (textFieldCustomerName.getText().equalsIgnoreCase(exampleText) || textFieldCustomerName.getText().equals("")) {
+                    JOptionPane.showMessageDialog(mainPanel, "Please provide your first and last name: This information is required before you can continue.");
+                } else {
+                    List<RentalItem> selectedItems = databaseList.getSelectedValuesList();
+                    for (RentalItem item : selectedItems) {
+                        try {
+                            rentalSystem.addItemToCart(item, klant1, cartManager);
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(mainPanel, "An error occurred while adding your item to the cart. Please try again later.");
+                        }
                     }
+                    for (RentalItem item : selectedItems) {
+                        createCartModel().addElement(item);
+                    }
+                    // Update the shopping cart list
+                    ShoppingCartList.setModel(createCartModel());
                 }
-                for (RentalItem item : selectedItems) {
-                    createCartModel().addElement(item);
-                }
-                // Update the shopping cart list
-                ShoppingCartList.setModel(createCartModel());
             }
         });
-        // Checkout
+        /**
+         * This method is called when the "Add to Cart" button is clicked.
+         * If the customer has not entered their name, an error message is displayed.
+         * Otherwise, the selected items are added to the cart and the cart list is updated.
+         *
+         * @throws IOException if an error occurs while adding the items to the cart
+         */
         checkoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            String s = "";
-            ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
-            if (!(shoppingCart.size() == 0)) {
-                for (RentalItem item : shoppingCart) {
+                Customer customer = new Customer(0, "", "", "", "", "", 0);
+                String s = "";
+                ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
+                for (int i = 0; i < customers.size(); i++) {
+                    String fullName = customers.get(i).getFirstName().toLowerCase() + " " + customers.get(i).getName().toLowerCase();
+                    if (textFieldCustomerName.getText().toLowerCase().equals(fullName)) {
+                        customer = customers.get(i);
+                    }
+                }
+                if (!(shoppingCart.size() == 0)) {
+                    RentalItem rentalItem = new RentalItem("",0,0,false,0,"","",0);
+                    //for (RentalItem item : shoppingCart) {
+                    for (RentalItem item : shoppingCart) {
+                        rentalItem = item;
+                    }
                     try {
-                        s = rentalSystem.checkOut(klant1, cartManager, overview, databaseManager, item);
+                        s = rentalSystem.checkOut(customer, cartManager, overview, databaseManager, rentalItem);
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                     } catch (ParseException ex) {
                         JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                     }
+                } else {
+                    JOptionPane.showMessageDialog(mainPanel, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart", 1);
                 }
-            } else {
-                JOptionPane.showMessageDialog(mainPanel, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart", 1);
+                textAreaTicketResult.setText(s);
+                // Update the shopping cart list
+                rentalSystem.clearShoppingCart();
+                clearCartModel();
+                ShoppingCartList.setModel(createCartModel());
             }
-            textAreaTicketResult.setText(s);
-            // Update the shopping cart list
-            rentalSystem.clearShoppingCart();
-            clearCartModel();
-            ShoppingCartList.setModel(createCartModel());
-        }
-    });
-        // Search for specific item
+        });
+        /**
+         * This method is called when the "Search" button is clicked.
+         * If the search text field is empty, an error message is displayed.
+         * Otherwise, the database is searched for movies or games matching the search query,
+         * and the search results are displayed in the list.
+         */
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -177,6 +210,13 @@ public class RentAVideo {
                 }
             }
         });
+        /**
+         * This method is called when the "Submit New Customer" button is clicked.
+         * If any of the fields are empty, an error message is displayed.
+         * Otherwise, a new Customer object is created and added to the list of customers and the database.
+         *
+         * @throws IOException if an error occurs while adding the customer to the database
+         */
         submitNewCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -185,7 +225,7 @@ public class RentAVideo {
                         || textFieldNewCustomerAdres.getText().equals("")
                         || textFieldNewCustomerBirthdate.getText().equals("")
                         || labelPhoneNumber.getText().equals("")) {
-                    JOptionPane.showMessageDialog(mainPanel,"Please fill out all field");
+                    JOptionPane.showMessageDialog(mainPanel, "Please fill out all field.");
                 } else {
                     Customer customer = new Customer(generateClientNumber(), textFieldNewCustomerFirstName.getText().toLowerCase(),
                             textFieldNewCustomerLastName.getText().toLowerCase(),
@@ -196,16 +236,20 @@ public class RentAVideo {
                     String customerInformation = customer.getFirstName() + " " + customer.getName();
                     customerDefaultListModel.addElement(customerInformation);
                     customers.add(customer);
-                    JOptionPane.showMessageDialog(mainPanel,"You have been added to the system database.");
+                    JOptionPane.showMessageDialog(mainPanel, "Success: Your information has been added to the system database.");
                     try {
                         rentalSystem.addCustomerToDatabase(customer);
                     } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(mainPanel, "An error occurred when trying to add the customer to the database");
+                        JOptionPane.showMessageDialog(mainPanel, "An error occurred when trying to add the customer to the database.");
                     }
                     customerListList.setModel(customerDefaultListModel);
                 }
             }
         });
+        /**
+         * This method is called when the "Delete Customer" button is clicked.
+         * The selected customer is removed from the list of customers and the database.
+         */
         deleteCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -220,6 +264,11 @@ public class RentAVideo {
                 customerListList.setModel(customerDefaultListModel);
             }
         });
+        /**
+         * This method is called when the "Search" button is clicked on the admin panel screen.
+         * The list is searched for a customer matching the search query, and the search results are displayed.
+         * If no match is found, an error message is displayed.
+         */
         searchCustomerListSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -230,22 +279,63 @@ public class RentAVideo {
                         if (textFieldCustomerListSearch.getText().toLowerCase().equals(customers.get(i).getName().toLowerCase()) || textFieldCustomerListSearch.getText().toLowerCase().equals(customers.get(i).getFirstName().toLowerCase())) {
                             model.addElement(customers.get(i).getFirstName() + " " + customers.get(i).getName() + " " + customers.get(i).getPhoneNumber());
                             found = true;
-                            }
                         }
                     }
+                }
                 if (!found) {
-                    JOptionPane.showMessageDialog(mainPanel, "No results found");
+                    JOptionPane.showMessageDialog(mainPanel, "No results found.");
                     customerListList.setModel(customerDefaultListModel);
                 } else {
                     customerListList.setModel(model);
                 }
             }
         });
+        /**
+         * This method is called when the "Enter" button is clicked.
+         * It attempts to identify the customer based on the provided name.
+         * If a match is not found, an error message is displayed.
+         * If a match is found, the customer's name is displayed in the customer name field, and the database list is enabled.
+         *
+         * @throws ArrayIndexOutOfBoundsException  if an entry for the provided name is not found in the database
+         */
+        enterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) throws ArrayIndexOutOfBoundsException {
+                try {
+                    textFieldCustomerName.setText(identifyCustomer());
+                } catch (ArrayIndexOutOfBoundsException exception) {
+                    JOptionPane.showMessageDialog(mainPanel, "An entry for the provided name was not found in the database. Please register as a new customer before proceeding.");
+                }
+                if (textFieldCustomerNumber.getText().length() > 0) {
+                    databaseList.setEnabled(true);
+                }
+            }
+        });
     }
 
-    public Customer identifyCustomer() {
-        String customerName = textFieldCustomerName.getText().toLowerCase();
-        return null;
+    /**
+     * This method attempts to identify a customer based on their first and last name.
+     * If a match is found, the customer's name, years subscribed, and client number are returned.
+     *
+     * @return the identified customer's name, or an empty string if no match is found
+     */
+    public String identifyCustomer() {
+        String identifiedCustomer = "";
+        String[] parts = textFieldCustomerName.getText().toLowerCase().split(" ");
+        String firstName = parts[0];
+        String name = parts[1];
+        for (int i = 0; i < customers.size(); i++) {
+            //System.out.println(customers.get(i).getFirstName().toLowerCase());
+            if (firstName.toLowerCase().equals(customers.get(i).getFirstName().toLowerCase()) && name.toLowerCase().equals(customers.get(i).getName().toLowerCase())) {
+                String yearSubscribed = String.valueOf(customers.get(i).getYearsSubscribed());
+                String clientNumber = String.valueOf(customers.get(i).getClientNumber());
+                identifiedCustomer = customers.get(i).getFirstName() + " " + customers.get(i).getName();
+                textFieldYearsSubscribed.setText(yearSubscribed);
+                textFieldCustomerNumber.setText(clientNumber);
+                //System.out.println(identifiedCustomer);
+            }
+        }
+        return identifiedCustomer;
     }
 
     public int generateClientNumber() {
@@ -259,8 +349,7 @@ public class RentAVideo {
         }
         customerListList.setModel(customerDefaultListModel);
     }
-
-    // Add items from the Movie/Games Array into the model
+    
     public void createListModel(DatabaseManager databaseManager) {
         ArrayList<RentalItem> rentalMovies = databaseManager.getRentalMovies();
         ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();
@@ -281,7 +370,6 @@ public class RentAVideo {
         searchResults.clear();
     }
 
-    // Add items from the shopping cart to the model
     public DefaultListModel<RentalItem> createCartModel() {
         DefaultListModel<RentalItem> model = new DefaultListModel<>();
         for (RentalItem item : shoppingCart) {

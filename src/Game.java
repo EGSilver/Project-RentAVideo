@@ -23,6 +23,7 @@ public class Game extends RentalItem {
         this.publisher = publisher;
     }
 
+/*
     @Override
     public String toString() {
         return "Game{" +
@@ -30,5 +31,14 @@ public class Game extends RentalItem {
                 "platform='" + platform + '\'' +
                 ", publisher='" + publisher + '\'' +
                 '}';
+    }
+*/
+
+   @Override
+   public String toString() {
+        return super.getTitle() + " - " +
+                super.getType();
+
+
     }
 }
