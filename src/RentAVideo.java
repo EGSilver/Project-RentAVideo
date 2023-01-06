@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RentAVideo {
@@ -93,6 +92,10 @@ public class RentAVideo {
     private JScrollPane customerListScrollPane;
     private JPanel overviewTicketPanel;
     private JTextArea textAreaTicketResult;
+    private JTextField textFieldCustomerNameReturnScreen;
+    private JTextField textFieldCustomerYearsSubscribedReturnScreen;
+    private JTextField textFieldCustomerNumberReturnScreen;
+    private JTextArea textArea1;
     private JTextField textFieldTicketResult;
     private final RentalSystem rentalSystem = new RentalSystem();
     private final CartManager cartManager = new CartManager();
@@ -117,6 +120,8 @@ public class RentAVideo {
         textFieldYearsSubscribed.setEditable(false);
         textAreaTicketResult.setEditable(false);
         databaseList.setEnabled(false);
+        textFieldCustomerNumberReturnScreen.setEditable(false);
+        textFieldCustomerYearsSubscribedReturnScreen.setEditable(false);
         /**
          * This method is called when the "Add to Cart" button is clicked.
          * If the customer has not entered their name, an error message is displayed.
