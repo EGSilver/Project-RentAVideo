@@ -517,7 +517,9 @@ public class RentAVideo {
         });
     }
 
-    public void removeSelectionFromHistory
+    public void removeSelectionFromHistory() {
+        
+    }
 
     public void removeSelectionFromCart(RentalItem item) {
         Iterator iterator = shoppingCart.iterator();
