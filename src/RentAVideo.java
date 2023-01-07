@@ -53,7 +53,7 @@ public class RentAVideo {
     private JTextField textFieldMovieReleaseDate;
     private JTextField textFieldMovieDescription;
     private JTextField textFieldMovieEsrbRating;
-    private JList earningsRapportList;
+    private JList<Object> earningsRapportList;
     private JButton addMovieButton;
     private JList<String> customerListList;
     private JLabel labelFirstName;
@@ -102,7 +102,7 @@ public class RentAVideo {
     private JTextField textFieldCustomerNumberReturnScreen;
     private JTextArea textAreaReturnScreen;
     private JButton submitButtonReturnScreen;
-    private JList dailyReportJlist;
+    private JList<Object> dailyReportJlist;
     private JList returnScreenJlist;
     private JButton returnMovieButton;
     private JTextField textFieldTicketResult;
@@ -120,6 +120,8 @@ public class RentAVideo {
     private DefaultListModel<String> customerDefaultListModel = new DefaultListModel<String>();
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
     private DefaultListModel rentalHistory = new DefaultListModel<>();
+
+    DefaultListModel<Object> dayEarningReport = new DefaultListModel<>();
     private boolean submitButtonReturnScreenFired = false;
     private boolean enterButtonRentScreenFired = false;
     private Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
@@ -192,6 +194,7 @@ public class RentAVideo {
                         rentalSystem.saveRentalDate(rentalItem);
                         rentalSystem.createRentalHistory(customer, cartManager);
                         rentalHistory.addAll(rentalSystem.viewRentalHistory(customer));
+                        rentalSystem.viewIncomeOverviewTest((java.sql.Date) currentSystemDate, overview);
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                     } catch (ParseException ex) {
@@ -204,6 +207,7 @@ public class RentAVideo {
                 rentalSystem.clearShoppingCart();
                 clearCartModel();
                 ShoppingCartList.setModel(createCartModel());
+
             }
         });
         /**
@@ -395,8 +399,8 @@ public class RentAVideo {
         submitButtonReturnScreen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultListModel replacement = new DefaultListModel<>();
-                returnScreenJlist.setModel(replacement);
+                DefaultListModel emptyReplacement = new DefaultListModel<>();
+                returnScreenJlist.setModel(emptyReplacement);
                 submitButtonReturnScreenFired = true;
                 String[] parts = identifyCustomer().split(" ");
                 try {
@@ -424,7 +428,7 @@ public class RentAVideo {
             @Override
             public void actionPerformed(ActionEvent e) {
                 rentalSystem.testHashMap();
-                DefaultListModel dayReportModel = new DefaultListModel<>();
+                DefaultListModel<Object> dayReportModel = new DefaultListModel<>();
                 rentalSystem.createOverview(String.valueOf(currentSystemDate), overview);
                 String date = textFieldDayRapportDateInput.getText();
                 String replaceDate = date.replace("/", "-");
@@ -441,9 +445,7 @@ public class RentAVideo {
                 RentalItem item = (RentalItem) returnScreenJlist.getSelectedValue();
                 try {
                     textAreaReturnScreen.setText(rentalSystem.returnItem(item, overview, cartManager));
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
-                } catch (ParseException ex) {
+                } catch (IOException | ParseException ex) {
                     JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
                 }
                 rentalHistory.remove(returnScreenJlist.getSelectedIndex());
@@ -453,8 +455,7 @@ public class RentAVideo {
         submitDateButtonEarningsReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultListModel dayEarningReport = new DefaultListModel<>();
-                rentalSystem.createIncomeOverview(String.valueOf(currentSystemDate));
+                DefaultListModel<Object> dayEarningReport = new DefaultListModel<>();
                 String date = textFieldEarningsRapportDateInput.getText();
                 String replaceDate = date.replace("/", "-");
                 if (matchDatePattern(replaceDate)) {

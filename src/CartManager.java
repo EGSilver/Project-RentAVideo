@@ -17,6 +17,7 @@ public class CartManager {
     private final double TAX = 1.21;
 
     private DecimalFormat decimalFormat = new DecimalFormat("#.00");
+    private Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
 
     public ArrayList<RentalItem> addItemToCart(RentalItem item, Customer customer) throws IOException {
         if (databaseManager.getStockFromCsv(item) <= 0) {
@@ -81,6 +82,7 @@ public class CartManager {
             //JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
             overview.setIncome(getIncome + income);
+            overview.createIncomeOverview(String.valueOf(currentSystemDate));
         }
         return s;
     }
@@ -91,8 +93,8 @@ public class CartManager {
      */
     public String returnItemAndCalculateFine(RentalItem item, DayOverview overview) throws ParseException {
         // For testing late returns.
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date pastDate = dateFormat.parse("2022-12-04");
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //Date pastDate = dateFormat.parse("2022-12-04");
         // End
         String stringOutput = "";
         double fine = 0;

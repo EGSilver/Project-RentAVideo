@@ -6,7 +6,7 @@ public class DayOverview {
     private int lateReturns;
     private int newMembers;
 
-    private double income = 0;
+    private double income;
     private HashMap<String, DayOverview> dayOverviewMap = new HashMap<String, DayOverview>();
     private HashMap<String, Double> dayIncomeOverviewMap = new HashMap<String, Double>();
 
@@ -20,6 +20,10 @@ public class DayOverview {
 
     public void createIncomeOverview(String currentDate) {
         dayIncomeOverviewMap.put(currentDate, income);
+    }
+
+    public void createIncomeOverviewTest(Date currentDate, DayOverview overview) {
+        dayIncomeOverviewMap.put(String.valueOf(currentDate), income);
     }
 
     public String viewDayOverview(String specificDate) {
@@ -38,8 +42,16 @@ public class DayOverview {
     public Object viewIncomeOverview(String specificDate) {
         Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(specificDate);
         System.out.println(specificDate
-                + "\nTotal amount of income: €" + income);
+                + "\nTotal amount of income: €" + overviewEarningsOfCertainDate);
         return dayIncomeOverviewMap.get(specificDate);
+    }
+
+    public Object viewIncomeOverviewTest(Date specificDate, DayOverview overview) {
+        String date = String.valueOf(specificDate);
+        Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(date);
+        System.out.println(specificDate
+                + "\nTotal amount of income: €" + overviewEarningsOfCertainDate);
+        return dayIncomeOverviewMap.get(date);
     }
 
     public void testHashMap() {

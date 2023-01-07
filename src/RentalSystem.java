@@ -1,4 +1,5 @@
 import java.io.*;
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -179,9 +180,19 @@ public class RentalSystem {
     public ArrayList<RentalItem> searchForMovieOrGameInCsv(String title, DatabaseManager databaseManager) {
         return databaseManager.searchForMovieOrGameInCsv(title, databaseManager);
     }
-
     public int generateClientNumber() throws IOException {
       return customerManager.generateClientNumber();
     }
 
- }
+    public double getIncome() {
+        return dayOverview.getIncome();
+    }
+
+    public void viewIncomeOverviewTest(Date currentSystemDate, DayOverview dayOverview) {
+        dayOverview.viewIncomeOverviewTest(currentSystemDate, dayOverview);
+    }
+
+    public void createIncomeOverviewTest(Date currentSystemDate, DayOverview dayOverview) {
+        dayOverview.createIncomeOverviewTest(currentSystemDate, dayOverview);
+    }
+}
