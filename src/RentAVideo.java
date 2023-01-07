@@ -102,6 +102,7 @@ public class RentAVideo {
     private JButton submitButtonRentScreen;
     private JList dailyReportJlist;
     private JList returnScreenJlist;
+    private JButton returnMovieButton;
     private JTextField textFieldTicketResult;
     private final RentalSystem rentalSystem = new RentalSystem();
     private CartManager cartManager = new CartManager();
@@ -270,7 +271,7 @@ public class RentAVideo {
                     textFieldNewCustomerAdres.setText("");
                     textFieldNewCustomerBirthdate.setText("");
                     textFieldNewCustomerPhoneNumber.setText("");
-                    overview.setNewMembers(overview.getNewMembers()+1);
+                    overview.setNewMembers(overview.getNewMembers() + 1);
                     customerListList.setModel(customerDefaultListModel);
                 }
             }
@@ -402,7 +403,7 @@ public class RentAVideo {
                 }
                 for (Customer customer : customers) {
                     if (customer.getFirstName().equalsIgnoreCase(parts[0]) && customer.getName().equalsIgnoreCase(parts[1])) {
-                       createRentalItemReturnList(customer);
+                        createRentalItemReturnList(customer);
 
                     }
                 }
@@ -422,23 +423,42 @@ public class RentAVideo {
                 DefaultListModel dayReportModel = new DefaultListModel<>();
                 rentalSystem.createOverview(String.valueOf(currentSystemDate), overview);
                 String date = textFieldDayRapportDateInput.getText();
-                String replaceDate = date.replace("/","-");
-                if (matchPattern(replaceDate)) {
+                String replaceDate = date.replace("/", "-");
+                if (matchDatePattern(replaceDate)) {
                     dayReportModel.addElement(rentalSystem.viewDayOverview(replaceDate));
                     dailyReportJlist.setModel(dayReportModel);
                 }
                 textFieldDayRapportDateInput.setText("");
             }
         });
+        returnMovieButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RentalItem item = (RentalItem) returnScreenJlist.getSelectedValue();
+                try {
+                    rentalSystem.returnItem(item, overview, cartManager);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
+                }
+                rentalHistory.remove(returnScreenJlist.getSelectedIndex());
+                textAreaTicketResult.setText();
+                returnScreenJlist.setModel(rentalHistory);
+            }
+        });
     }
 
-    public void createRentalItemReturnList(Customer customer) {
-        rentalHistory.addAll(rentalSystem.viewRentalHistory(customer));
-        returnScreenJlist.setModel(rentalHistory);
-
+    public void createRentalItemReturnList(Customer customer) throws NullPointerException {
+        try {
+            rentalHistory.addAll(rentalSystem.viewRentalHistory(customer));
+            returnScreenJlist.setModel(rentalHistory);
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(mainPanel,"You have not rented any items yet.");
+        }
     }
 
-    public boolean matchPattern(String date) {
+    public boolean matchDatePattern(String date) {
         String incomingDate = date;
         String pattern = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
         Pattern r = Pattern.compile(pattern);
