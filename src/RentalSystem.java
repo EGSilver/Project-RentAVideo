@@ -97,8 +97,8 @@ public class RentalSystem {
 
     }
 
-    public void addItemToCart(RentalItem item, Customer customer, CartManager cart) throws IOException {
-        cart.addItemToCart(item, customer);
+    public String addItemToCart(RentalItem item, Customer customer, CartManager cart) throws IOException {
+        return cart.addItemToCart(item, customer);
     }
 
     public String viewCart(CartManager cart) {

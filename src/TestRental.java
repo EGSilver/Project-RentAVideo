@@ -127,6 +127,6 @@ public class TestRental {
     //***//
     //***/Checking when the movie was rented out
         //System.out.println(rentalSystem.viewRentedItemDate(theMatrix));
-        //rentAVideoPanel.run(rentalSystem);
+        rentAVideoPanel.run(rentalSystem);
     }
 }

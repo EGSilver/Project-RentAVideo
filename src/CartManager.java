@@ -19,15 +19,16 @@ public class CartManager {
     private DecimalFormat decimalFormat = new DecimalFormat("#.00");
     private Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
 
-    public ArrayList<RentalItem> addItemToCart(RentalItem item, Customer customer) throws IOException {
+    public String addItemToCart(RentalItem item, Customer customer) throws IOException {
+        String outOfStockMessage = "";
         if (databaseManager.getStockFromCsv(item) <= 0) {
-            System.out.println("This item is out of stock");
+            outOfStockMessage += "This item is out of stock";
         } else if (databaseManager.getAgeRatingFromCsv(item).equals("A") && customer.checkUnderaged()) {
-            System.out.println(item.getTitle() + " has been rated " + databaseManager.getAgeRatingFromCsv(item) + ". You must be age 18 or higher to be able to rent this item.\n");
+            outOfStockMessage += item.getTitle() + " has been rated " + databaseManager.getAgeRatingFromCsv(item) + ". You must be age 18 or higher to be able to rent this item.\n";
         } else {
             itemCart.add(item);
         }
-        return itemCart;
+        return outOfStockMessage;
     }
 
     public String viewCart() {
@@ -75,14 +76,11 @@ public class CartManager {
         double income = number.doubleValue();
         if (totalPrice == 0) {
             s += ("Total price to pay: €" + "0");
-            //JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
         } else {
             s += "Total price to pay: €" + formattedTotalPrice;
-            //JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
             overview.setIncome(getIncome + income);
-            //overview.createIncomeOverview(String.valueOf(currentSystemDate));
             overview.updateIncomeOverview(String.valueOf(currentSystemDate));
         }
         return s;

@@ -274,7 +274,6 @@ public class DatabaseManager {
         return stock;
     }
 
-    // Function gets called when a customer checks out his cart, works with both types "Movies" & "Games"
     public void updateItemStockInCsv(RentalItem item) throws IOException {
         String filePath = "";
         if (item.getType().equals("Movie")) {
@@ -305,7 +304,6 @@ public class DatabaseManager {
         }
     }
 
-    // Takes care of being able to return an item to the "store" no matter the type "Movies" & "Games".
     public RentalItem returnItem(RentalItem item, DayOverview overview) throws IOException {
         String filepath = "";
         if (item.getType().equals("Movie")) {
