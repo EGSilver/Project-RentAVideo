@@ -194,7 +194,7 @@ public class RentAVideo {
                         rentalSystem.saveRentalDate(rentalItem);
                         rentalSystem.createRentalHistory(customer, cartManager);
                         rentalHistory.addAll(rentalSystem.viewRentalHistory(customer));
-                        rentalSystem.viewIncomeOverviewTest((java.sql.Date) currentSystemDate, overview);
+                        dayEarningReport.addElement(rentalSystem.viewIncomeOverviewTest((java.sql.Date) currentSystemDate, overview));
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                     } catch (ParseException ex) {
@@ -455,11 +455,9 @@ public class RentAVideo {
         submitDateButtonEarningsReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultListModel<Object> dayEarningReport = new DefaultListModel<>();
                 String date = textFieldEarningsRapportDateInput.getText();
                 String replaceDate = date.replace("/", "-");
                 if (matchDatePattern(replaceDate)) {
-                    dayEarningReport.addElement(rentalSystem.viewIncomeOverview(replaceDate));
                     earningsRapportList.setModel(dayEarningReport);
                 }
                 textFieldEarningsRapportDateInput.setText("");

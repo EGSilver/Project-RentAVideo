@@ -188,8 +188,8 @@ public class RentalSystem {
         return dayOverview.getIncome();
     }
 
-    public void viewIncomeOverviewTest(Date currentSystemDate, DayOverview dayOverview) {
-        dayOverview.viewIncomeOverviewTest(currentSystemDate, dayOverview);
+    public String viewIncomeOverviewTest(Date currentSystemDate, DayOverview dayOverview) {
+        return dayOverview.viewIncomeOverviewTest(currentSystemDate, dayOverview);
     }
 
     public void createIncomeOverviewTest(Date currentSystemDate, DayOverview dayOverview) {

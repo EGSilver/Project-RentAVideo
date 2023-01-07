@@ -46,12 +46,11 @@ public class DayOverview {
         return dayIncomeOverviewMap.get(specificDate);
     }
 
-    public Object viewIncomeOverviewTest(Date specificDate, DayOverview overview) {
+    public String viewIncomeOverviewTest(Date specificDate, DayOverview overview) {
         String date = String.valueOf(specificDate);
         Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(date);
-        System.out.println(specificDate
-                + "\nTotal amount of income: €" + overviewEarningsOfCertainDate);
-        return dayIncomeOverviewMap.get(date);
+        return specificDate + "\nTotal amount of income: €" + overviewEarningsOfCertainDate;
+
     }
 
     public void testHashMap() {
