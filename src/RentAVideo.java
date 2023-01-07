@@ -53,7 +53,6 @@ public class RentAVideo {
     private JTextField textFieldMovieReleaseDate;
     private JTextField textFieldMovieDescription;
     private JTextField textFieldMovieEsrbRating;
-    private JList<Object> earningsRapportList;
     private JButton addMovieButton;
     private JList<String> customerListList;
     private JLabel labelFirstName;
@@ -102,9 +101,12 @@ public class RentAVideo {
     private JTextField textFieldCustomerNumberReturnScreen;
     private JTextArea textAreaReturnScreen;
     private JButton submitButtonReturnScreen;
-    private JList<Object> dailyReportJlist;
     private JList returnScreenJlist;
     private JButton returnMovieButton;
+    private JTextArea dailyReportTextArea;
+    private JTextArea earningsRapportListtextArea;
+    private JButton button1;
+    private JButton button2;
     private JTextField textFieldTicketResult;
     private final RentalSystem rentalSystem = new RentalSystem();
     private CartManager cartManager = new CartManager();
@@ -121,7 +123,7 @@ public class RentAVideo {
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
     private DefaultListModel rentalHistory = new DefaultListModel<>();
 
-    DefaultListModel<Object> dayEarningReport = new DefaultListModel<>();
+    DefaultListModel<String> dayEarningReport = new DefaultListModel<>();
     private boolean submitButtonReturnScreenFired = false;
     private boolean enterButtonRentScreenFired = false;
     private Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
@@ -426,15 +428,22 @@ public class RentAVideo {
          */
         submitDateButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) throws NullPointerException {
                 rentalSystem.testHashMap();
                 DefaultListModel<Object> dayReportModel = new DefaultListModel<>();
                 rentalSystem.createOverview(String.valueOf(currentSystemDate), overview);
                 String date = textFieldDayRapportDateInput.getText();
                 String replaceDate = date.replace("/", "-");
-                if (matchDatePattern(replaceDate)) {
-                    dayReportModel.addElement(rentalSystem.viewDayOverview(replaceDate));
-                    dailyReportJlist.setModel(dayReportModel);
+                if (textFieldDayRapportDateInput.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(mainPanel, "Please enter a date.");
+                } else if (matchDatePattern(replaceDate)) {
+                    try {
+                        dayReportModel.addElement(rentalSystem.viewDayOverview(replaceDate));
+                        dailyReportTextArea.setText(String.valueOf(dayReportModel));
+                    } catch (NullPointerException q) {
+                        JOptionPane.showMessageDialog(mainPanel,"No data found for the specified date.");
+                    }
+
                 }
                 textFieldDayRapportDateInput.setText("");
             }
@@ -455,12 +464,21 @@ public class RentAVideo {
         submitDateButtonEarningsReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                earningsRapportListtextArea.setText("");
                 String date = textFieldEarningsRapportDateInput.getText();
                 String replaceDate = date.replace("/", "-");
-                if (matchDatePattern(replaceDate)) {
-                    earningsRapportList.setModel(dayEarningReport);
+                if (textFieldEarningsRapportDateInput.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(mainPanel,"Please enter a date.");
+                } else if (matchDatePattern(replaceDate)) {
+                    if (dayEarningReport.isEmpty()) {
+                        JOptionPane.showMessageDialog(mainPanel,"No data found for the specified date.");
+                    }
+                    String result = String.valueOf(dayEarningReport);
+                    String decentString = result.replaceAll("\\[|\\]", "");
+                    earningsRapportListtextArea.setText(decentString);
                 }
                 textFieldEarningsRapportDateInput.setText("");
+                dayEarningReport.clear();
             }
         });
     }
@@ -572,6 +590,7 @@ public class RentAVideo {
     }
 
     public void run(RentalSystem rentalSystem) {
+        overview.createIncomeOverview(String.valueOf(currentSystemDate));
         //mainPanel.setPreferredSize(new Dimension(1200,500));
         customers.addAll(loadCustomersFromCsv());
         loadMovies();

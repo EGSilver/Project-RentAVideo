@@ -82,7 +82,8 @@ public class CartManager {
             //JOptionPane.showMessageDialog(null, s);
             System.out.println(s + "\n");
             overview.setIncome(getIncome + income);
-            overview.createIncomeOverview(String.valueOf(currentSystemDate));
+            //overview.createIncomeOverview(String.valueOf(currentSystemDate));
+            overview.updateIncomeOverview(String.valueOf(currentSystemDate));
         }
         return s;
     }

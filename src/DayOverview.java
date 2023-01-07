@@ -26,6 +26,13 @@ public class DayOverview {
         dayIncomeOverviewMap.put(String.valueOf(currentDate), income);
     }
 
+    public void updateIncomeOverview(String currentDate) {
+        //double value = dayIncomeOverviewMap.get(currentDate);
+        //income += value;
+        dayIncomeOverviewMap.replace(currentDate, income);
+    }
+
+
     public String viewDayOverview(String specificDate) {
         DayOverview overviewOfCertainDate = dayOverviewMap.get(specificDate);
         int rentals = overviewOfCertainDate.getRentals();
@@ -42,15 +49,14 @@ public class DayOverview {
     public Object viewIncomeOverview(String specificDate) {
         Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(specificDate);
         System.out.println(specificDate
-                + "\nTotal amount of income: €" + overviewEarningsOfCertainDate);
+                + "\nTotal amount\nof income:\n€" + overviewEarningsOfCertainDate);
         return dayIncomeOverviewMap.get(specificDate);
     }
 
     public String viewIncomeOverviewTest(Date specificDate, DayOverview overview) {
         String date = String.valueOf(specificDate);
         Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(date);
-        return specificDate + "\nTotal amount of income: €" + overviewEarningsOfCertainDate;
-
+        return specificDate + "\nTotal amount\nof income:\n€" + overviewEarningsOfCertainDate;
     }
 
     public void testHashMap() {

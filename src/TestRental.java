@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Scanner;
 
 public class TestRental {
     public static void main(String[] args) throws IOException, ParseException {
@@ -66,10 +67,10 @@ public class TestRental {
         //rentalSystem.setLateReturns(10, dayOverview);
         //rentalSystem.addCustomer(klant1, dayOverview);
         //rentalSystem.addItemToCart(theMatrix, klant1, cartManager);
-        rentalSystem.addItemToCart(theLionKing, klant1, cartManager);
+        //rentalSystem.addItemToCart(theLionKing, klant1, cartManager);
         //rentalSystem.addItemToCart(tombRaider, klant1, cartManager);
         //rentalSystem.viewCart(cartManager);
-        rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager, rentalItem);
+        //rentalSystem.checkOut(klant1, cartManager, dayOverview, databaseManager, rentalItem);
 
 
         //System.out.println(rentalSystem.getCart(cartManager));
@@ -87,8 +88,8 @@ public class TestRental {
         //rentalSystem.createOverview(currentSystemDate, dayOverview);
         //rentalSystem.viewDayOverview(currentSystemDate, dayOverview);
         // System.out.println();
-        rentalSystem.createIncomeOverviewTest(currentSystemDate, dayOverview);
-        rentalSystem.viewIncomeOverviewTest(currentSystemDate, dayOverview);
+        //rentalSystem.createIncomeOverviewTest(currentSystemDate, dayOverview);
+        //rentalSystem.viewIncomeOverviewTest(currentSystemDate, dayOverview);
         //rentalSystem.createIncomeOverview(String.valueOf(currentSystemDate));
         //rentalSystem.viewIncomeOverview(String.valueOf(currentSystemDate));
     //***/Remove overview from hashmap/***///
@@ -126,6 +127,6 @@ public class TestRental {
     //***//
     //***/Checking when the movie was rented out
         //System.out.println(rentalSystem.viewRentedItemDate(theMatrix));
-        rentAVideoPanel.run(rentalSystem);
+        //rentAVideoPanel.run(rentalSystem);
     }
 }

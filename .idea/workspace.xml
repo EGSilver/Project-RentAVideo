@@ -7,26 +7,16 @@
     <list default="true" id="f95643d7-1e26-4ef1-b631-b34d5737b794" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/movies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/movies.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/DayOverview.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/DayOverview.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$11.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$12.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentAVideo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/RentalSystem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project-RentAVideo/TestRental.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project-RentAVideo/TestRental.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CartManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DayOverview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DayOverview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RentAVideo.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RentAVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RentalSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentalSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestRental.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRental.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,28 +45,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE&quot;: &quot;right&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;121&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE&quot;: &quot;left&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;256&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/DeanV/OneDrive/Programming Fun/Project-RentAVideo-main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.STATE": "right",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "121",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.STATE": "left",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "220",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/DeanV/OneDrive/Programming Fun/Project-RentAVideo-main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="G:\Git\Project-RentAVideo\data" />
@@ -132,7 +122,8 @@
       <workItem from="1673099841719" duration="5489000" />
       <workItem from="1673111975140" duration="1020000" />
       <workItem from="1673113470328" duration="345000" />
-      <workItem from="1673114240174" duration="30000" />
+      <workItem from="1673114240174" duration="445000" />
+      <workItem from="1673115058225" duration="4732000" />
     </task>
     <servers />
   </component>
@@ -191,21 +182,21 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/DayOverview.java</url>
-          <line>41</line>
-          <properties class="DayOverview" method="viewIncomeOverview">
+          <line>28</line>
+          <properties class="DayOverview" method="updateIncomeOverview">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="99" />
+          <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/DayOverview.java</url>
-          <line>48</line>
-          <properties class="DayOverview" method="viewIncomeOverviewTest">
+          <line>129</line>
+          <properties class="DayOverview" method="setIncome">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="100" />
+          <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/CartManager.java</url>
@@ -213,14 +204,29 @@
           <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/CartManager.java</url>
-          <line>84</line>
-          <option name="timeStamp" value="95" />
+          <url>file://$PROJECT_DIR$/src/RentAVideo.java</url>
+          <line>198</line>
+          <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/TestRental.java</url>
-          <line>3</line>
-          <option name="timeStamp" value="102" />
+          <url>file://$PROJECT_DIR$/src/RentAVideo.java</url>
+          <line>592</line>
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/CartManager.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/CartManager.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/RentAVideo.java</url>
+          <line>469</line>
+          <option name="timeStamp" value="115" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

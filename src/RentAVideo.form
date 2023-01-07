@@ -580,7 +580,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="8213e" layout-manager="GridLayoutManager" row-count="4" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="8213e" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -654,10 +654,10 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="73066" class="javax.swing.JList" binding="dailyReportJlist">
+                      <component id="e242a" class="javax.swing.JTextArea" binding="dailyReportTextArea">
                         <constraints/>
                         <properties>
-                          <model/>
+                          <text value=""/>
                         </properties>
                       </component>
                     </children>
@@ -669,12 +669,28 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="56ebb" class="javax.swing.JList" binding="earningsRapportList">
+                      <component id="486d0" class="javax.swing.JTextArea" binding="earningsRapportListtextArea">
                         <constraints/>
                         <properties/>
                       </component>
                     </children>
                   </scrollpane>
+                  <component id="8d863" class="javax.swing.JButton" binding="button1" default-binding="true">
+                    <constraints>
+                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Button"/>
+                    </properties>
+                  </component>
+                  <component id="f1c0c" class="javax.swing.JButton" binding="button2" default-binding="true">
+                    <constraints>
+                      <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Button"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
               <grid id="8991d" binding="customerListPanel" layout-manager="GridLayoutManager" row-count="5" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
