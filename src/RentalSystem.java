@@ -37,7 +37,6 @@ public class RentalSystem {
     }
 
     public String checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager, RentalItem item) throws IOException, ParseException {
-        createRentalHistory(customer, cartManager);
         saveRentalDate(item);
         return cartManager.checkout(customer, cartManager, overview, databaseManager);
     }

@@ -43,7 +43,6 @@ public class CartManager {
      */
     public String checkout(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager) throws IOException, ParseException {
         rentalDate = getDate();
-        System.out.println(cartManager.getItemCart());
         double getIncome = overview.getIncome();
         String s = "Your Ticket:\n" + customer.getName() + " " + customer.getFirstName() + ", items rented:\n";
         totalPrice = 0;

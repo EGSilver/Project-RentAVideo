@@ -101,9 +101,10 @@ public class RentAVideo {
     private JTextArea textAreaReturnScreen;
     private JButton submitButtonRentScreen;
     private JList dailyReportJlist;
+    private JList returnScreenJlist;
     private JTextField textFieldTicketResult;
     private final RentalSystem rentalSystem = new RentalSystem();
-    private final CartManager cartManager = new CartManager();
+    private CartManager cartManager = new CartManager();
     private ArrayList<Customer> customers = new ArrayList<>();
 
     private final CustomerManager customerManager = new CustomerManager(customers);
@@ -115,6 +116,7 @@ public class RentAVideo {
     private ArrayList<RentalItem> rentalGames = databaseManager.getRentalGames();
     private DefaultListModel<String> customerDefaultListModel = new DefaultListModel<String>();
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
+    private DefaultListModel rentalHistory = new DefaultListModel<>();
     private boolean submitButtonRentScreenFired = false;
     private boolean enterButtonRentScreenFired = false;
     private Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
@@ -154,7 +156,6 @@ public class RentAVideo {
                     for (RentalItem item : selectedItems) {
                         createCartModel().addElement(item);
                     }
-                    // Update the shopping cart list
                     ShoppingCartList.setModel(createCartModel());
                 }
             }
@@ -180,13 +181,14 @@ public class RentAVideo {
                 }
                 if (!(shoppingCart.size() == 0)) {
                     RentalItem rentalItem = new RentalItem("", 0, 0, false, 0, "", "", 0);
-                    //for (RentalItem item : shoppingCart) {
                     for (RentalItem item : shoppingCart) {
                         rentalItem = item;
                     }
                     try {
                         s = rentalSystem.checkOut(customer, cartManager, overview, databaseManager, rentalItem);
                         rentalSystem.saveRentalDate(rentalItem);
+                        rentalSystem.createRentalHistory(customer, cartManager);
+                        rentalHistory.addAll(rentalSystem.viewRentalHistory(customer));
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(mainPanel, "An error occurred while processing the order. Please try again later.");
                     } catch (ParseException ex) {
@@ -196,7 +198,6 @@ public class RentAVideo {
                     JOptionPane.showMessageDialog(mainPanel, "Your shopping cart is currently empty. Please add items to the cart before checking out.", "Empty Shopping Cart", 1);
                 }
                 textAreaTicketResult.setText(s);
-                // Update the shopping cart list
                 rentalSystem.clearShoppingCart();
                 clearCartModel();
                 ShoppingCartList.setModel(createCartModel());
@@ -392,12 +393,21 @@ public class RentAVideo {
             @Override
             public void actionPerformed(ActionEvent e) {
                 submitButtonRentScreenFired = true;
+                String[] parts = identifyCustomer().split(" ");
                 try {
                     textFieldCustomerNameReturnScreen.setText(identifyCustomer());
                 } catch (ArrayIndexOutOfBoundsException exception) {
                     JOptionPane.showMessageDialog(mainPanel, "An entry for the provided name was not found in the database. Please enter your full name or register as a new customer before proceeding.");
 
                 }
+                for (Customer customer : customers) {
+                    if (customer.getFirstName().equalsIgnoreCase(parts[0]) && customer.getName().equalsIgnoreCase(parts[1])) {
+                       createRentalItemReturnList(customer);
+
+                    }
+                }
+
+                //returnScreenJlist.setModel(rentalHistory);
             }
         });
         /**
@@ -420,6 +430,12 @@ public class RentAVideo {
                 textFieldDayRapportDateInput.setText("");
             }
         });
+    }
+
+    public void createRentalItemReturnList(Customer customer) {
+        rentalHistory.addAll(rentalSystem.viewRentalHistory(customer));
+        returnScreenJlist.setModel(rentalHistory);
+
     }
 
     public boolean matchPattern(String date) {
@@ -452,7 +468,6 @@ public class RentAVideo {
         String firstName = parts[0];
         String name = parts[1];
         for (int i = 0; i < customers.size(); i++) {
-            //System.out.println(customers.get(i).getFirstName().toLowerCase());
             if (firstName.toLowerCase().equals(customers.get(i).getFirstName().toLowerCase()) && name.toLowerCase().equals(customers.get(i).getName().toLowerCase())) {
                 String yearSubscribed = String.valueOf(customers.get(i).getYearsSubscribed());
                 String clientNumber = String.valueOf(customers.get(i).getClientNumber());
