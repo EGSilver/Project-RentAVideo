@@ -201,7 +201,7 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="Enter your first and last name"/>
+                      <text value="Enter first and last name"/>
                     </properties>
                   </component>
                   <component id="a18ca" class="javax.swing.JTextField" binding="textFieldCustomerNumber">
@@ -252,6 +252,7 @@
                     </constraints>
                     <properties>
                       <text value="Submit"/>
+                      <toolTipText value="Get customer information"/>
                     </properties>
                   </component>
                   <vspacer id="a79c5">
@@ -358,6 +359,7 @@
                     </constraints>
                     <properties>
                       <text value="Search"/>
+                      <toolTipText value="Search for movie or game"/>
                     </properties>
                   </component>
                 </children>
@@ -521,7 +523,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="9a2dc" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+                      <component id="9a2dc" class="javax.swing.JTextArea" binding="textAreaReturnScreen">
                         <constraints/>
                         <properties/>
                       </component>
@@ -585,7 +587,7 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="yyyy-mm-dd"/>
+                      <text value="yyyy/mm/dd"/>
                     </properties>
                   </component>
                   <component id="2c7b1" class="javax.swing.JButton" binding="submitDateButton1" default-binding="true">
@@ -603,7 +605,7 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <text value="yyyy-mm-dd"/>
+                      <text value="yyyy/mm/dd"/>
                     </properties>
                   </component>
                   <hspacer id="6e068">
@@ -692,6 +694,7 @@
                     </constraints>
                     <properties>
                       <text value="Delete Selected Customer"/>
+                      <toolTipText value="Permanently delete customer from database"/>
                     </properties>
                   </component>
                   <hspacer id="56391">

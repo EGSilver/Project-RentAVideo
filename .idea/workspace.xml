@@ -6,15 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f95643d7-1e26-4ef1-b631-b34d5737b794" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/customers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/customers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/games.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/games.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/movies.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/movies.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CustomerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DayOverview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DayOverview.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RentAVideo.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RentAVideo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentAVideo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RentalSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RentalSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestRental.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRental.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +28,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2J2r8WvRTsa707JDKP1yVJMADJM" />
   <component name="ProjectViewState">
@@ -103,7 +100,7 @@
       <workItem from="1672954418393" duration="1318000" />
       <workItem from="1672958883117" duration="17363000" />
       <workItem from="1673006152157" duration="23212000" />
-      <workItem from="1673033942315" duration="12393000" />
+      <workItem from="1673033942315" duration="14789000" />
     </task>
     <servers />
   </component>
@@ -142,10 +139,41 @@
           </properties>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/CustomerManager.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="37" />
+          <line>43</line>
+          <properties class="CustomerManager" method="viewRentalHistory">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/CustomerManager.java</url>
+          <line>38</line>
+          <properties class="CustomerManager" method="createRentalHistory">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/DayOverview.java</url>
+          <line>24</line>
+          <properties class="DayOverview" method="viewDayOverview">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/DayOverview.java</url>
+          <line>49</line>
+          <properties class="DayOverview" method="createOverview">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

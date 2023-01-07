@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,8 +18,8 @@ public class RentAVideo {
     private JTextField textFieldSearch;
     private JPanel rentalSystemPanel;
     private JPanel adminPanel;
-    private JList databaseList;
-    private JList ShoppingCartList;
+    private JList<RentalItem> databaseList;
+    private JList<RentalItem> ShoppingCartList;
     private JList ticketList;
     private JTextField textFieldCustomerName;
     private JTextField textFieldYearsSubscribed;
@@ -54,7 +53,7 @@ public class RentAVideo {
     private JTextField textFieldMovieEsrbRating;
     private JList earningsRapportList;
     private JButton addMovieButton;
-    private JList customerListList;
+    private JList<String> customerListList;
     private JLabel labelFirstName;
     private JLabel labelLastName;
     private JLabel labelAdres;
@@ -99,7 +98,7 @@ public class RentAVideo {
     private JTextField textFieldCustomerNameReturnScreen;
     private JTextField textFieldCustomerYearsSubscribedReturnScreen;
     private JTextField textFieldCustomerNumberReturnScreen;
-    private JTextArea textArea1;
+    private JTextArea textAreaReturnScreen;
     private JButton submitButtonRentScreen;
     private JList dailyReportJlist;
     private JTextField textFieldTicketResult;
@@ -123,6 +122,7 @@ public class RentAVideo {
 
 
     public RentAVideo() {
+        textAreaReturnScreen.setEditable(false);
         textFieldCustomerNumber.setEditable(false);
         textFieldYearsSubscribed.setEditable(false);
         textAreaTicketResult.setEditable(false);
@@ -384,6 +384,10 @@ public class RentAVideo {
                 }
             }
         });
+        /**
+         * This method handles the action performed event when the submit button is clicked on the rent screen.
+         * It identifies the customer by calling the identifyCustomer method and sets the customer name in the return screen text field.
+         */
         submitButtonRentScreen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -396,6 +400,11 @@ public class RentAVideo {
                 }
             }
         });
+        /**
+         * This method handles the action performed event when the submit date button is clicked.
+         * It fetches the date entered in the text field, formats it and checks if it matches the pattern.
+         * If it matches, it fetches the day overview for that date and displays it in the daily report list.
+         */
         submitDateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -407,14 +416,14 @@ public class RentAVideo {
                 if (matchPattern(replaceDate)) {
                     dayReportModel.addElement(rentalSystem.viewDayOverview(replaceDate));
                     dailyReportJlist.setModel(dayReportModel);
-
                 }
+                textFieldDayRapportDateInput.setText("");
             }
         });
     }
 
     public boolean matchPattern(String date) {
-        String incomingDate = String.valueOf(date);
+        String incomingDate = date;
         String pattern = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
         Pattern r = Pattern.compile(pattern);
         Matcher matcher = r.matcher(incomingDate);
@@ -512,7 +521,7 @@ public class RentAVideo {
     }
 
 
-    public void run(RentalSystem rentalSystem) throws ParseException {
+    public void run(RentalSystem rentalSystem) {
         //mainPanel.setPreferredSize(new Dimension(1200,500));
         customers.addAll(loadCustomersFromCsv());
         loadMovies();

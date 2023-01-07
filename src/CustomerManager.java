@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.*;
 
 public class CustomerManager {
-    private ArrayList<Customer> customers;
-    private HashMap<Customer, ArrayList<RentalItem>> rentalHistory = new HashMap<>();
+    private final ArrayList<Customer> customers;
+    private final HashMap<Customer, ArrayList<RentalItem>> rentalHistory = new HashMap<>();
 
-    private HashMap<RentalItem, Date> rentalDates = new HashMap<>();
+    private final HashMap<RentalItem, Date> rentalDates = new HashMap<>();
 
     public CustomerManager(ArrayList<Customer> customers) {
         this.customers = customers;
@@ -66,7 +66,7 @@ public class CustomerManager {
     public int generateClientNumber() throws IOException {
         String fileName = ".\\data\\customers.csv";
         int oldNumber = 0;
-        int newNumber = 0;
+        int newNumber;
         BufferedReader reader = new BufferedReader(new FileReader(fileName));
         String line;
         while ((line = reader.readLine()) != null) {
