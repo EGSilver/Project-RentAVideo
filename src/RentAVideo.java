@@ -99,7 +99,7 @@ public class RentAVideo {
     private JTextField textFieldCustomerYearsSubscribedReturnScreen;
     private JTextField textFieldCustomerNumberReturnScreen;
     private JTextArea textAreaReturnScreen;
-    private JButton submitButtonRentScreen;
+    private JButton submitButtonReturnScreen;
     private JList dailyReportJlist;
     private JList returnScreenJlist;
     private JButton returnMovieButton;
@@ -118,7 +118,7 @@ public class RentAVideo {
     private DefaultListModel<String> customerDefaultListModel = new DefaultListModel<String>();
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
     private DefaultListModel rentalHistory = new DefaultListModel<>();
-    private boolean submitButtonRentScreenFired = false;
+    private boolean submitButtonReturnScreenFired = false;
     private boolean enterButtonRentScreenFired = false;
     private Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
     private Customer c = null;
@@ -390,13 +390,15 @@ public class RentAVideo {
          * This method handles the action performed event when the submit button is clicked on the rent screen.
          * It identifies the customer by calling the identifyCustomer method and sets the customer name in the return screen text field.
          */
-        submitButtonRentScreen.addActionListener(new ActionListener() {
+        submitButtonReturnScreen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                submitButtonRentScreenFired = true;
+                DefaultListModel replacement = new DefaultListModel<>();
+                returnScreenJlist.setModel(replacement);
+                submitButtonReturnScreenFired = true;
                 String[] parts = identifyCustomer().split(" ");
                 try {
-                    textFieldCustomerNameReturnScreen.setText(identifyCustomer());
+                    textFieldCustomerNameReturnScreen.setText(parts[0] + " " + parts[1]);
                 } catch (ArrayIndexOutOfBoundsException exception) {
                     JOptionPane.showMessageDialog(mainPanel, "An entry for the provided name was not found in the database. Please enter your full name or register as a new customer before proceeding.");
 
@@ -443,7 +445,7 @@ public class RentAVideo {
                     JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
                 }
                 rentalHistory.remove(returnScreenJlist.getSelectedIndex());
-                textAreaTicketResult.setText();
+                textAreaTicketResult.setText("dave");
                 returnScreenJlist.setModel(rentalHistory);
             }
         });
@@ -480,7 +482,7 @@ public class RentAVideo {
     public String identifyCustomer() {
         String[] parts = {};
         String identifiedCustomer = "";
-        if (submitButtonRentScreenFired) {
+        if (submitButtonReturnScreenFired) {
             parts = textFieldCustomerNameReturnScreen.getText().toLowerCase().split(" ");
         } else if (enterButtonRentScreenFired) {
             parts = textFieldCustomerName.getText().toLowerCase().split(" ");
@@ -493,11 +495,11 @@ public class RentAVideo {
                 String clientNumber = String.valueOf(customers.get(i).getClientNumber());
                 identifiedCustomer = customers.get(i).getFirstName() + " " + customers.get(i).getName();
                 if (enterButtonRentScreenFired) {
-                    submitButtonRentScreenFired = false;
+                    enterButtonRentScreenFired = false;
                     textFieldYearsSubscribed.setText(yearSubscribed);
                     textFieldCustomerNumber.setText(clientNumber);
-                } else if (submitButtonRentScreenFired) {
-                    enterButtonRentScreenFired = false;
+                } else if (submitButtonReturnScreenFired) {
+                    submitButtonReturnScreenFired = false;
                     textFieldCustomerYearsSubscribedReturnScreen.setText(yearSubscribed);
                     textFieldCustomerNumberReturnScreen.setText(clientNumber);
                 }

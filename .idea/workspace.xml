@@ -103,7 +103,7 @@
       <workItem from="1672958883117" duration="17363000" />
       <workItem from="1673006152157" duration="23212000" />
       <workItem from="1673033942315" duration="14826000" />
-      <workItem from="1673051952238" duration="10050000" />
+      <workItem from="1673051952238" duration="11920000" />
     </task>
     <servers />
   </component>
@@ -168,6 +168,15 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/RentAVideo.java</url>
+          <line>481</line>
+          <properties class="RentAVideo" method="identifyCustomer">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="65" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
