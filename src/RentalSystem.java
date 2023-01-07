@@ -1,7 +1,6 @@
 import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class RentalSystem {
     private ArrayList<Customer> customers;
@@ -18,10 +17,9 @@ public class RentalSystem {
         this.customerManager = new CustomerManager(customers);
     }
 
-    public void returnItem(RentalItem item, DayOverview overview, CartManager cartManager) throws IOException, ParseException {
+    public String returnItem(RentalItem item, DayOverview overview, CartManager cartManager) throws IOException, ParseException {
         databaseManager.returnItem(item, overview);
-        cartManager.returnItemAndCalculateFine(item, overview);
-
+        return cartManager.returnItemAndCalculateFine(item, overview);
     }
 
     public void testHashMap() {
@@ -89,12 +87,13 @@ public class RentalSystem {
 
     }
 
-    public void createIncomeOverview(Date date, DayOverview day) {
-        day.createIncomeOverview(date);
+    public void createIncomeOverview(String date) {
+        dayOverview.createIncomeOverview(date);
     }
 
-    public void viewIncomeOverview(Date date, DayOverview day) {
-        day.viewIncomeOverview(date);
+    public Object viewIncomeOverview(String date) {
+        return dayOverview.viewIncomeOverview(date);
+
     }
 
     public void addItemToCart(RentalItem item, Customer customer, CartManager cart) throws IOException {
@@ -145,7 +144,7 @@ public class RentalSystem {
         customerManager.removeCustomer(customer);
     }
 
-    public void removeIncomeOverviewFromMap(Date date, DayOverview dayOverview) {
+    public void removeIncomeOverviewFromMap(String date, DayOverview dayOverview) {
         dayOverview.removeIncomeOverviewFromMap(date);
     }
 

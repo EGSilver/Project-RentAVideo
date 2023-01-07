@@ -8,7 +8,7 @@ public class DayOverview {
 
     private double income = 0;
     private HashMap<String, DayOverview> dayOverviewMap = new HashMap<String, DayOverview>();
-    private HashMap<Date, Double> dayIncomeOverviewMap = new HashMap<>();
+    private HashMap<String, Double> dayIncomeOverviewMap = new HashMap<String, Double>();
 
     public DayOverview(int returns, int rentals, int lateReturns, int newMembers) {
         this.returns = returns;
@@ -18,7 +18,7 @@ public class DayOverview {
         this.income = income;
     }
 
-    public void createIncomeOverview(Date currentDate) {
+    public void createIncomeOverview(String currentDate) {
         dayIncomeOverviewMap.put(currentDate, income);
     }
 
@@ -35,10 +35,11 @@ public class DayOverview {
                 + "\nAmount of New Members: " + newMembers;
     }
 
-    public void viewIncomeOverview(Date specificDate) {
+    public Object viewIncomeOverview(String specificDate) {
         Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(specificDate);
         System.out.println(specificDate
                 + "\nTotal amount of income: €" + income);
+        return dayIncomeOverviewMap.get(specificDate);
     }
 
     public void testHashMap() {
@@ -64,8 +65,8 @@ public class DayOverview {
         }
     }
 
-    public void removeIncomeOverviewFromMap(Date specificDate) {
-        Iterator<Date> it = dayIncomeOverviewMap.keySet().iterator();
+    public void removeIncomeOverviewFromMap(String specificDate) {
+        Iterator<String> it = dayIncomeOverviewMap.keySet().iterator();
         while (it.hasNext()) {
             if (it.next().equals(specificDate)) {
                 it.remove();

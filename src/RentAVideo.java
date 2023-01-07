@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.System.out;
+
 public class RentAVideo {
     private JPanel mainPanel;
     private JFrame frame;
@@ -36,7 +38,7 @@ public class RentAVideo {
     private JTextField textFieldNewCustomerPhoneNumber;
     private JTextField textFieldNewCustomerEmail;
     private JButton submitNewCustomerButton;
-    private JButton submitDateButton1;
+    private JButton submitDateButtonEarningsReport;
     private JButton submitDateButton;
     private JTextField textFieldDayRapportDateInput;
     private JTextField textFieldEarningsRapportDateInput;
@@ -219,7 +221,7 @@ public class RentAVideo {
                     clearSearchResultScreen();
                     searchResults = rentalSystem.searchForMovieOrGameInCsv(searchText, databaseManager);
                     for (RentalItem searchResult : searchResults) {
-                        System.out.println(searchResult);
+                        out.println(searchResult);
                         model.addElement(searchResult);
                     }
                     databaseList.setModel(model);
@@ -438,15 +440,28 @@ public class RentAVideo {
             public void actionPerformed(ActionEvent e) {
                 RentalItem item = (RentalItem) returnScreenJlist.getSelectedValue();
                 try {
-                    rentalSystem.returnItem(item, overview, cartManager);
+                    textAreaReturnScreen.setText(rentalSystem.returnItem(item, overview, cartManager));
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
                 } catch (ParseException ex) {
                     JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
                 }
                 rentalHistory.remove(returnScreenJlist.getSelectedIndex());
-                textAreaTicketResult.setText("dave");
                 returnScreenJlist.setModel(rentalHistory);
+            }
+        });
+        submitDateButtonEarningsReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultListModel dayEarningReport = new DefaultListModel<>();
+                rentalSystem.createIncomeOverview(String.valueOf(currentSystemDate));
+                String date = textFieldEarningsRapportDateInput.getText();
+                String replaceDate = date.replace("/", "-");
+                if (matchDatePattern(replaceDate)) {
+                    dayEarningReport.addElement(rentalSystem.viewIncomeOverview(replaceDate));
+                    earningsRapportList.setModel(dayEarningReport);
+                }
+                textFieldEarningsRapportDateInput.setText("");
             }
         });
     }
@@ -556,7 +571,6 @@ public class RentAVideo {
     public ArrayList<Customer> loadCustomersFromCsv() {
         return rentalSystem.loadCustomersFromCsv();
     }
-
 
     public void run(RentalSystem rentalSystem) {
         //mainPanel.setPreferredSize(new Dimension(1200,500));
