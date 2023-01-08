@@ -202,13 +202,11 @@ public class RentAVideo {
                     }
                     ArrayList<RentalItem> shoppingCartCopy = new ArrayList<>(shoppingCart);
                     returnOverviewMap.put(customer, shoppingCartCopy);
-                    ArrayList<RentalItem> a = returnOverviewMap.get(customer);
                     rentalHistory.addAll(returnOverviewMap.get(customer));
                     try {
                         s = rentalSystem.checkOut(customer, cartManager, overview, databaseManager, rentalItem);
                         dayEarningReport.addElement(rentalSystem.viewIncomeOverviewTest((java.sql.Date) currentSystemDate, overview));
                         String incomeReportString = rentalSystem.viewIncomeOverviewTest((java.sql.Date) currentSystemDate, overview);
-                        ArrayList<RentalItem> b = returnOverviewMap.get(customer);
                         String[] parts = incomeReportString.split(":");
                         Double income = Double.valueOf(parts[1].replace("€", ""));
                         dayEarningsReportMap.put(String.valueOf(currentSystemDate), income);
@@ -416,6 +414,9 @@ public class RentAVideo {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) throws ArrayIndexOutOfBoundsException {
+                DefaultListModel emptyModel = new DefaultListModel<>();
+                shoppingCart.clear();
+                shoppingCartList.setModel(emptyModel);
                 enterButtonRentScreenFired = true;
                 try {
                     textFieldCustomerName.setText(identifyCustomer());
@@ -724,14 +725,17 @@ public class RentAVideo {
         return tree.toString();
     }
 
-    public void lateReturn() throws IOException, ParseException {
+    public void testLateReturn() throws IOException, ParseException {
         for (Customer customer : customers) {
             if (customer.getFirstName().equalsIgnoreCase("vera") && customer.getName().equalsIgnoreCase("peeters")) {
                 Customer vera = customer;
-                for (RentalItem item : rentalMovies) {
+                for (RentalItem item : rentalGames) {
                     if (item.getTitle().equalsIgnoreCase("Tomba")) {
                         RentalItem tomba = item;
-                        rentalSystem.checkOut(vera, cartManager, overview, databaseManager, tomba);
+                        rentalSystem.addItemToCart(tomba,vera,cartManager);
+                        rentalSystem.checkOutTestLateReturn(vera, cartManager, overview, databaseManager, tomba);
+                        returnOverviewMap.put(customer, cartManager.getItemCart());
+                        rentalHistory.addAll(returnOverviewMap.get(customer));
                     }
                 }
             }
@@ -743,9 +747,8 @@ public class RentAVideo {
         return rentalSystem.loadCustomersFromCsv();
     }
 
-    public void run(RentalSystem rentalSystem) {
+    public void run(RentalSystem rentalSystem) throws IOException, ParseException {
         out.println(christmasTree());
-        //mainPanel.setPreferredSize(new Dimension(1200,500));
         customers.addAll(loadCustomersFromCsv());
         loadMovies();
         loadGames();
@@ -753,11 +756,11 @@ public class RentAVideo {
         frame = new JFrame();
         frame.setContentPane(mainPanel);
         createListModel(databaseManager);
-        //createGameModel(rentalSystem, databaseManager);
         frame.setTitle("RentAVideo");
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        testLateReturn();
     }
 
     private void createUIComponents() {
