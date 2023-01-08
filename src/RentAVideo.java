@@ -176,11 +176,12 @@ public class RentAVideo {
             }
         });
         /**
-         * This method is called when the "Add to Cart" button is clicked.
-         * If the customer has not entered their name, an error message is displayed.
-         * Otherwise, the selected items are added to the cart and the cart list is updated.
-         *
-         * @throws IOException if an error occurs while adding the items to the cart
+         This function is called when the checkoutButton button is clicked. It initializes a Customer object called "customer" to a dummy customer with default values.
+         It then searches the customers List for a customer with a name that matches the text in the textFieldCustomerName field (ignoring case) and sets the "customer" object to the matching customer.
+         If the shoppingCart List is not empty, it initializes a RentalItem object called "rentalItem" to a dummy rental item with default values and sets it to the last element in the shoppingCart List.
+         It creates a copy of the shoppingCart List called "shoppingCartCopy" and adds an entry to the returnOverviewMap with the "customer" object as the key and the "shoppingCartCopy" List as the value.
+         It then adds all the elements in the "shoppingCartCopy" List to the rentalHistory model and attempts to call the checkOut method of the rentalSystem object with the "customer", cartManager, overview, databaseManager, and "rentalItem" objects as arguments.
+         If an IOException or ParseException is thrown, it displays an error message to the user. If the shoppingCart List is empty, it displays a message to the user stating that their shopping cart is empty.
          */
         checkoutButton.addActionListener(new ActionListener() {
             @Override
@@ -226,7 +227,7 @@ public class RentAVideo {
             }
         });
         /**
-         * This method is called when the "Search" button is clicked.
+         * This function is called when the "Search" button is clicked.
          * If the search text field is empty, an error message is displayed.
          * Otherwise, the database is searched for movies or games matching the search query,
          * and the search results are displayed in the list.
@@ -251,10 +252,11 @@ public class RentAVideo {
             }
         });
         /**
-         * This method is called when the "Submit New Customer" button is clicked.
-         * If any of the fields are empty, an error message is displayed.
-         * Otherwise, a new Customer object is created and added to the list of customers and the database.
-         *
+         This function is called when the submitNewCustomerButton button is clicked.
+         If any of the text fields for entering a new customer's information are empty, it displays an error message to the user.
+         Otherwise, it creates a new Customer object called "customer",
+         sets its fields to the values entered by the user, and adds the "customer" object to the customers and customerDefaultListModel Lists.
+         It then displays a success message to the user and calls the addCustomerToDatabase method of the rentalSystem object, passing in the "customer" object as an argument.
          * @throws IOException if an error occurs while adding the customer to the database
          */
         submitNewCustomerButton.addActionListener(new ActionListener() {
@@ -306,8 +308,12 @@ public class RentAVideo {
             }
         });
         /**
-         * This method is called when the "Delete Customer" button is clicked.
-         * The selected customer is removed from the list of customers and the database.
+         This function is called when the deleteCustomerButton button is clicked.
+         It iterates through the customers List and searches for a customer whose name and first name match the selected value in the customerListList JList.
+         If a match is found, it stores the index of the customer in the "index" variable and stores the customer object in a Customer object called "c".
+         It then calls the deleteCustomerFromCsv method of the rentalSystem object, passing in the "c" object as an argument.
+         It then removes the customer at the "index" position from the customers and customerDefaultListModel Lists,
+         and updates the customerListList JList with the updated customerDefaultListModel.
          */
         deleteCustomerButton.addActionListener(new ActionListener() {
             @Override
@@ -329,9 +335,10 @@ public class RentAVideo {
             }
         });
         /**
-         * This method is called when the "Search" button is clicked on the admin panel screen.
-         * The list is searched for a customer matching the search query, and the search results are displayed.
-         * If no match is found, an error message is displayed.
+         This function is called when the searchCustomerListSearch button is clicked.
+         It searches the customers List for a customer with a name or first name that matches the text in the textFieldCustomerListSearch field (ignoring case).
+         If a match is found, it displays the customer's name,
+         first name, and phone number in the customerListList JList. If no match is found, it displays a message to the user stating that no results were found.
          */
         searchCustomerListSearch.addActionListener(new ActionListener() {
             @Override
@@ -427,6 +434,7 @@ public class RentAVideo {
         submitButtonReturnScreen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                textAreaReturnScreen.setText("");
                 DefaultListModel emptyReplacement = new DefaultListModel<>();
                 returnScreenJlist.setModel(emptyReplacement);
                 rentalHistory.clear();
@@ -486,6 +494,15 @@ public class RentAVideo {
                 textFieldDayRapportDateInput.setText("");
             }
         });
+        /**
+         This function is called when the returnMovieButton button is clicked. It retrieves the selected item from the returnScreenJlist JList,
+         and stores it in a RentalItem object called "item". It then attempts to call the returnItem method of the rentalSystem object, passing in the "item" object,
+         the overview object, and the cartManager object as arguments.
+         If no exceptions are thrown, it removes the selected item from the rentalHistory model and updates the returnScreenJlist JList with the updated model.
+         @throws IOException if an I/O error occurs
+         @throws ParseException if there is a problem parsing the input
+         @throws NullPointerException if the item object is null
+         */
         returnMovieButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -505,6 +522,15 @@ public class RentAVideo {
                 returnScreenJlist.setModel(rentalHistory);
             }
         });
+        /**
+         This function is called when the submitDateButtonEarningsReport button is clicked. It retrieves the text from the textFieldEarningsRapportDateInput field,
+         replaces any '/' characters with '-', and stores it in a String called "date". It then retrieves the value associated with the "date" key in the dayEarningsReportMap Map,
+         and stores it in a String called "income". If the textFieldEarningsRapportDateInput field is empty, it displays a message to the user to enter a date.
+         If the "date" String does not match the expected date pattern, it also displays a message to the user.
+         Otherwise, it checks if the dayEarningsReportMap Map is empty or if the "income" String is equal to "null".
+         If either of these conditions is true, it displays a message to the user stating that no data was found for the specified date.
+         If none of these conditions are true, it sets the text of the earningsRapportListtextArea to a message displaying the total income for the specified date.
+         */
         submitDateButtonEarningsReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

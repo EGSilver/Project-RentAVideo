@@ -92,16 +92,16 @@ public class CartManager {
      */
     public String returnItemAndCalculateFine(RentalItem item, DayOverview overview) throws ParseException {
         // For testing late returns.
-        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //Date pastDate = dateFormat.parse("2022-12-04");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date pastDate = dateFormat.parse("2022-12-04");
         // End
         String stringOutput = "";
         double fine = 0;
         double income = overview.getIncome();
         double fineIncome = 0;
         int returns = overview.getLateReturns();
-        //int duration = calcRentalDuration(pastDate);
-        int duration = calcRentalDuration(rentalDate);
+        int duration = calcRentalDuration(pastDate);
+        //int duration = calcRentalDuration(rentalDate);
         int currentStock = item.getStock();
         //item.setStock(currentStock + 1);
         if (duration > 3 && duration > 7) {
