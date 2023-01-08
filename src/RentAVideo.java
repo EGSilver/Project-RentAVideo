@@ -200,7 +200,6 @@ public class RentAVideo {
                         rentalItem = item;
                     }
                     ArrayList<RentalItem> shoppingCartCopy = new ArrayList<>(shoppingCart);
-                    rentalSystem.saveRentalDate(rentalItem);
                     returnOverviewMap.put(customer, shoppingCartCopy);
                     ArrayList<RentalItem> a = returnOverviewMap.get(customer);
                     rentalHistory.addAll(returnOverviewMap.get(customer));
@@ -313,15 +312,20 @@ public class RentAVideo {
         deleteCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (Customer c : customers) {
-                    if (customerListList.getSelectedValue().equals(c.getFirstName() + " " + c.getName())) {
-                        rentalSystem.deleteCustomerFromCsv(c);
-
+                int index = -1;
+                for (int i = 0; i < customers.size(); i++) {
+                    if (customerListList.getSelectedValue().equals(customers.get(i).getFirstName() + " " + customers.get(i).getName())) {
+                        index = i;
                     }
                 }
-                customers.remove(customerListList.getSelectedIndex());
-                customerDefaultListModel.remove(customerListList.getSelectedIndex());
-                customerListList.setModel(customerDefaultListModel);
+
+                if (index != -1) {
+                    Customer c = customers.get(index);
+                    rentalSystem.deleteCustomerFromCsv(c);
+                    customers.remove(index);
+                    customerDefaultListModel.remove(index);
+                    customerListList.setModel(customerDefaultListModel);
+                }
             }
         });
         /**
