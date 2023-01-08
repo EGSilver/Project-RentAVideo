@@ -568,7 +568,7 @@ public class RentAVideo {
 
     public void removeSelectionFromHistory(String specificDate) {
         Iterator iterator = dayEarningsReportMap.entrySet().iterator();
-        String reformattedDate = specificDate.replaceAll("/","-");
+        String reformattedDate = specificDate.replaceAll("/", "-");
         while (iterator.hasNext()) {
             Map.Entry<String, Double> entry = (Map.Entry<String, Double>) iterator.next();
             if (entry.getKey().equals(reformattedDate)) {
@@ -651,9 +651,6 @@ public class RentAVideo {
     }
 
 
-
-
-
     public void createAdminPanelCustomerModel() {
         for (Customer customer : customers) {
             String customerInformation = customer.getFirstName() + " " + customer.getName();
@@ -727,8 +724,18 @@ public class RentAVideo {
         return tree.toString();
     }
 
-    private void initializeReturnOverviewMap() {
-        returnOverviewMap = new HashMap<>();
+    public void lateReturn() throws IOException, ParseException {
+        for (Customer customer : customers) {
+            if (customer.getFirstName().equalsIgnoreCase("vera") && customer.getName().equalsIgnoreCase("peeters")) {
+                Customer vera = customer;
+                for (RentalItem item : rentalMovies) {
+                    if (item.getTitle().equalsIgnoreCase("Tomba")) {
+                        RentalItem tomba = item;
+                        rentalSystem.checkOut(vera, cartManager, overview, databaseManager, tomba);
+                    }
+                }
+            }
+        }
     }
 
 

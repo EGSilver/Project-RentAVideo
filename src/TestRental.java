@@ -12,10 +12,10 @@ public class TestRental {
     DayOverview dayOverview = new DayOverview(0,0,0,0);
     //Customer klant2 = new Customer(0,"Swa","Backeljau","Onbekend", "1962", "xxxxx",0);
     Customer klant1 = new Customer(0000001,"Jef","Vermassen","Kabouterstraat 8 2800 Mechelen","2016-02-09","0499/99/66/33",0);
-    //Game tombRaider = new Game("Tomb Raider",4,3,false,0,"Game","Playstation 1","Eidos Interactive","",9.6, 1);
+    //Game tombRaider = new Game("Tomb Raider",3.5,3,false,0,"Game","Playstation 1","Eidos Interactive","",0);
     RentalItem rentalItem = new RentalItem("",0,0,false, 0, "","",0);
     //Movie theMatrix = new Movie("The Matrix",0,3, false,0, "Movie","1999","Action", "","", 1);
-    Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "", 1);
+    //Movie theLionKing = new Movie("The Lion King",3.5,3,false, 0,"Movie","1994","Adventure", "", "", 1);
     //Movie SnowWhtie = new Movie("Snow White",0,0,false,0,"Movie","","","","",1);
     //rentalSystem.createOverview(currentSystemDate, dayOverview);
     //System.out.println(rentalSystem.viewDayOverview(currentSystemDate));
