@@ -157,7 +157,7 @@ public class RentalSystem {
         databaseManager.removeItemFromArraylist(item, databaseManager);
     }
 
-    public void createRentalHistory(Customer customer, CartManager cartManager) {
+    public void createRentalHistory(Customer customer, ArrayList<RentalItem> cartManager) {
         customerManager.createRentalHistory(customer, cartManager);
     }
 

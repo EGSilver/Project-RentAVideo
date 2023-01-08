@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -122,10 +123,9 @@ public class RentAVideo {
     private DefaultListModel<String> customerDefaultListModel = new DefaultListModel<String>();
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
     private DefaultListModel rentalHistory = new DefaultListModel<>();
-
     private HashMap<String, Double> dayEarningsReportMap = new HashMap<>();
-
-    DefaultListModel<String> dayEarningReport = new DefaultListModel<>();
+    private HashMap<Customer, ArrayList<RentalItem>> returnOverviewMap = new HashMap<>();
+    private DefaultListModel<String> dayEarningReport = new DefaultListModel<>();
     private boolean submitButtonReturnScreenFired = false;
     private boolean enterButtonRentScreenFired = false;
     private Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
@@ -188,7 +188,6 @@ public class RentAVideo {
                 overview.createIncomeOverview(String.valueOf(currentSystemDate));
                 Customer customer = new Customer(0, "", "", "", "", "", 0);
                 String s = "";
-                ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
                 for (int i = 0; i < customers.size(); i++) {
                     String fullName = customers.get(i).getFirstName().toLowerCase() + " " + customers.get(i).getName().toLowerCase();
                     if (textFieldCustomerName.getText().toLowerCase().equals(fullName)) {
@@ -200,13 +199,16 @@ public class RentAVideo {
                     for (RentalItem item : shoppingCart) {
                         rentalItem = item;
                     }
+                    ArrayList<RentalItem> shoppingCartCopy = new ArrayList<>(shoppingCart);
+                    rentalSystem.saveRentalDate(rentalItem);
+                    returnOverviewMap.put(customer, shoppingCartCopy);
+                    ArrayList<RentalItem> a = returnOverviewMap.get(customer);
+                    rentalHistory.addAll(returnOverviewMap.get(customer));
                     try {
                         s = rentalSystem.checkOut(customer, cartManager, overview, databaseManager, rentalItem);
-                        rentalSystem.saveRentalDate(rentalItem);
-                        rentalSystem.createRentalHistory(customer, cartManager);
-                        rentalHistory.addAll(rentalSystem.viewRentalHistory(customer));
-                        //dayEarningReport.addElement(rentalSystem.viewIncomeOverviewTest((java.sql.Date) currentSystemDate, overview));
+                        dayEarningReport.addElement(rentalSystem.viewIncomeOverviewTest((java.sql.Date) currentSystemDate, overview));
                         String incomeReportString = rentalSystem.viewIncomeOverviewTest((java.sql.Date) currentSystemDate, overview);
+                        ArrayList<RentalItem> b = returnOverviewMap.get(customer);
                         String[] parts = incomeReportString.split(":");
                         Double income = Double.valueOf(parts[1].replace("€", ""));
                         dayEarningsReportMap.put(String.valueOf(currentSystemDate), income);
@@ -220,9 +222,8 @@ public class RentAVideo {
                 }
                 textAreaTicketResult.setText(s);
                 rentalSystem.clearShoppingCart();
-                clearCartModel();
+                clearCartModel(); // shoppingCart.clear();
                 shoppingCartList.setModel(createCartModel());
-
             }
         });
         /**
@@ -424,6 +425,7 @@ public class RentAVideo {
             public void actionPerformed(ActionEvent e) {
                 DefaultListModel emptyReplacement = new DefaultListModel<>();
                 returnScreenJlist.setModel(emptyReplacement);
+                rentalHistory.clear();
                 submitButtonReturnScreenFired = true;
                 String[] parts = identifyCustomer().split(" ");
                 try {
@@ -547,16 +549,19 @@ public class RentAVideo {
 
     public void removeSelectionFromCart(RentalItem item) {
         Iterator iterator = shoppingCart.iterator();
-        while (iterator.hasNext()) {
+        int counter = 0;
+        while (iterator.hasNext() && counter < 1) {
             if (iterator.next().equals(item)) {
                 iterator.remove();
+                counter++;
             }
         }
     }
 
     public void createRentalItemReturnList(Customer customer) throws NullPointerException {
         try {
-            rentalHistory.addAll(rentalSystem.viewRentalHistory(customer));
+            out.println(returnOverviewMap.get(customer));
+            rentalHistory.addAll(returnOverviewMap.get(customer));
             returnScreenJlist.setModel(rentalHistory);
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(mainPanel, "You have not rented any items yet.");
@@ -690,6 +695,10 @@ public class RentAVideo {
         }
         tree.append("*\n");
         return tree.toString();
+    }
+
+    private void initializeReturnOverviewMap() {
+        returnOverviewMap = new HashMap<>();
     }
 
 
