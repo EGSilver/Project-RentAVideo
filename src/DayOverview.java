@@ -47,9 +47,6 @@ public class DayOverview {
     }
 
     public Object viewIncomeOverview(String specificDate) {
-        Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(specificDate);
-        System.out.println(specificDate
-                + "\nTotal amount\nof income:\n€" + overviewEarningsOfCertainDate);
         return dayIncomeOverviewMap.get(specificDate);
     }
 
