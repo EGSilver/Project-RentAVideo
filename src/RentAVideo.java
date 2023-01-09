@@ -106,6 +106,7 @@ public class RentAVideo {
     private JButton deleteDailyFromHistoryButton;
     private JButton deleteEarningsFromHistoryButton;
     private JButton removeItemButton;
+    private JTabbedPane allTabs;
     private JTextField textFieldTicketResult;
     private final RentalSystem rentalSystem = new RentalSystem();
     private CartManager cartManager = new CartManager();
@@ -437,6 +438,9 @@ public class RentAVideo {
         submitButtonReturnScreen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                allTabs.setEnabledAt(0,false);
+                allTabs.setEnabledAt(1,false);
+                allTabs.setEnabledAt(3,false);
                 textAreaReturnScreen.setText("");
                 returnScreenJlist.setModel(emptyModel);
                 rentalHistory.clear();
@@ -469,6 +473,11 @@ public class RentAVideo {
                         }
                     } catch (ArrayIndexOutOfBoundsException q) {
                     }
+                }
+                if (rentalHistory.isEmpty()) {
+                    allTabs.setEnabledAt(0, true);
+                    allTabs.setEnabledAt(1, true);
+                    allTabs.setEnabledAt(3, true);
                 }
             }
         });
@@ -530,7 +539,16 @@ public class RentAVideo {
                 } catch (ArrayIndexOutOfBoundsException ob) {
                     JOptionPane.showMessageDialog(mainPanel, "Please select an item first.");
                 }
-                returnOverviewMap.remove(customer);
+                for (Customer c : customers) {
+                    if (textFieldCustomerNameReturnScreen.getText().contains(c.getName())) {
+                        returnOverviewMap.remove(c);
+                    }
+                }
+                if (rentalHistory.isEmpty()) {
+                    allTabs.setEnabledAt(0, true);
+                    allTabs.setEnabledAt(1, true);
+                    allTabs.setEnabledAt(3, true);
+                }
                 shoppingCart.clear();
                 shoppingCartList.setModel(emptyModel);
                 returnScreenJlist.setModel(rentalHistory);
