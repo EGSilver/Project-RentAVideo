@@ -776,7 +776,7 @@
                   </scrollpane>
                 </children>
               </grid>
-              <grid id="4470" binding="moviePanel" layout-manager="GridLayoutManager" row-count="10" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="4470" binding="moviePanel" layout-manager="GridLayoutManager" row-count="12" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="10" bottom="0" right="10"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -788,7 +788,7 @@
                 <children>
                   <component id="e2458" class="javax.swing.JLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Add Movie"/>
@@ -796,7 +796,7 @@
                   </component>
                   <component id="ecacb" class="javax.swing.JTextField" binding="TextFieldMovieTitle">
                     <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -806,7 +806,7 @@
                   </component>
                   <component id="c8393" class="javax.swing.JTextField" binding="textFieldMovieRentalPrice">
                     <constraints>
-                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -814,7 +814,7 @@
                   </component>
                   <component id="7f7f4" class="javax.swing.JTextField" binding="textFieldMovieRentalDuration">
                     <constraints>
-                      <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -822,7 +822,7 @@
                   </component>
                   <component id="44873" class="javax.swing.JTextField" binding="textFieldMovieStock">
                     <constraints>
-                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -830,7 +830,7 @@
                   </component>
                   <component id="785a8" class="javax.swing.JTextField" binding="textFieldMovieType">
                     <constraints>
-                      <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -838,7 +838,7 @@
                   </component>
                   <component id="a3c2" class="javax.swing.JTextField" binding="textFieldMovieReleaseDate">
                     <constraints>
-                      <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -846,7 +846,7 @@
                   </component>
                   <component id="a044" class="javax.swing.JLabel" binding="labelMovieTitle">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Title"/>
@@ -854,7 +854,7 @@
                   </component>
                   <component id="a708b" class="javax.swing.JLabel" binding="labelMovieRentalPrice">
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Rental Price"/>
@@ -862,7 +862,7 @@
                   </component>
                   <component id="882c6" class="javax.swing.JLabel" binding="labelMovieRentalDuration">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Rental Duration"/>
@@ -870,7 +870,7 @@
                   </component>
                   <component id="57734" class="javax.swing.JLabel" binding="labelMovieStock">
                     <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Stock"/>
@@ -878,7 +878,7 @@
                   </component>
                   <component id="9ee2" class="javax.swing.JLabel" binding="labelMovieType">
                     <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Type"/>
@@ -886,7 +886,7 @@
                   </component>
                   <component id="1a4d5" class="javax.swing.JLabel" binding="labelMovieReleaseDate">
                     <constraints>
-                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Release Date"/>
@@ -894,7 +894,7 @@
                   </component>
                   <component id="32a7d" class="javax.swing.JLabel" binding="labelMovieDescription">
                     <constraints>
-                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Description"/>
@@ -902,7 +902,7 @@
                   </component>
                   <component id="7ba83" class="javax.swing.JLabel" binding="labelMovieEsrbRating">
                     <constraints>
-                      <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Esrb Rating"/>
@@ -910,7 +910,7 @@
                   </component>
                   <component id="5a732" class="javax.swing.JTextField" binding="textFieldMovieDescription">
                     <constraints>
-                      <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -918,7 +918,7 @@
                   </component>
                   <component id="b929e" class="javax.swing.JTextField" binding="textFieldMovieEsrbRating">
                     <constraints>
-                      <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
@@ -926,7 +926,7 @@
                   </component>
                   <component id="3f7b8" class="javax.swing.JButton" binding="addMovieButton">
                     <constraints>
-                      <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Add Movie / Game"/>
@@ -944,7 +944,7 @@
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <grid id="4f642" binding="gamePanel" layout-manager="GridLayoutManager" row-count="10" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="4f642" binding="gamePanel" layout-manager="GridLayoutManager" row-count="11" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="10" bottom="0" right="10"/>
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -956,31 +956,13 @@
                 <children>
                   <component id="a2967" class="javax.swing.JLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Add Game"/>
                     </properties>
                   </component>
-                  <component id="a5d1c" class="javax.swing.JTextField" binding="textFieldGameTitle">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value=""/>
-                    </properties>
-                  </component>
                   <component id="e92d7" class="javax.swing.JTextField" binding="textFieldGameRentalPrice">
-                    <constraints>
-                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties/>
-                  </component>
-                  <component id="64803" class="javax.swing.JTextField" binding="textFieldGameRentalDuration">
                     <constraints>
                       <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -988,15 +970,15 @@
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="fc375" class="javax.swing.JTextField" binding="textFieldGameType">
+                  <component id="64803" class="javax.swing.JTextField" binding="textFieldGameRentalDuration">
                     <constraints>
-                      <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="1afeb" class="javax.swing.JTextField" binding="textFieldGamePlatform">
+                  <component id="fc375" class="javax.swing.JTextField" binding="textFieldGameType">
                     <constraints>
                       <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -1004,71 +986,7 @@
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="d1c7c" class="javax.swing.JLabel" binding="labelGameTitle">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Title"/>
-                    </properties>
-                  </component>
-                  <component id="17310" class="javax.swing.JLabel" binding="labelGameRentalPrice">
-                    <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Rental Price"/>
-                    </properties>
-                  </component>
-                  <component id="3b3bb" class="javax.swing.JLabel" binding="labelGameRentalDuration">
-                    <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Rental Duration"/>
-                    </properties>
-                  </component>
-                  <component id="aad21" class="javax.swing.JLabel" binding="labelGameStock">
-                    <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Stock"/>
-                    </properties>
-                  </component>
-                  <component id="40b19" class="javax.swing.JLabel" binding="labelGameType">
-                    <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Type"/>
-                    </properties>
-                  </component>
-                  <component id="8c8fa" class="javax.swing.JLabel" binding="labelGamePlatform">
-                    <constraints>
-                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Platform"/>
-                    </properties>
-                  </component>
-                  <component id="9fec5" class="javax.swing.JLabel" binding="labelGamePublisher">
-                    <constraints>
-                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Publisher"/>
-                    </properties>
-                  </component>
-                  <component id="fd85d" class="javax.swing.JLabel" binding="labelGameEsrbRating">
-                    <constraints>
-                      <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Esrb Rating"/>
-                    </properties>
-                  </component>
-                  <component id="5fd89" class="javax.swing.JTextField" binding="textFieldGamePublisher">
+                  <component id="1afeb" class="javax.swing.JTextField" binding="textFieldGamePlatform">
                     <constraints>
                       <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -1076,7 +994,63 @@
                     </constraints>
                     <properties/>
                   </component>
-                  <component id="a76b2" class="javax.swing.JTextField" binding="textFieldGameEsrbRating">
+                  <component id="17310" class="javax.swing.JLabel" binding="labelGameRentalPrice">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Rental Price"/>
+                    </properties>
+                  </component>
+                  <component id="3b3bb" class="javax.swing.JLabel" binding="labelGameRentalDuration">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Rental Duration"/>
+                    </properties>
+                  </component>
+                  <component id="aad21" class="javax.swing.JLabel" binding="labelGameStock">
+                    <constraints>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Stock"/>
+                    </properties>
+                  </component>
+                  <component id="40b19" class="javax.swing.JLabel" binding="labelGameType">
+                    <constraints>
+                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Type"/>
+                    </properties>
+                  </component>
+                  <component id="8c8fa" class="javax.swing.JLabel" binding="labelGamePlatform">
+                    <constraints>
+                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Platform"/>
+                    </properties>
+                  </component>
+                  <component id="9fec5" class="javax.swing.JLabel" binding="labelGamePublisher">
+                    <constraints>
+                      <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Publisher"/>
+                    </properties>
+                  </component>
+                  <component id="fd85d" class="javax.swing.JLabel" binding="labelGameEsrbRating">
+                    <constraints>
+                      <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Esrb Rating"/>
+                    </properties>
+                  </component>
+                  <component id="5fd89" class="javax.swing.JTextField" binding="textFieldGamePublisher">
                     <constraints>
                       <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -1084,9 +1058,17 @@
                     </constraints>
                     <properties/>
                   </component>
+                  <component id="a76b2" class="javax.swing.JTextField" binding="textFieldGameEsrbRating">
+                    <constraints>
+                      <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
                   <component id="163d6" class="javax.swing.JButton" binding="addGameButton">
                     <constraints>
-                      <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <text value="Add Movie / Game"/>
@@ -1094,11 +1076,29 @@
                   </component>
                   <component id="2c615" class="javax.swing.JTextField" binding="textFieldGameStock">
                     <constraints>
-                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                      <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
                     <properties/>
+                  </component>
+                  <component id="a5d1c" class="javax.swing.JTextField" binding="textFieldGameTitle">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="d1c7c" class="javax.swing.JLabel" binding="labelGameTitle">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Title"/>
+                    </properties>
                   </component>
                 </children>
               </grid>

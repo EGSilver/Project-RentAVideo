@@ -95,9 +95,10 @@ public class DatabaseManager {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
+                int clientNumber = Integer.parseInt(parts[6]);
                 if (!(parts[0].equals(customer.getFirstName()) && parts[1].equals(customer.getName()))) {
                     int yearsSubscribed = Integer.parseInt(parts[5]);
-                    Customer remainingCustomer = new Customer(0, parts[0], parts[1], parts[3], parts[2], parts[4], yearsSubscribed);
+                    Customer remainingCustomer = new Customer(clientNumber, parts[0], parts[1], parts[3], parts[2], parts[4], yearsSubscribed);
                     remainingCustomers.add(remainingCustomer);
                 }
             }

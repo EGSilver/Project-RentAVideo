@@ -157,7 +157,6 @@ public class RentAVideo {
                 } else {
                     List<RentalItem> selectedItems = databaseList.getSelectedValuesList();
                     for (RentalItem item : selectedItems) {
-
                         try {
                             String underAgedAndOutOfStockMessage = rentalSystem.addItemToCart(item, customer, cartManager);
                             if (underAgedAndOutOfStockMessage.equalsIgnoreCase("This item is out of stock")) {
