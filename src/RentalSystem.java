@@ -103,11 +103,11 @@ public class RentalSystem {
     }
 
     public String addItemToCart(RentalItem item, Customer customer, CartManager cart) throws IOException {
-        return cart.addItemToCart(item, customer);
+        return cart.addItemToRentalCart(item, customer);
     }
 
     public String viewCart(CartManager cart) {
-        return cart.viewCart();
+        return cart.viewRentalCart();
     }
 
     public ArrayList<RentalItem> getCart(CartManager cart) {
@@ -139,7 +139,7 @@ public class RentalSystem {
     }
 
     public void addCustomerToDatabase(Customer customer) throws IOException {
-        databaseManager.addCustomerToDatabase(customer);
+        databaseManager.addCustomerToCsv(customer);
     }
 
     public void deleteCustomerFromCsv(Customer customer) {
@@ -194,7 +194,7 @@ public class RentalSystem {
     }
 
     public String viewIncomeOverviewTest(Date currentSystemDate, DayOverview dayOverview) {
-        return dayOverview.viewIncomeOverviewTest(currentSystemDate, dayOverview);
+        return dayOverview.viewIncomeOverviewTestLateReturn(currentSystemDate, dayOverview);
     }
 
     public void createIncomeOverviewTest(Date currentSystemDate, DayOverview dayOverview) {

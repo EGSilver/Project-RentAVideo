@@ -581,6 +581,9 @@ public class RentAVideo {
 
             }
         });
+        /**
+         * Removes the selected item from the shopping cart and updates the cart display.
+         */
         removeItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -588,6 +591,9 @@ public class RentAVideo {
                 createCartModel();
             }
         });
+        /**
+         * Removes the earnings with the specified date from the earnings history and updates the display.
+         */
         deleteEarningsFromHistoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -629,6 +635,11 @@ public class RentAVideo {
         }
     }
 
+    /**
+     * Validates the date format of the specified date.
+     * @param date the date to be validated
+     * @return true if the date is in the correct format, false otherwise
+     */
     public boolean matchDatePattern(String date) {
         String incomingDate = date;
         String pattern = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$";
@@ -723,6 +734,10 @@ public class RentAVideo {
         return customer;
     }
 
+    /**
+     * Creates a new default list model for the shopping cart list.
+     * The model is populated with the items in the shopping cart.
+     */
     public DefaultListModel<RentalItem> createCartModel() {
         DefaultListModel<RentalItem> model = new DefaultListModel<>();
         for (RentalItem item : shoppingCart) {
@@ -768,6 +783,12 @@ public class RentAVideo {
         return date;
     }
 
+    /**
+     * This method is for testing purposes and should only be commented out after the initial test has been completed.
+     *
+     * Creates a new default list model for the shopping cart list.
+     * The model is populated with the items in the shopping cart with rental dates from the past.
+     */
     public void testLateReturn() throws IOException, ParseException {
         Date date = new java.util.Date();
         long fifteenDaysInMilliseconds = 24L * 24 * 60 * 60 * 1000;

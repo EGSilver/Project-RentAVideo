@@ -62,7 +62,7 @@ public class DatabaseManager {
         return games;
     }
 
-    public void addCustomerToDatabase(Customer customer) throws IOException {
+    public void addCustomerToCsv(Customer customer) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(".\\data\\customers.csv"));
         String line;
         boolean customerExists = false;

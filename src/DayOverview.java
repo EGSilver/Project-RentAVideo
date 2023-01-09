@@ -50,7 +50,7 @@ public class DayOverview {
         return dayIncomeOverviewMap.get(specificDate);
     }
 
-    public String viewIncomeOverviewTest(Date specificDate, DayOverview overview) {
+    public String viewIncomeOverviewTestLateReturn(Date specificDate, DayOverview overview) {
         String date = String.valueOf(specificDate);
         Double overviewEarningsOfCertainDate = dayIncomeOverviewMap.get(date);
         return specificDate + "\nTotal amount\nof income:\n€" + overviewEarningsOfCertainDate;

@@ -18,7 +18,7 @@ public class CartManager {
     private DecimalFormat decimalFormat = new DecimalFormat("#.00");
     private Date currentSystemDate = new java.sql.Date(System.currentTimeMillis());
 
-    public String addItemToCart(RentalItem item, Customer customer) throws IOException {
+    public String addItemToRentalCart(RentalItem item, Customer customer) throws IOException {
         String outOfStockMessage = "";
         if (databaseManager.getStockFromCsv(item) <= 0) {
             outOfStockMessage += "This item is out of stock";
@@ -30,7 +30,7 @@ public class CartManager {
         return outOfStockMessage;
     }
 
-    public String viewCart() {
+    public String viewRentalCart() {
         String s = "";
         for (RentalItem item : itemCart) {
             s += item.getTitle() + "\n";
@@ -92,7 +92,6 @@ public class CartManager {
      * @param item The rental item that was returned late.
      * @param overview The overview of the day on which the item was returned.
      * @param rentalDate The date on which the item was rented.
-     * @return A string indicating the number of days the item was late and the calculated fine amount.
      */
     public String returnItemAndCalculateFine(RentalItem item, DayOverview overview, java.util.Date rentalDate) throws ParseException {
         // For testing late returns.
