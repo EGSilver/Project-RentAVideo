@@ -106,7 +106,6 @@ public class RentAVideo {
     private JButton deleteDailyFromHistoryButton;
     private JButton deleteEarningsFromHistoryButton;
     private JButton removeItemButton;
-    private JTextArea textAreaChristmasTree;
     private JTextField textFieldTicketResult;
     private final RentalSystem rentalSystem = new RentalSystem();
     private CartManager cartManager = new CartManager();
@@ -442,32 +441,35 @@ public class RentAVideo {
                 returnScreenJlist.setModel(emptyModel);
                 rentalHistory.clear();
                 submitButtonReturnScreenFired = true;
-                String[] parts = identifyCustomer().split(" ");
-                try {
-                    if (parts.length > 2) {
-                        textFieldCustomerNameReturnScreen.setText(parts[0] + " " + parts[1] + " " + parts[2]);
-                    } else {
-                        textFieldCustomerNameReturnScreen.setText(parts[0] + " " + parts[1]);
-                    }
-                } catch (ArrayIndexOutOfBoundsException exception) {
+                if (textFieldCustomerNameReturnScreen.getText().equals("")) {
                     JOptionPane.showMessageDialog(mainPanel, "An entry for the provided name was not found in the database. Please enter your full name or register as a new customer before proceeding.");
-
-                }
-                try {
-                    String firstName = parts[0];
-                    String[] lastNameParts = Arrays.copyOfRange(parts, 1, parts.length);
-                    String lastName = lastNameParts[0];
-                    for (int i = 1; i < lastNameParts.length; i++) {
-                        lastName += " " + lastNameParts[i];
-                    }
-                    for (Customer customer : customers) {
-                        if (customer.getFirstName().equalsIgnoreCase(firstName) && customer.getName().equalsIgnoreCase(lastName)) {
-                            createRentalItemReturnList(customer);
+                } else {
+                    String[] parts = identifyCustomer().split(" ");
+                    try {
+                        if (parts.length > 2) {
+                            textFieldCustomerNameReturnScreen.setText(parts[0] + " " + parts[1] + " " + parts[2]);
+                        } else {
+                            textFieldCustomerNameReturnScreen.setText(parts[0] + " " + parts[1]);
                         }
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        JOptionPane.showMessageDialog(mainPanel, "An entry for the provided name was not found in the database. Please enter your full name or register as a new customer before proceeding.");
+
                     }
-                } catch (ArrayIndexOutOfBoundsException q) {
+                    try {
+                        String firstName = parts[0];
+                        String[] lastNameParts = Arrays.copyOfRange(parts, 1, parts.length);
+                        String lastName = lastNameParts[0];
+                        for (int i = 1; i < lastNameParts.length; i++) {
+                            lastName += " " + lastNameParts[i];
+                        }
+                        for (Customer customer : customers) {
+                            if (customer.getFirstName().equalsIgnoreCase(firstName) && customer.getName().equalsIgnoreCase(lastName)) {
+                                createRentalItemReturnList(customer);
+                            }
+                        }
+                    } catch (ArrayIndexOutOfBoundsException q) {
+                    }
                 }
-                //returnScreenJlist.setModel(rentalHistory);
             }
         });
         /**
@@ -488,7 +490,9 @@ public class RentAVideo {
                 } else if (matchDatePattern(replaceDate)) {
                     try {
                         dayReportModel.addElement(rentalSystem.viewDayOverview(replaceDate));
-                        dailyReportTextArea.setText(String.valueOf(dayReportModel));
+                        String resultOfDayReportModel = String.valueOf(dayReportModel);
+                        String replacedResult = resultOfDayReportModel.replace("[", "").replace("]", "");
+                        dailyReportTextArea.setText(replacedResult);
                     } catch (NullPointerException q) {
                         JOptionPane.showMessageDialog(mainPanel, "No data found for the specified date.");
                     }
@@ -511,7 +515,11 @@ public class RentAVideo {
             public void actionPerformed(ActionEvent e) {
                 RentalItem item = (RentalItem) returnScreenJlist.getSelectedValue();
                 try {
-                    textAreaReturnScreen.setText(rentalSystem.returnItem(item, overview, cartManager, getItemRentalDate(item)));
+                    if (rentalSystem.returnItem(item, overview, cartManager, getItemRentalDate(item)).equals(null)) {
+                        JOptionPane.showMessageDialog(mainPanel,"Please select an item first.");
+                    } else {
+                        textAreaReturnScreen.setText(rentalSystem.returnItem(item, overview, cartManager, getItemRentalDate(item)));
+                    }
                 } catch (IOException | ParseException ex) {
                     JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
                 } catch (NullPointerException np) {
@@ -522,6 +530,9 @@ public class RentAVideo {
                 } catch (ArrayIndexOutOfBoundsException ob) {
                     JOptionPane.showMessageDialog(mainPanel, "Please select an item first.");
                 }
+                returnOverviewMap.remove(customer);
+                shoppingCart.clear();
+                shoppingCartList.setModel(emptyModel);
                 returnScreenJlist.setModel(rentalHistory);
             }
         });
@@ -620,7 +631,7 @@ public class RentAVideo {
      *
      * @return the identified customer's name, or an empty string if no match is found
      */
-    public String identifyCustomer() {
+    public String identifyCustomer() throws ArrayIndexOutOfBoundsException {
         String[] parts = {};
         String identifiedCustomer = "";
         if (submitButtonReturnScreenFired) {
@@ -628,27 +639,31 @@ public class RentAVideo {
         } else if (enterButtonRentScreenFired) {
             parts = textFieldCustomerName.getText().toLowerCase().split(" ");
         }
-        String firstName = parts[0];
-        String[] lastNameParts = Arrays.copyOfRange(parts, 1, parts.length);
-        String lastName = lastNameParts[0];
-        for (int i = 1; i < lastNameParts.length; i++) {
-            lastName += " " + lastNameParts[i];
-        }
-        for (int i = 0; i < customers.size(); i++) {
-            if (firstName.toLowerCase().equals(customers.get(i).getFirstName().toLowerCase()) && lastName.toLowerCase().equals(customers.get(i).getName().toLowerCase())) {
-                String yearSubscribed = String.valueOf(customers.get(i).getYearsSubscribed());
-                String clientNumber = String.valueOf(customers.get(i).getClientNumber());
-                identifiedCustomer = customers.get(i).getFirstName() + " " + customers.get(i).getName();
-                if (enterButtonRentScreenFired) {
-                    enterButtonRentScreenFired = false;
-                    textFieldYearsSubscribed.setText(yearSubscribed);
-                    textFieldCustomerNumber.setText(clientNumber);
-                } else if (submitButtonReturnScreenFired) {
-                    submitButtonReturnScreenFired = false;
-                    textFieldCustomerYearsSubscribedReturnScreen.setText(yearSubscribed);
-                    textFieldCustomerNumberReturnScreen.setText(clientNumber);
+        try {
+            String firstName = parts[0];
+            String[] lastNameParts = Arrays.copyOfRange(parts, 1, parts.length);
+            String lastName = lastNameParts[0];
+            for (int i = 1; i < lastNameParts.length; i++) {
+                lastName += " " + lastNameParts[i];
+            }
+            for (int i = 0; i < customers.size(); i++) {
+                if (firstName.toLowerCase().equals(customers.get(i).getFirstName().toLowerCase()) && lastName.toLowerCase().equals(customers.get(i).getName().toLowerCase())) {
+                    String yearSubscribed = String.valueOf(customers.get(i).getYearsSubscribed());
+                    String clientNumber = String.valueOf(customers.get(i).getClientNumber());
+                    identifiedCustomer = customers.get(i).getFirstName() + " " + customers.get(i).getName();
+                    if (enterButtonRentScreenFired) {
+                        enterButtonRentScreenFired = false;
+                        textFieldYearsSubscribed.setText(yearSubscribed);
+                        textFieldCustomerNumber.setText(clientNumber);
+                    } else if (submitButtonReturnScreenFired) {
+                        submitButtonReturnScreenFired = false;
+                        textFieldCustomerYearsSubscribedReturnScreen.setText(yearSubscribed);
+                        textFieldCustomerNumberReturnScreen.setText(clientNumber);
+                    }
                 }
             }
+        } catch (ArrayIndexOutOfBoundsException e) {
+
         }
         return identifiedCustomer;
     }
@@ -728,25 +743,30 @@ public class RentAVideo {
     }
 
     public Date getItemRentalDate(RentalItem inboundItem) {
-            Date date = new Date();
-            for (Map.Entry<RentalItem, Date> entry : rentalDate.entrySet()) {
-                date = entry.getValue();
-            }
-            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            return date;
+        Date date = new Date();
+        for (Map.Entry<RentalItem, Date> entry : rentalDate.entrySet()) {
+            date = entry.getValue();
+        }
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return date;
     }
 
     public void testLateReturn() throws IOException, ParseException {
+        Date date = new java.util.Date();
+        long fifteenDaysInMilliseconds = 24L * 24 * 60 * 60 * 1000;
+        java.util.Date fifteenDaysAgo = new java.util.Date(date.getTime() - fifteenDaysInMilliseconds);
         for (Customer customer : customers) {
             if (customer.getFirstName().equalsIgnoreCase("vera") && customer.getName().equalsIgnoreCase("peeters")) {
                 Customer vera = customer;
                 for (RentalItem item : rentalGames) {
                     if (item.getTitle().equalsIgnoreCase("Tomba")) {
                         RentalItem tomba = item;
-                        rentalSystem.addItemToCart(tomba,vera,cartManager);
+                        rentalSystem.addItemToCart(tomba, vera, cartManager);
                         rentalSystem.checkOut(vera, cartManager, overview, databaseManager, tomba);
                         returnOverviewMap.put(customer, cartManager.getItemCart());
                         rentalHistory.addAll(returnOverviewMap.get(customer));
+                        rentalDate.put(item, fifteenDaysAgo);
+
                     }
                 }
             }
@@ -759,7 +779,6 @@ public class RentAVideo {
     }
 
     public void run(RentalSystem rentalSystem) throws IOException, ParseException {
-        out.println(christmasTree());
         rentalDate.putAll(rentalSystem.getRentalDates());
         customers.addAll(loadCustomersFromCsv());
         loadMovies();
@@ -773,6 +792,7 @@ public class RentAVideo {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         //testLateReturn();
+        out.println("\nWelcome to the RentAVideo project of Dean Vervaeck!\n" + christmasTree());
     }
 
     private void createUIComponents() {

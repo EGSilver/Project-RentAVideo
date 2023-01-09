@@ -88,6 +88,11 @@ public class CartManager {
     /**
     The returnItemAndCalculateFine function processes the return of a rental item and calculates any applicable fines.
     It also updates the day's overview with relevant information and updates the stock of the returned item.
+     *
+     * @param item The rental item that was returned late.
+     * @param overview The overview of the day on which the item was returned.
+     * @param rentalDate The date on which the item was rented.
+     * @return A string indicating the number of days the item was late and the calculated fine amount.
      */
     public String returnItemAndCalculateFine(RentalItem item, DayOverview overview, java.util.Date rentalDate) throws ParseException {
         // For testing late returns.
@@ -103,35 +108,18 @@ public class CartManager {
         //int duration = calcRentalDuration(rentalDate);
         int currentStock = item.getStock();
         //item.setStock(currentStock + 1);
-        if (duration > 3 && duration > 7) {
-            fine = duration * item.getRentalPrice();
-            fineIncome = fine;
-            stringOutput = "This item was returned late by "
-                    + (duration - item.getRentalDuration())
-                    + " day(s). The calculated fine is = €"
-                    + fine;
-            overview.setLateReturns((returns) +1);
-            overview.setIncome((income) + fineIncome);
-        } else if (duration > 3 && duration > 14) {
-            fine = (duration * item.getRentalPrice() * 0.1);
-            fineIncome = fine;
-            stringOutput = "This item was returned late by "
-                    + (duration - item.getRentalDuration())
-                    + " day(s). The calculated fine is = €"
-                    + fine;
-            overview.setLateReturns((returns) +1);
-            overview.setIncome((income) + fineIncome);
-        } else if (duration > 3 && duration > 21) {
-            fine = (duration * (item.getRentalPrice() * 2 ) * 0.05);
-            fineIncome = fine;
-            stringOutput = "This item was returned late by "
-                    + (duration - item.getRentalDuration())
-                    + " day(s). The calculated fine is = €"
-                    + fine;
-            overview.setLateReturns((returns) +1);
-            overview.setIncome((income) + fineIncome);
-        } else {
+        if (duration <= 3) {
             stringOutput = "This item was returned on time";
+        } else {
+            int weeksLate = (duration - 3) / 7;
+            fine = weeksLate * 15 + (duration - 3) * item.getRentalPrice() * 0.5;
+            fineIncome = fine;
+            stringOutput = "This item was returned late by\n"
+                    + (duration - item.getRentalDuration())
+                    + " day(s).\nThe calculated fine is:\n€"
+                    + fine;
+            overview.setLateReturns((returns) +1);
+            overview.setIncome((income) + fineIncome);
         }
         return stringOutput;
     }
