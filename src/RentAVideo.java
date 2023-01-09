@@ -150,6 +150,7 @@ public class RentAVideo {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String exampleText = "Enter first and last name";
+                Customer customer = getCustomer();
                 if (textFieldCustomerName.getText().equalsIgnoreCase(exampleText) || textFieldCustomerName.getText().equals("")) {
                     JOptionPane.showMessageDialog(mainPanel, "Please provide your first and last name: This information is required before you can continue.");
                 } else {
@@ -523,7 +524,7 @@ public class RentAVideo {
             public void actionPerformed(ActionEvent e) {
                 RentalItem item = (RentalItem) returnScreenJlist.getSelectedValue();
                 try {
-                    if (rentalSystem.returnItem(item, overview, cartManager, getItemRentalDate(item)).equals(null)) {
+                    if (getItemRentalDate(item) == null) {
                         JOptionPane.showMessageDialog(mainPanel,"Please select an item first.");
                     } else {
                         textAreaReturnScreen.setText(rentalSystem.returnItem(item, overview, cartManager, getItemRentalDate(item)));

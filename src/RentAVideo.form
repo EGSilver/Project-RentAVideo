@@ -47,7 +47,9 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <text value="dd/mm/yyyy"/>
+                    </properties>
                   </component>
                   <component id="c4939" class="javax.swing.JTextField" binding="textFieldNewCustomerAdres">
                     <constraints>

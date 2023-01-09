@@ -1,5 +1,6 @@
 import java.time.Period;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Customer {
 
@@ -78,7 +79,13 @@ public class Customer {
         this.yearsSubscribed = yearsSubscribed;
     }
     public boolean checkUnderaged() {
-        LocalDate dateOfBirth = LocalDate.parse(birthdate);
+        String formattedBirthdate = birthdate;
+        String x = formattedBirthdate.replaceAll("/","-");
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate date = LocalDate.parse(x, inputFormatter);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String outputString = date.format(outputFormatter);
+        LocalDate dateOfBirth = LocalDate.parse(outputString);
         Period age = Period.between(dateOfBirth, LocalDate.now());
         if (age.getYears() < 18) {
             return true;

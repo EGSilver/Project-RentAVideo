@@ -1,8 +1,9 @@
-3.5,3,false,15,The Matrix,1999,Action,Movie, ,M,1
-3.5,3,false,15,The Lion King,1994,Animation,Movie, ,E,1
-3.5,3,false,15,The Lake House,2006,Drama,Movie, ,M,0
-3.5,3,false,15,The Exorcist,1973,Horror,Movie, ,A,0
-3.5,3,false,15,Red Dragon,2002,Thriller,Movie, ,M,0
-3.5,3,false,15,Bambi,1947,Animation,Movie, ,E,0
+3.5,3,false,8,The Lion King,1994,Animation,Movie, ,E,1
+3.5,3,false,16,The Lake House,2006,Drama,Movie, ,M,0
+3.5,3,false,12,The Matrix,1999,Action,Movie, ,M,0
+3.5,3,false,14,The Exorcist,1973,Horror,Movie, ,A,0
+3.5,3,false,24,Red Dragon,2002,Thriller,Movie, ,M,0
+3.5,3,false,18,Bambi,1947,Animation,Movie, ,E,0
 3.5,3,false,15,Venom,2018,Action,Movie, ,M,0
 3.5,3,false,15,Aladdin,1992,Animation,Movie, ,E,0
+3.5,3,false,15,8 Mile,2003,placeholder,Movie,,7.1,0
