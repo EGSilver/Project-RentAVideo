@@ -111,8 +111,6 @@ public class RentAVideo {
     private final RentalSystem rentalSystem = new RentalSystem();
     private CartManager cartManager = new CartManager();
     private ArrayList<Customer> customers = new ArrayList<>();
-
-    private final CustomerManager customerManager = new CustomerManager(customers);
     private final DatabaseManager databaseManager = new DatabaseManager();
     private DayOverview overview = new DayOverview(0, 0, 0, 0);
     private ArrayList<RentalItem> shoppingCart = rentalSystem.getCart(cartManager);
@@ -440,6 +438,7 @@ public class RentAVideo {
                 allTabs.setEnabledAt(0,false);
                 allTabs.setEnabledAt(1,false);
                 allTabs.setEnabledAt(3,false);
+                submitButtonReturnScreen.setEnabled(false);
                 textAreaReturnScreen.setText("");
                 returnScreenJlist.setModel(emptyModel);
                 rentalHistory.clear();
@@ -477,6 +476,7 @@ public class RentAVideo {
                     allTabs.setEnabledAt(0, true);
                     allTabs.setEnabledAt(1, true);
                     allTabs.setEnabledAt(3, true);
+                    submitButtonReturnScreen.setEnabled(true);
                 }
             }
         });
@@ -547,6 +547,7 @@ public class RentAVideo {
                     allTabs.setEnabledAt(0, true);
                     allTabs.setEnabledAt(1, true);
                     allTabs.setEnabledAt(3, true);
+                    submitButtonReturnScreen.setEnabled(true);
                 }
                 shoppingCart.clear();
                 shoppingCartList.setModel(emptyModel);
