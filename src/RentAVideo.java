@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -123,7 +122,9 @@ public class RentAVideo {
     private DefaultListModel<String> customerDefaultListModel = new DefaultListModel<String>();
     private DefaultListModel<RentalItem> defaultModel = new DefaultListModel<>();
     private DefaultListModel rentalHistory = new DefaultListModel<>();
+    private DefaultListModel emptyModel = new DefaultListModel<>();
     private HashMap<String, Double> dayEarningsReportMap = new HashMap<>();
+    private HashMap<RentalItem, Date> rentalDate = new HashMap<>();
     private HashMap<Customer, ArrayList<RentalItem>> returnOverviewMap = new HashMap<>();
     private DefaultListModel<String> dayEarningReport = new DefaultListModel<>();
     private boolean submitButtonReturnScreenFired = false;
@@ -150,7 +151,7 @@ public class RentAVideo {
         addToCartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String exampleText = "Enter your first and last name";
+                String exampleText = "Enter first and last name";
                 if (textFieldCustomerName.getText().equalsIgnoreCase(exampleText) || textFieldCustomerName.getText().equals("")) {
                     JOptionPane.showMessageDialog(mainPanel, "Please provide your first and last name: This information is required before you can continue.");
                 } else {
@@ -222,6 +223,7 @@ public class RentAVideo {
                 rentalSystem.clearShoppingCart();
                 clearCartModel(); // shoppingCart.clear();
                 shoppingCartList.setModel(createCartModel());
+                returnScreenJlist.setModel(emptyModel);
             }
         });
         /**
@@ -302,6 +304,7 @@ public class RentAVideo {
                     textFieldNewCustomerEmail.setText("");
                     overview.setNewMembers(overview.getNewMembers() + 1);
                     customerListList.setModel(customerDefaultListModel);
+                    returnScreenJlist.setModel(emptyModel);
                 }
             }
         });
@@ -414,7 +417,7 @@ public class RentAVideo {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) throws ArrayIndexOutOfBoundsException {
-                DefaultListModel emptyModel = new DefaultListModel<>();
+                returnScreenJlist.setModel(emptyModel);
                 shoppingCart.clear();
                 shoppingCartList.setModel(emptyModel);
                 enterButtonRentScreenFired = true;
@@ -436,8 +439,7 @@ public class RentAVideo {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textAreaReturnScreen.setText("");
-                DefaultListModel emptyReplacement = new DefaultListModel<>();
-                returnScreenJlist.setModel(emptyReplacement);
+                returnScreenJlist.setModel(emptyModel);
                 rentalHistory.clear();
                 submitButtonReturnScreenFired = true;
                 String[] parts = identifyCustomer().split(" ");
@@ -509,7 +511,7 @@ public class RentAVideo {
             public void actionPerformed(ActionEvent e) {
                 RentalItem item = (RentalItem) returnScreenJlist.getSelectedValue();
                 try {
-                    textAreaReturnScreen.setText(rentalSystem.returnItem(item, overview, cartManager));
+                    textAreaReturnScreen.setText(rentalSystem.returnItem(item, overview, cartManager, getItemRentalDate(item)));
                 } catch (IOException | ParseException ex) {
                     JOptionPane.showMessageDialog(mainPanel, "There was a problem while processing your order, please try again later.");
                 } catch (NullPointerException np) {
@@ -725,6 +727,15 @@ public class RentAVideo {
         return tree.toString();
     }
 
+    public Date getItemRentalDate(RentalItem inboundItem) {
+            Date date = new Date();
+            for (Map.Entry<RentalItem, Date> entry : rentalDate.entrySet()) {
+                date = entry.getValue();
+            }
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            return date;
+    }
+
     public void testLateReturn() throws IOException, ParseException {
         for (Customer customer : customers) {
             if (customer.getFirstName().equalsIgnoreCase("vera") && customer.getName().equalsIgnoreCase("peeters")) {
@@ -733,7 +744,7 @@ public class RentAVideo {
                     if (item.getTitle().equalsIgnoreCase("Tomba")) {
                         RentalItem tomba = item;
                         rentalSystem.addItemToCart(tomba,vera,cartManager);
-                        rentalSystem.checkOutTestLateReturn(vera, cartManager, overview, databaseManager, tomba);
+                        rentalSystem.checkOut(vera, cartManager, overview, databaseManager, tomba);
                         returnOverviewMap.put(customer, cartManager.getItemCart());
                         rentalHistory.addAll(returnOverviewMap.get(customer));
                     }
@@ -749,6 +760,7 @@ public class RentAVideo {
 
     public void run(RentalSystem rentalSystem) throws IOException, ParseException {
         out.println(christmasTree());
+        rentalDate.putAll(rentalSystem.getRentalDates());
         customers.addAll(loadCustomersFromCsv());
         loadMovies();
         loadGames();
@@ -760,7 +772,7 @@ public class RentAVideo {
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        testLateReturn();
+        //testLateReturn();
     }
 
     private void createUIComponents() {

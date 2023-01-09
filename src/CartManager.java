@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -90,7 +89,7 @@ public class CartManager {
     The returnItemAndCalculateFine function processes the return of a rental item and calculates any applicable fines.
     It also updates the day's overview with relevant information and updates the stock of the returned item.
      */
-    public String returnItemAndCalculateFine(RentalItem item, DayOverview overview) throws ParseException {
+    public String returnItemAndCalculateFine(RentalItem item, DayOverview overview, java.util.Date rentalDate) throws ParseException {
         // For testing late returns.
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date pastDate = dateFormat.parse("2022-12-04");
@@ -100,7 +99,7 @@ public class CartManager {
         double income = overview.getIncome();
         double fineIncome = 0;
         int returns = overview.getLateReturns();
-        int duration = calcRentalDuration(pastDate);
+        int duration = calcRentalDuration(rentalDate);
         //int duration = calcRentalDuration(rentalDate);
         int currentStock = item.getStock();
         //item.setStock(currentStock + 1);

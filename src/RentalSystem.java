@@ -2,6 +2,7 @@ import java.io.*;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RentalSystem {
     private ArrayList<Customer> customers;
@@ -18,9 +19,9 @@ public class RentalSystem {
         this.customerManager = new CustomerManager(customers);
     }
 
-    public String returnItem(RentalItem item, DayOverview overview, CartManager cartManager) throws IOException, ParseException {
+    public String returnItem(RentalItem item, DayOverview overview, CartManager cartManager, java.util.Date rentalDate) throws IOException, ParseException {
         databaseManager.returnItem(item, overview);
-        return cartManager.returnItemAndCalculateFine(item, overview);
+        return cartManager.returnItemAndCalculateFine(item, overview, rentalDate);
     }
 
     public void testHashMap() {
@@ -38,6 +39,10 @@ public class RentalSystem {
     public String checkOut(Customer customer, CartManager cartManager, DayOverview overview, DatabaseManager databaseManager, RentalItem item) throws IOException, ParseException {
         saveRentalDate(item);
         return cartManager.checkout(customer, cartManager, overview, databaseManager);
+    }
+
+    public HashMap<RentalItem, java.util.Date> getRentalDates() {
+       return customerManager.getRentalDates();
     }
 
     public void addCustomer(Customer customer, DayOverview overview) throws IOException {

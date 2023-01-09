@@ -78,6 +78,10 @@ public class CustomerManager {
         return newNumber;
     }
 
+    public HashMap<RentalItem, Date> getRentalDates() {
+        return rentalDates;
+    }
+
     @Override
     public String toString() {
         return "CustomerManager{" +
